@@ -9,6 +9,7 @@ Cart System
 Categories and Search Filter 
 User Friendly Display of Products 
 Add to Cart , Remove From Cart
+Support Mobile Devices 
 
 Nice to Have
 modern interface 
