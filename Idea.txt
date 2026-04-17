@@ -1,0 +1,24 @@
+E-commerce site
+
+What is it
+This is an App designed to provide products at the fingertips of its users . This app will cater to the user's needs by providing exactly what the user wants and how they want it from the store , This data will be displayed from a public API and all the store products will be displayed , in a user Friendly way that allows the user to easily understand and navigate the online store.
+
+Must have 
+Login Authentication
+Cart System
+Categories and Search Filter 
+User Friendly Display of Products 
+Add to Cart , Remove From Cart
+
+Nice to Have
+modern interface 
+animations 
+Mock Payment System 
+Description Link of Product
+Full Page Description of Product
+Similar Products 
+
+
+User Flow
+User Logs in or (continues as guest with minimal featues)-> Products are Displayed -> User Selects a product -> adds to cart -> continues browse products -> Open Cart -> Reviews Items and Pricing -> Checks Out -> Receives Confirmation  
+
