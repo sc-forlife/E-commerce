@@ -1,0 +1,23 @@
+# Components
+
+1. NAVBAR with Search
+2. NAVBAR without search
+3. Products Banner
+4. Card (Product)
+5. Card Static Container
+6. Card Scrollable Container
+7. Footer
+8. Description card (Cart section)
+
+## App state
+
+### UseState
+
+1. Selected Category
+2. Selected Products
+
+### Context Api
+
+1. Products
+2. Cart
+3. User Session (optional)
