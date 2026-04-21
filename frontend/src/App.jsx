@@ -6,12 +6,18 @@ export default function App() {
 
   async function run() {
     const data = await testingApi();
-    console.log(data);
+    setProduct(data);
   }
 
   useEffect(() => {
     run();
   }, []);
 
-  return <></>;
+  console.log(product);
+
+  return (
+    <>
+      <div></div>
+    </>
+  );
 }
