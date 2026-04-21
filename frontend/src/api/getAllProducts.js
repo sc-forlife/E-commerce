@@ -1,7 +1,7 @@
 //categories to get
 const categories = ["beauty", "tops"];
 
-async function testingApi(category) {
+async function getApi(category) {
   try {
     const response = await fetch(
       `https://dummyjson.com/products/category/${category}`,
@@ -13,11 +13,11 @@ async function testingApi(category) {
   }
 }
 
-export async function shopProducts() {
+export async function allShopProducts() {
   //get only products for specific categories
   const selectedProducts = [];
   for (const item of categories) {
-    const salem = await testingApi(item);
+    const salem = await getApi(item);
     selectedProducts.push(salem);
   }
   return selectedProducts;

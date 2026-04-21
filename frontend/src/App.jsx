@@ -1,11 +1,11 @@
-import { testingApi } from "./api/testing";
+import { allShopProducts } from "./api/getAllProducts";
 import { useState, useEffect } from "react";
 
 export default function App() {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState([{}]);
 
   async function run() {
-    const data = await testingApi();
+    const data = await allShopProducts();
     setProduct(data);
   }
 
@@ -17,7 +17,15 @@ export default function App() {
 
   return (
     <>
-      <div></div>
+      <div>
+        {product.map((item) => {
+          const items = item.products;
+          if (!items) return;
+          for (const x of items) {
+            console.log(x.title, x.category);
+          }
+        })}
+      </div>
     </>
   );
 }
