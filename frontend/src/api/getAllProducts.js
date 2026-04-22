@@ -1,5 +1,6 @@
+import { categories } from "../data/category_data.js";
+
 //categories to get
-const categories = ["beauty", "tops"];
 
 async function getApi(category) {
   try {
@@ -9,7 +10,7 @@ async function getApi(category) {
     const responseData = await response.json();
     return responseData;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -20,5 +21,7 @@ export async function allShopProducts() {
     const salem = await getApi(item);
     selectedProducts.push(salem);
   }
+  //returns an array with objects , each object is a different category
+  //[{products: Array(5), total: 5, skip: 0, limit: 5} , {products: Array(5), total: 5, skip: 0, limit: 5}]
   return selectedProducts;
 }
