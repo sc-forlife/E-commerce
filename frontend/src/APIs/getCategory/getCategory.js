@@ -1,4 +1,4 @@
-import { categories } from "../data/category_data";
+import { categories } from "../../data/category_data";
 
 export async function getCategory(category) {
   if (!categories.includes(category)) {

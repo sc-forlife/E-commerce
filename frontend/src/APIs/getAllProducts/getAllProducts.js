@@ -1,4 +1,4 @@
-import { categories } from "../data/category_data.js";
+import { categories } from "../../data/category_data.js";
 
 //categories to get
 
