@@ -13,8 +13,9 @@ export async function getCategory(category) {
     );
     const responseData = await response.json();
 
+    // returns [{product one},{product two},{product three} , ...]
     return responseData.products;
   } catch (err) {
-    console.error(err, "somethign went wrong");
+    console.error(err, "something went wrong");
   }
 }
