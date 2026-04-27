@@ -1,27 +1,31 @@
 import { allShopProducts } from "../getAllProducts/getAllProducts.js";
 
-async function getProducts() {
-  const allProducts = await allShopProducts();
-  const itemDescription = [];
+// async function getProducts() {
+//   const allProducts = await allShopProducts();
+//   const itemDescription = [];
 
-  //get each item into an array by title , category
-  allProducts.forEach((item) => {
-    const categoryItems = item.products;
-    for (const product of categoryItems) {
-      itemDescription.push(`${product.title} ${product.category}`);
-    }
-  });
+//   //get each item into an array by title , category
+//   allProducts.forEach((item) => {
+//     const categoryItems = item.products;
+//     for (const product of categoryItems) {
+//       itemDescription.push(`${product.title} ${product.category}`);
+//     }
+//   });
 
-  return itemDescription;
-}
+//   return itemDescription;
+// }
 
 async function searchQuery(param) {
-  const shopItems = await getProducts();
+  const shopItems = await allShopProducts();
 
   //fix user param
   param = param.trim().toLowerCase();
 
-  return shopItems.filter((item) => item.toLowerCase().includes(lowerParam));
+  shopItems.forEach((productArray) => {
+    const searchedArray = productArray.filter((item) => {
+      return item.category;
+    });
+  });
 }
 
 console.log("Search Results");
