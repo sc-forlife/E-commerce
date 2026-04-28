@@ -1,0 +1,41 @@
+.navbar_container {
+  background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+#navbar_side1 {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+}
+
+#navbar_side2 {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+#logo_search {
+  display: flex;
+  justify-content: space-between;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: blueviolet;
+}
+
+#category_button {
+  width: 100%;
+}
+
+input {
+}

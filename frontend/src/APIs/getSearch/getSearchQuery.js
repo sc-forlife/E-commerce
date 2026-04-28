@@ -18,5 +18,3 @@ export async function searchQuery(param) {
   // returns [[{product one},{product two},{product three} , ...],[{product one},{product two},{product three} , ...]]
   return finalProducts;
 }
-
-console.log(await searchQuery("a"));
