@@ -1,9 +1,11 @@
-import { categories } from "../../data/category_data.js";
 import { getCategory } from "../getCategory/getCategory.js";
 
 //categories to get
 
-export async function allShopProducts() {
+export async function allShopProducts(categories) {
+  if (!categories) {
+    throw new Error("Invalid parameter `categories`");
+  }
   const selectedProducts = [];
 
   for (const item of categories) {
