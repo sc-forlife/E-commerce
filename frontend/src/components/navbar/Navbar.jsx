@@ -1,23 +1,41 @@
 import css from "./Navbar.module.css";
 import { numbersInWords } from "../../data/dummyData.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useEffectEvent } from "react";
 import { getCategory } from "../../APIs/getCategory/getCategory";
 import { storeProducts } from "../../hooks/products";
 import { useContext } from "react";
 import { ProductsContext } from "../../App";
+import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts.js";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 export default function Navbar() {
-  const { setProducts } = useContext(ProductsContext);
+  const { setProducts, categories } = useContext(ProductsContext);
+  const [productlabels, setProductLabels] = useState();
 
+  async function formatProducts() {
+    const data = await allShopProducts(categories);
+    const objects = [];
+    data.forEach((category) => {
+      for (const item of category) {
+        objects.push(item);
+      }
+    });
+    return objects;
+  }
+
+  useEffect(() => {
+    (async () => {
+      const data = await formatProducts();
+      setProductLabels(data);
+    })();
+  }, []);
+
+  //Send data to the display component
   function getProductsByCategory(category) {
-    // const shopProducts = await getCategory(category);
     setProducts(category);
   }
 
-  const [value, setValue] = useState("");
-  console.log(value);
   return (
     <>
       <div className={css.navbar_container}>
@@ -27,7 +45,9 @@ export default function Navbar() {
             <div id={css.search}>
               <Autocomplete
                 disablePortal
-                options={numbersInWords}
+                options={productlabels}
+                freeSolo
+                getOptionLabel={(options) => options.title}
                 onChange={(event, newValue) => getProductsByCategory(newValue)}
                 sx={{ width: 500 }}
                 renderInput={(params) => (
