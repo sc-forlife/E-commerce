@@ -1,13 +1,23 @@
 import css from "./Navbar.module.css";
-import { numbersInWords } from "../../data/dummyData";
-import { useState } from "react";
+import { numbersInWords } from "../../data/dummyData.js";
+import { useState, useEffect } from "react";
+import { getCategory } from "../../APIs/getCategory/getCategory";
+import { storeProducts } from "../../hooks/products";
+import { useContext } from "react";
+import { ProductsContext } from "../../App";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function Navbar() {
-  const [display, setDisplay] = useState(false);
-  function suggestionsBar() {
-    setDisplay(true);
+  const { setProducts } = useContext(ProductsContext);
+
+  function getProductsByCategory(category) {
+    // const shopProducts = await getCategory(category);
+    setProducts(category);
   }
 
+  const [value, setValue] = useState("");
+  console.log(value);
   return (
     <>
       <div className={css.navbar_container}>
@@ -15,17 +25,25 @@ export default function Navbar() {
           <div id={css.logo_search}>
             <h1 id={css.logo}>Logo</h1>
             <div id={css.search}>
-              <input
-                onFocus={suggestionsBar}
-                type="text"
-                placeholder="Enter text"
+              <Autocomplete
+                disablePortal
+                options={numbersInWords}
+                onChange={(event, newValue) => getProductsByCategory(newValue)}
+                sx={{ width: 500 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Movie" />
+                )}
               />
               <button>search</button>
-              {display ? <div id={css.suggestionsBar}></div> : null}
             </div>
           </div>
           <div id={css.category}>
-            <button id={css.category_button}>category One</button>
+            <button
+              id={css.category_button}
+              onClick={() => getProductsByCategory("beauty")}
+            >
+              category One
+            </button>
             <button id={css.category_button}>category Two</button>
             <button id={css.category_button}>category Three</button>
             <button id={css.category_button}>category Four</button>

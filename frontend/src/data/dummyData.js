@@ -1,4 +1,4 @@
-export const numbersInWords = [
+const numbers = [
   "one",
   "two",
   "three",
@@ -100,3 +100,8 @@ export const numbersInWords = [
   "ninety nine",
   "one hundred",
 ];
+
+export const numbersInWords = numbers.map((word, index) => ({
+  label: word,
+  id: index + 1,
+}));
