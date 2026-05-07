@@ -8,6 +8,12 @@ import { ProductsContext } from "../../App";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts.js";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { Alert } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
+import Logo from "../../assets/Logo.png";
 
 export default function Navbar() {
   const { setProducts, categories } = useContext(ProductsContext);
@@ -38,42 +44,29 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={css.navbar_container}>
-        <div id={css.navbar_side1}>
-          <div id={css.logo_search}>
-            <h1 id={css.logo}>Logo</h1>
-            <div id={css.search}>
-              <Autocomplete
-                disablePortal
-                options={productlabels}
-                freeSolo
-                getOptionLabel={(options) => options.title}
-                onChange={(event, newValue) => getProductsByCategory(newValue)}
-                sx={{ width: 500 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Movie" />
-                )}
-              />
-              <button>search</button>
-            </div>
-          </div>
-          <div id={css.category}>
-            <button
-              id={css.category_button}
-              onClick={() => getProductsByCategory("beauty")}
-            >
-              category One
-            </button>
-            <button id={css.category_button}>category Two</button>
-            <button id={css.category_button}>category Three</button>
-            <button id={css.category_button}>category Four</button>
-          </div>
-        </div>
-        <div id={css.navbar_side2}>
-          <button>Login/Sign Up</button>
-          <button>View Cart</button>
-        </div>
-      </div>
+      <Box bg={"yellow"} w={"100%"} h={"60px"}>
+        <Flex bg={"blue"}>
+          <Image h={"60px"} src={Logo} justify={"flex-start"} />
+          <Flex justify="center">
+            <Autocomplete
+              id="free-solo-demo"
+              sx={{
+                "& .MuiInputBase-root": { height: "40px" },
+              }}
+              freeSolo
+              //   onChange={(event, newValue) => setDisplayValue(newValue)}
+              // onInputChange={(event, newInputValue) =>
+              //   setDisplayValue(newInputValue)
+              // }
+              // options={top100Films.map((option) => option.title)}
+              renderInput={(params) => (
+                <TextField {...params} placeholder="Search" />
+              )}
+            />
+          </Flex>
+        </Flex>
+        <Flex></Flex>
+      </Box>
     </>
   );
 }
