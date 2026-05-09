@@ -1,26 +1,15 @@
 import css from "./Navbar.module.css";
 import { numbersInWords } from "../../data/dummyData.js";
-import { useState, useEffect, useEffectEvent } from "react";
-import { getCategory } from "../../APIs/getCategory/getCategory";
-import { storeProducts } from "../../hooks/products";
-import { useContext } from "react";
-import { ProductsContext } from "../../App";
+import { useState, useEffect, useEffectEvent, useContext } from "react";
+import { getCategory } from "../../APIs/getCategory/getCategory.js";
+import { storeProducts } from "../../hooks/products.js";
+import { ProductsContext } from "../../App.jsx";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts.js";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import { Alert, Icon } from "@chakra-ui/react";
-import { Flex } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
+import { Flex, Box, Button, Image } from "@chakra-ui/react";
 import Logo from "../../assets/Logo.png";
-import { Menu } from "@chakra-ui/react";
-import { Portal } from "@chakra-ui/react";
-import { Badge } from "@chakra-ui/react";
-import { Float } from "@chakra-ui/react";
-import { Circle } from "@chakra-ui/react";
-
-import { FaCartPlus } from "react-icons/fa";
+import MenuComponent from "../MenuComponent/MenuComponent.jsx";
+import SearchComponent from "../SearchBar/SearchComponent.jsx";
+import CartComponent from "../CartButton/CartComponent.jsx";
 
 export default function Navbar() {
   const { setProducts, categories } = useContext(ProductsContext);
@@ -59,72 +48,14 @@ export default function Navbar() {
           paddingRight={"10px"}
         >
           <Image h={"60px"} src={Logo} justify={"flex-start"} m={"5px"} />
-          <Menu.Root>
-            <Menu.Trigger asChild>
-              <Button size="sm" variant="outline">
-                Select Anime
-              </Button>
-            </Menu.Trigger>
-            <Portal>
-              <Menu.Positioner>
-                <Menu.Content>
-                  {links.map((link) => (
-                    <Menu.Item key={link.href} asChild value={link.title}>
-                      <a href={link.href} target="_blank" rel="noreferrer">
-                        {link.title}
-                      </a>
-                    </Menu.Item>
-                  ))}
-                </Menu.Content>
-              </Menu.Positioner>
-            </Portal>
-          </Menu.Root>
-
-          <Autocomplete
-            id="free-solo-demo"
-            sx={{
-              "& .MuiInputBase-root": { height: "40px", width: "450px" },
-            }}
-            freeSolo
-            //   onChange={(event, newValue) => setDisplayValue(newValue)}
-            // onInputChange={(event, newInputValue) =>
-            //   setDisplayValue(newInputValue)
-            // }
-            // options={top100Films.map((option) => option.title)}
-            renderInput={(params) => (
-              <TextField {...params} placeholder="Search" />
-            )}
-          />
+          <MenuComponent />
+          <SearchComponent />
         </Flex>
         <Flex align={"center"} justify={"space-around"} w={"30%"}>
-          <Box position={"relative"}>
-            <Icon>
-              <FaCartPlus style={{ width: "40px" }} />
-            </Icon>
-            <Float>
-              <Circle size="5" bg="red" color="white">
-                0
-              </Circle>
-            </Float>
-          </Box>
+          <CartComponent />
           <Button variant={"ghost"}>Login / Sign Up</Button>
         </Flex>
       </Box>
     </>
   );
 }
-
-const links = [
-  {
-    title: "Naruto",
-    href: "https://www.crunchyroll.com/naruto",
-  },
-  {
-    title: "One Piece",
-    href: "https://www.crunchyroll.com/one-piece",
-  },
-  {
-    title: "Attack on Titan",
-    href: "https://www.crunchyroll.com/attack-on-titan",
-  },
-];
