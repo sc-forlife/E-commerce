@@ -3,8 +3,9 @@ import { categories } from "../../data/category_data.js";
 
 export async function searchQuery(param) {
   const shopItems = await allShopProducts(categories);
+  let finalProducts = [];
 
-  const finalProducts = shopItems.map((productArray) => {
+  shopItems.forEach((productArray) => {
     const searchedArray = productArray.filter((item) => {
       //only match this regex
       const regex = new RegExp(`\\s*${param}\\s*`, "i");
@@ -12,7 +13,9 @@ export async function searchQuery(param) {
 
       return bool;
     });
-    return searchedArray;
+    for (const item of searchedArray) {
+      finalProducts.push(item);
+    }
   });
 
   // returns [[{product one},{product two},{product three} , ...],[{product one},{product two},{product three} , ...]]

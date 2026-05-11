@@ -1,7 +1,16 @@
 import { Button, Menu, Portal } from "@chakra-ui/react";
 import { categories } from "../../data/category_data";
+import { UserContext } from "../../pages/home/Home";
+import { useContext } from "react";
+import { getCategory } from "../../APIs/getCategory/getCategory";
 
 export default function MenuComponent() {
+  const { setSearchProduct } = useContext(UserContext);
+
+  async function getProducts(product) {
+    setSearchProduct(await getCategory(product));
+  }
+
   return (
     <>
       <Menu.Root>
@@ -18,7 +27,7 @@ export default function MenuComponent() {
                   key={index}
                   asChild
                   value={category}
-                  onClick={(e) => console.log(e.target.innerText)}
+                  onClick={(e) => getProducts(e.target.innerText)}
                 >
                   <p>{category}</p>
                 </Menu.Item>
