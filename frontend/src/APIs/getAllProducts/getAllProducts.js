@@ -11,7 +11,9 @@ export async function allShopProducts(categories) {
   for (const item of categories) {
     const categoryProducts = await getCategory(item);
 
-    selectedProducts.push(categoryProducts);
+    for (const item of categoryProducts) {
+      selectedProducts.push(item);
+    }
   }
 
   // returns [[{product one},{product two},{product three} , ...],[{product one},{product two},{product three} , ...]]

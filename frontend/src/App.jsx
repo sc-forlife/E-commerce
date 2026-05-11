@@ -1,4 +1,4 @@
-import Display from "./components/DisplayProducts/Display";
+import Display from "./components/DisplayProducts/Card";
 import Navbar from "./components/NavBar/Navbar";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
@@ -27,9 +27,9 @@ export default function App() {
     <>
       <ProductsContext.Provider value={{ products, setProducts, categories }}>
         <Navbar />
-        <Flex gap={"5"} margin={"10px"}>
+        <Flex gap={"5"} margin={"10px"} wrap={"wrap"}>
           {storeProductsAPI
-            ? storeProductsAPI[1].map((product) => {
+            ? storeProductsAPI.map((product) => {
                 return (
                   <Display
                     price={product.price}

@@ -6,16 +6,21 @@ import { categories } from "../../data/category_data";
 
 describe("Get All Products", () => {
   it("Returns all the API products", async () => {
-    vi.spyOn(categoryFunction, "getCategory").mockResolvedValueOnce([
+    vi.spyOn(categoryFunction, "getCategory").mockResolvedValue([
       { items: "" },
       { items: "" },
       { items: "" },
     ]);
-    const products = await allShopProducts(["beauty"]);
+    const products = await allShopProducts(["beauty", "tops"]);
 
     //test for a nested structure array
     expect(products).toEqual([
-      expect.arrayContaining([{ items: "" }, { items: "" }, { items: "" }]),
+      { items: "" },
+      { items: "" },
+      { items: "" },
+      { items: "" },
+      { items: "" },
+      { items: "" },
     ]);
   });
   it("Missing parameter throws an error", async () => {

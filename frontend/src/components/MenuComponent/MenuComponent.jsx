@@ -1,4 +1,5 @@
 import { Button, Menu, Portal } from "@chakra-ui/react";
+import { categories } from "../../data/category_data";
 
 export default function MenuComponent() {
   return (
@@ -6,17 +7,20 @@ export default function MenuComponent() {
       <Menu.Root>
         <Menu.Trigger asChild>
           <Button size="sm" variant="outline">
-            Select Anime
+            Categories
           </Button>
         </Menu.Trigger>
         <Portal>
           <Menu.Positioner>
             <Menu.Content>
-              {links.map((link) => (
-                <Menu.Item key={link.href} asChild value={link.title}>
-                  <a href={link.href} target="_blank" rel="noreferrer">
-                    {link.title}
-                  </a>
+              {categories.map((category, index) => (
+                <Menu.Item
+                  key={index}
+                  asChild
+                  value={category}
+                  onClick={(e) => console.log(e.target.innerText)}
+                >
+                  <p>{category}</p>
                 </Menu.Item>
               ))}
             </Menu.Content>
@@ -26,18 +30,3 @@ export default function MenuComponent() {
     </>
   );
 }
-
-const links = [
-  {
-    title: "Naruto",
-    href: "https://www.crunchyroll.com/naruto",
-  },
-  {
-    title: "One Piece",
-    href: "https://www.crunchyroll.com/one-piece",
-  },
-  {
-    title: "Attack on Titan",
-    href: "https://www.crunchyroll.com/attack-on-titan",
-  },
-];

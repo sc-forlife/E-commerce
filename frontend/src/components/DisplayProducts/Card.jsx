@@ -1,8 +1,4 @@
-import { storeProducts } from "../../hooks/products";
 import { Button, Card, Image, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import { ProductsContext } from "../../App";
-import { useContext } from "react";
 
 export default function Display({
   title = "",
@@ -10,8 +6,6 @@ export default function Display({
   img = "",
   alt = "",
 }) {
-  const { products } = useContext(ProductsContext);
-
   return (
     <>
       <Card.Root maxW="250px" maxH="400px" overflow="hidden">

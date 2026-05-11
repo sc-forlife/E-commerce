@@ -15,29 +15,6 @@ export default function Navbar() {
   const { setProducts, categories } = useContext(ProductsContext);
   const [productlabels, setProductLabels] = useState();
 
-  async function formatProducts() {
-    const data = await allShopProducts(categories);
-    const objects = [];
-    data.forEach((category) => {
-      for (const item of category) {
-        objects.push(item);
-      }
-    });
-    return objects;
-  }
-
-  useEffect(() => {
-    (async () => {
-      const data = await formatProducts();
-      setProductLabels(data);
-    })();
-  }, []);
-
-  //Send data to the display component
-  function getProductsByCategory(category) {
-    setProducts(category);
-  }
-
   return (
     <>
       <Box w={"100%"} h={"60px"} display="flex">
