@@ -3,21 +3,14 @@ import { categories } from "../../data/category_data.js";
 
 export async function searchQuery(param) {
   const shopItems = await allShopProducts(categories);
-  let finalProducts = [];
+  const searchedArray = shopItems.filter((item) => {
+    //only match this regex
+    const regex = new RegExp(`\\s*${param}\\s*`, "i");
+    const bool = regex.test(item.category) || regex.test(item.title);
 
-  shopItems.forEach((productArray) => {
-    const searchedArray = productArray.filter((item) => {
-      //only match this regex
-      const regex = new RegExp(`\\s*${param}\\s*`, "i");
-      const bool = regex.test(item.category) || regex.test(item.title);
-
-      return bool;
-    });
-    for (const item of searchedArray) {
-      finalProducts.push(item);
-    }
+    return bool;
   });
 
-  // returns [[{product one},{product two},{product three} , ...],[{product one},{product two},{product three} , ...]]
-  return finalProducts;
+  // returns [{product one},{product two},{product three},[{product one},{product two},{product three}]
+  return searchedArray;
 }
