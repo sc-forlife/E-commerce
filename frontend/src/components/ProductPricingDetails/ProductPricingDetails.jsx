@@ -18,6 +18,10 @@ export default function ProductDescription() {
   //Use create context to provide the details
   const [product, setProduct] = useState("");
 
+  //Add a Quantity Input
+  //Think about Category ,
+  //Think about tags
+
   return (
     <>
       <Box

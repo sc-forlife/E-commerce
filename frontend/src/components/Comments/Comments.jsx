@@ -1,22 +1,25 @@
 import { Box, Avatar, HStack, Stack, Text, Blockquote } from "@chakra-ui/react";
 import { useContext } from "react";
-import { StoreProduct } from "../ProductDetails/ProductDetails";
+import { StoreProduct } from "../ProductExtraData/ProductExtraData";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import Rating from "../Rating/Rating";
 
 export default function Comments() {
   const { product } = useContext(StoreProduct);
 
-  console.log(product);
-
   return (
     <>
       <Box>
         <Stack gap={"30px"}>
           {product.reviews ? (
-            product.reviews.map((comment) => {
+            product.reviews.map((comment, index) => {
               return (
-                <Box bg={"bg.muted"} p={"10px"} borderRadius={"2xl"}>
+                <Box
+                  bg={"bg.muted"}
+                  p={"10px"}
+                  borderRadius={"2xl"}
+                  key={index}
+                >
                   <Stack>
                     <HStack>
                       <Avatar.Root colorPalette="red">
