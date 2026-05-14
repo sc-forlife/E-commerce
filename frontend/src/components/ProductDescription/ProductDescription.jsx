@@ -15,25 +15,8 @@ import SpinnerComponent from "../Spinner/SpinnerComponent";
 import Rating from "../Rating/Rating";
 
 export default function ProductDescription() {
+  //Use create context to provide the details
   const [product, setProduct] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("https://dummyjson.com/test");
-        const responseData = await response.json();
-        console.log(responseData);
-      } catch (err) {
-        console.error("Something went wrong", err);
-      }
-
-      const [products] = await searchQuery("Tartan");
-      console.log(products);
-      setProduct(products);
-    })();
-  }, []);
-
-  console.log(product);
 
   return (
     <>
@@ -48,7 +31,7 @@ export default function ProductDescription() {
       >
         {product ? (
           <>
-            <Stack gap={"25px"}>
+            <Stack gap={"40px"}>
               <Flex justifyContent={"space-between"}>
                 <Heading>{product.title}</Heading>
                 <Badge
