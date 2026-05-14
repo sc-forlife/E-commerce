@@ -11,6 +11,6 @@ export async function searchQuery(param) {
     return bool;
   });
 
-  // returns [{product one},{product two},{product three},[{product one},{product two},{product three}]
+  // returns [{product one},{product two},{product three},{product one},{product two},{product three}]
   return searchedArray;
 }
