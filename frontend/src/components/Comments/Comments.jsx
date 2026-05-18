@@ -1,11 +1,11 @@
 import { Box, Avatar, HStack, Stack, Text, Blockquote } from "@chakra-ui/react";
 import { useContext } from "react";
-import { StoreProduct } from "../ProductExtraData/ProductExtraData";
+import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import Rating from "../Rating/Rating";
 
 export default function Comments() {
-  const { product } = useContext(StoreProduct);
+  const { product } = useContext(SelectedProduct);
 
   return (
     <>

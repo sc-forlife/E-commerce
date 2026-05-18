@@ -1,12 +1,12 @@
 import { Collapsible, Stack, Text } from "@chakra-ui/react";
 import { LuChevronRight } from "react-icons/lu";
-import { StoreProduct } from "../ProductExtraData/ProductExtraData";
+import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 import { useContext } from "react";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import CollapsibleComponent from "../CollapsibleComponent/CollapsibleComponent";
 
 export default function ProductDetailsComponent() {
-  const { product } = useContext(StoreProduct);
+  const { product } = useContext(SelectedProduct);
 
   console.log(product);
 

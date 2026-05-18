@@ -6,13 +6,14 @@ import {
   VStack,
   HStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 import HorizontalScrolling from "../HorizontalScrolling/HorinzontalScrolling";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 
 export default function ProductImage({ productTitle = "" }) {
   //Create a Context which provides product object
-  const [product, setProduct] = useState("");
+  const { product } = useContext(SelectedProduct);
   const [selectedImage, setSelectedImage] = useState();
 
   return (
@@ -22,12 +23,12 @@ export default function ProductImage({ productTitle = "" }) {
           <>
             <AspectRatio bg="bg.muted" maxW="450px" ratio={1 / 1}>
               <Image
-                src={selectedImage ? selectedImage : product[0].images[0]}
+                src={selectedImage ? selectedImage : product.images[0]}
                 objectFit={"cover"}
               />
             </AspectRatio>
             <HorizontalScrolling
-              render={product[0].images.map((imageURL) => {
+              render={product.images.map((imageURL, index) => {
                 return (
                   <AspectRatio
                     ratio={1 / 1}
@@ -36,6 +37,7 @@ export default function ProductImage({ productTitle = "" }) {
                     bg={imageURL === selectedImage ? "bg.muted" : "none"}
                   >
                     <Image
+                      key={index}
                       src={imageURL}
                       onClick={() => setSelectedImage(imageURL)}
                     />

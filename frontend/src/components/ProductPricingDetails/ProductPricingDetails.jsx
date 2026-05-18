@@ -10,13 +10,14 @@ import {
   RatingGroup,
 } from "@chakra-ui/react";
 import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import Rating from "../Rating/Rating";
 
 export default function ProductDescription() {
   //Use create context to provide the details
-  const [product, setProduct] = useState("");
+  const { product } = useContext(SelectedProduct);
 
   //Add a Quantity Input
   //Think about Category ,
