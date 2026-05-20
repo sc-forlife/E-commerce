@@ -4,7 +4,7 @@ import ProductDescription from "../../components/ProductPricingDetails/ProductPr
 import ProductDetails from "../../components/ProductExtraData/ProductExtraData";
 import ProductImage from "../../components/ProductImage/ProductImage";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
-import { Flex, HStack } from "@chakra-ui/react";
+import { Flex, HStack, Box } from "@chakra-ui/react";
 
 export const SelectedProduct = createContext();
 
@@ -28,14 +28,15 @@ export default function ViewProduct() {
       {product ? (
         <>
           <SelectedProduct.Provider value={{ product: product }}>
-            <HStack bg={"green"}>
-              <Flex justifyContent="center" align={"center"}>
+            <Flex justifyContent="center" align={"center"}>
+              <HStack gap={"100px"}>
                 <ProductImage />
                 <ProductDescription />
-              </Flex>
-            </HStack>
-
-            <ProductDetails />
+              </HStack>
+            </Flex>
+            <Box paddingLeft={"30px"}>
+              <ProductDetails />
+            </Box>
           </SelectedProduct.Provider>
         </>
       ) : (
