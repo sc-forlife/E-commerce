@@ -4,6 +4,7 @@ import ProductDescription from "../../components/ProductPricingDetails/ProductPr
 import ProductDetails from "../../components/ProductExtraData/ProductExtraData";
 import ProductImage from "../../components/ProductImage/ProductImage";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
+import NavBar from "../../components/NavBar/Navbar";
 import { Flex, HStack, Box } from "@chakra-ui/react";
 
 export const SelectedProduct = createContext();
@@ -29,12 +30,12 @@ export default function ViewProduct() {
         <>
           <SelectedProduct.Provider value={{ product: product }}>
             <Flex justifyContent="center" align={"center"}>
-              <HStack gap={"100px"}>
+              <HStack gap={"60px"}>
                 <ProductImage />
                 <ProductDescription />
               </HStack>
             </Flex>
-            <Box paddingLeft={"30px"}>
+            <Box paddingLeft={"30px"} marginBottom={"40px"}>
               <ProductDetails />
             </Box>
           </SelectedProduct.Provider>
@@ -47,3 +48,8 @@ export default function ViewProduct() {
     </>
   );
 }
+
+// You need to add:
+// Color Selection
+// Size Selection
+// Quantity Selection

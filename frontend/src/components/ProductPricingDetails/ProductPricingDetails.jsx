@@ -29,6 +29,7 @@ export default function ProductDescription() {
         m={"100px"}
         bg={""}
         maxW={"400px"}
+        h={"500px"}
         p={"20px"}
         rounded={"md"}
         borderColor={"ThreeDFace"}
@@ -36,7 +37,7 @@ export default function ProductDescription() {
       >
         {product ? (
           <>
-            <Stack gap={"40px"}>
+            <Stack gap={"50px"}>
               <Flex justifyContent={"space-between"}>
                 <Heading>{product.title}</Heading>
                 <Badge

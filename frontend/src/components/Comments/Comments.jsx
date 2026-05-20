@@ -17,6 +17,7 @@ export default function Comments() {
                 <Box
                   bg={"bg.muted"}
                   p={"10px"}
+                  w={"50%"}
                   borderRadius={"2xl"}
                   key={index}
                 >
