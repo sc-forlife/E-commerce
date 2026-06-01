@@ -8,8 +8,6 @@ import CollapsibleComponent from "../CollapsibleComponent/CollapsibleComponent";
 export default function ProductDetailsComponent() {
   const { product } = useContext(SelectedProduct);
 
-  console.log(product);
-
   return (
     <>
       {product ? (

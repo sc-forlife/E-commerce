@@ -25,7 +25,6 @@ export default function ViewProduct() {
 
   return (
     <>
-      {console.log(Boolean(product))}
       {product ? (
         <>
           <SelectedProduct.Provider value={{ product: product }}>
