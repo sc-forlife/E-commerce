@@ -5,11 +5,17 @@ import ProductImage from "./components/ProductImage/ProductImage"; // Testing Co
 import ProductDescription from "./components/ProductPricingDetails/ProductPricingDetails"; //Testing Component
 import ProductDetails from "./components/ProductExtraData/ProductExtraData";
 import ViewProduct from "./pages/ViewProduct/ViewProduct";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export default function App() {
   return (
     <>
-      <ViewProduct />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

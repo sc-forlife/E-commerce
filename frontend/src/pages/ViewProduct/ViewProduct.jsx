@@ -6,11 +6,13 @@ import ProductImage from "../../components/ProductImage/ProductImage";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
 import { Flex, HStack, Box } from "@chakra-ui/react";
+import { UserContext } from "../home/Home";
 
 export const SelectedProduct = createContext();
 
 export default function ViewProduct() {
   const [product, setProduct] = useState("");
+  const [searchProduct, setSearchProduct] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -25,11 +27,14 @@ export default function ViewProduct() {
 
   return (
     <>
+      <UserContext.Provider value={{ searchProduct, setSearchProduct }}>
+        <NavBar />
+      </UserContext.Provider>
       {product ? (
         <>
           <SelectedProduct.Provider value={{ product: product }}>
             <Flex justifyContent="center" align={"center"}>
-              <HStack gap={"60px"}>
+              <HStack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
                 <ProductImage />
                 <ProductDescription />
               </HStack>
