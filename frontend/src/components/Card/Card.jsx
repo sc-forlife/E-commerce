@@ -1,17 +1,21 @@
 import { Button, Card, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Display({
   title = "",
   price = "",
   img = "",
   alt = "",
+  linkTo = "",
 }) {
   return (
     <>
       <Card.Root maxW="250px" maxH="400px" overflow="hidden">
         <Image src={img} alt={alt} maxH={"200px"} />
         <Card.Body gap="0" p={"15px"}>
-          <Card.Title fontWeight={"light"}>{title}</Card.Title>
+          <Link to={linkTo}>
+            <Card.Title fontWeight={"light"}>{title}</Card.Title>
+          </Link>
           <Text
             textStyle="2x1"
             fontWeight="medium"

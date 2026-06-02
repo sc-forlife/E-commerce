@@ -7,17 +7,19 @@ import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
 import { Flex, HStack, Box } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
+import { useParams } from "react-router-dom";
 
 export const SelectedProduct = createContext();
 
 export default function ViewProduct() {
   const [product, setProduct] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
+  const { productId } = useParams();
 
   useEffect(() => {
     (async () => {
       try {
-        const [response] = await searchQuery("Tartan");
+        const [response] = await searchQuery(productId);
         setProduct(response);
       } catch (err) {
         console.error("Something went wrong", err);

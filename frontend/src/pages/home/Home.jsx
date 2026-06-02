@@ -4,6 +4,7 @@ import Card from "../../components/Card/Card";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 import { categories } from "../../data/category_data";
 import { Flex } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
 
@@ -31,6 +32,7 @@ export default function Home() {
                 title={product.title}
                 img={product.images[0]}
                 alt={product.thumbnail}
+                linkTo={`/ViewProduct/${product.title}`}
               />
             );
           })
