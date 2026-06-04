@@ -33,6 +33,7 @@ export default function Home() {
                 img={product.images[0]}
                 alt={product.thumbnail}
                 linkTo={`/ViewProduct/${product.title}`}
+                key={product.id}
               />
             );
           })
