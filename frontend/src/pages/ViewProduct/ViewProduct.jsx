@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
 import ProductDescription from "../../components/ProductPricingDetails/ProductPricingDetails";
 import ProductDetails from "../../components/ProductExtraData/ProductExtraData";
@@ -19,25 +19,22 @@ export default function ViewProduct() {
   const [searchProduct, setSearchProduct] = useState("");
   const [changeProduct, setChangeProduct] = useState("");
   const { productId } = useParams();
+  const page = useRef("View Page");
 
   useEffect(() => {
     (async () => {
-      if (changeProduct) {
-        navigate(changeProduct);
-      } else {
-        try {
-          const [response] = await searchQuery(productId);
-          setProduct(response);
-        } catch (err) {
-          console.error("Something went wrong", err);
-        }
+      try {
+        const [response] = await searchQuery(productId);
+        setProduct(response);
+      } catch (err) {
+        console.error("Something went wrong", err);
       }
     })();
-  }, []);
+  }, [productId]);
 
   return (
     <>
-      <UserContext.Provider value={{}}>
+      <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
       {product ? (

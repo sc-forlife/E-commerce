@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, useRef } from "react";
 import NavBar from "../../components/NavBar/Navbar";
 import Card from "../../components/Card/Card";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
@@ -12,6 +12,7 @@ export const UserContext = createContext();
 
 export default function Home() {
   const [searchProduct, setSearchProduct] = useState("");
+  const page = useRef("Home");
 
   useEffect(() => {
     (async () => {
@@ -20,7 +21,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      <UserContext.Provider value={{ searchProduct, setSearchProduct }}>
+      <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
       <Flex gap={"5"} margin={"10px"} wrap={"wrap"}>

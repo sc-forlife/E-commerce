@@ -7,10 +7,10 @@ import { UserContext } from "../../pages/home/Home";
 import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchComponent({ page = "" }) {
+export default function SearchComponent({}) {
   const navigate = useNavigate();
 
-  const { setSearchProduct } = useContext(UserContext);
+  const { setSearchProduct, page } = useContext(UserContext);
 
   const [storeProductsAPI, setStoreProductsAPI] = useState([
     { title: "Loading" },
@@ -30,9 +30,11 @@ export default function SearchComponent({ page = "" }) {
     navigate(`/ViewProduct/${link}`);
   }
 
+  console.log(page.current);
+
   return (
     <>
-      {page === "Home" ? (
+      {page.current === "Home" ? (
         <>
           <Autocomplete
             id="free-solo-demo"
@@ -54,13 +56,15 @@ export default function SearchComponent({ page = "" }) {
           <Autocomplete
             disablePortal
             sx={{
-              "& .MuiInputBase-root": { height: "40px", width: "450px" },
+              "& .MuiInputBase-root": { height: 40, width: "450px" },
             }}
             onChange={(event, newInputValue) => {
               changeProduct(newInputValue);
             }}
             options={storeProductsAPI.map((option) => option.title)}
-            renderInput={(params) => <TextField {...params} label="Products" />}
+            renderInput={(params) => (
+              <TextField {...params} placeholder="Products" />
+            )}
           />
         </>
       )}
