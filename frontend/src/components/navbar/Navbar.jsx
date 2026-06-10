@@ -5,18 +5,21 @@ import Logo from "../../assets/Logo.png";
 import MenuComponent from "../MenuComponent/MenuComponent.jsx";
 import SearchComponent from "../SearchBar/SearchComponent.jsx";
 import CartComponent from "../CartButton/CartComponent.jsx";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <>
-      <Box w={"100%"} h={"60px"} display="flex">
+      <Box w={"100%"} h={"60px"} m={"5px"} display="flex">
         <Flex
           align={"center"}
           justify={"space-between"}
           w={"70%"}
           paddingRight={"10px"}
         >
-          <Image h={"60px"} src={Logo} justify={"flex-start"} m={"5px"} />
+          <Link to={"/"}>
+            <Image h={"60px"} src={Logo} justify={"flex-start"} m={"5px"} />
+          </Link>
           <MenuComponent />
           <SearchComponent />
         </Flex>

@@ -3,12 +3,18 @@ import { categories } from "../../data/category_data";
 import { UserContext } from "../../pages/home/Home";
 import { useContext } from "react";
 import { getCategory } from "../../APIs/getCategory/getCategory";
+import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 
 export default function MenuComponent() {
   const { setSearchProduct } = useContext(UserContext);
+  const renderCategories = ["Show All", ...categories];
 
   async function getProducts(product) {
-    setSearchProduct(await getCategory(product));
+    if (product === "Show All") {
+      setSearchProduct(await allShopProducts(categories));
+    } else {
+      setSearchProduct(await getCategory(product));
+    }
   }
 
   return (
@@ -22,14 +28,16 @@ export default function MenuComponent() {
         <Portal>
           <Menu.Positioner>
             <Menu.Content>
-              {categories.map((category, index) => (
+              {renderCategories.map((category, index) => (
                 <Menu.Item
                   key={index}
                   asChild
                   value={category}
                   onClick={(e) => getProducts(e.target.innerText)}
                 >
-                  <p>{category}</p>
+                  <p>
+                    {category.slice(0, 1).toUpperCase() + category.slice(1)}
+                  </p>
                 </Menu.Item>
               ))}
             </Menu.Content>
