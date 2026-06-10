@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <>
-      <Box w={"100%"} h={"60px"} display="flex">
+      <Box w={"100%"} h={"60px"} m={"5px"} display="flex">
         <Flex
           align={"center"}
           justify={"space-between"}

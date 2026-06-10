@@ -21,7 +21,12 @@ export default function ProductImage({ productTitle = "" }) {
       <Box w={"450px"}>
         {product ? (
           <>
-            <AspectRatio bg="bg.muted" maxW="450px" ratio={1 / 1}>
+            <AspectRatio
+              borderRadius={"10px"}
+              bg="bg.muted"
+              maxW="450px"
+              ratio={1 / 1}
+            >
               <Image
                 src={selectedImage ? selectedImage : product.images[0]}
                 objectFit={"cover"}

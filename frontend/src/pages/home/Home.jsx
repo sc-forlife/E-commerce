@@ -19,20 +19,26 @@ export default function Home() {
       setSearchProduct(await allShopProducts(categories));
     })();
   }, []);
+  console.log(searchProduct);
   return (
     <>
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
-      <Flex gap={"5"} margin={"10px"} wrap={"wrap"}>
+      <Flex
+        gap={"5"}
+        marginTop={"50px"}
+        wrap={"wrap"}
+        justifyContent={"center"}
+      >
         {searchProduct ? (
           searchProduct.map((product) => {
             return (
               <Display
                 price={product.price}
                 title={product.title}
-                img={product.images[0]}
-                alt={product.thumbnail}
+                img={product.thumbnail}
+                alt={product.title}
                 linkTo={`/ViewProduct/${product.title}`}
                 key={product.id}
               />
