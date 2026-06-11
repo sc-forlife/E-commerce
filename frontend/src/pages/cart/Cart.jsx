@@ -7,8 +7,9 @@ export default function Cart() {
   return (
     <>
       <Center w={"100vw"} h={"100vh"} bg={"pink"}>
-        <Box bg={"grey"} w={"800px"} h={"450px"} borderRadius={"20px"}>
+        <Box bg={"white"} w={"800px"} h={"450px"} borderRadius={"20px"}>
           <CartTableHeading itemNumber={2} />
+          <hr></hr>
           <CartTable />
         </Box>
       </Center>

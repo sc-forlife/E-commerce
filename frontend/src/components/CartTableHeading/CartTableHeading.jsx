@@ -4,7 +4,7 @@ export default function CartTableHeading({ itemNumber = 0 }) {
   return (
     <>
       <Box
-        bg={"cyan"}
+        bg={"white"}
         w={"100%"}
         h={"80px"}
         borderTopRadius={"20px"}

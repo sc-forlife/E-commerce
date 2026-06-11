@@ -14,13 +14,16 @@ import MobileStepper from "../MobileStepper/MobileStepper";
 
 export default function CartTable() {
   const [products, setProducts] = useState([]);
+  const [value, setValue] = useState({ id: 0, value: 1 });
 
   useEffect(() => {
     (async function () {
       setProducts(await allShopProducts(categories));
     })();
   }, []);
+
   console.log(products);
+
   return (
     <Table.ScrollArea h={"325px"}>
       <Table.Root size="md" striped stickyHeader>
@@ -33,27 +36,41 @@ export default function CartTable() {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {products.map((item) => (
-            <Table.Row key={item.id}>
-              <Table.Cell>
-                <HStack>
-                  <AspectRatio ratio={1 / 1} w="70px">
-                    <Image src={item.thumbnail} alt={item.title}></Image>
-                  </AspectRatio>
-                  <Stack>
-                    <Text>{item.title}</Text>
-                  </Stack>
-                </HStack>
-              </Table.Cell>
-              <Table.Cell>{item.price}</Table.Cell>
-              <Table.Cell>
-                <Flex justifyContent={"center"}>
-                  <MobileStepper />
-                </Flex>
-              </Table.Cell>
-              <Table.Cell textAlign="end">{item.price}</Table.Cell>
-            </Table.Row>
-          ))}
+          {products.map((item) => {
+            if (item["cartPrice"]) {
+              item["cartPrice"] =
+                value.id === item.id
+                  ? item.price * value.value
+                  : item.cartPrice;
+            } else {
+              item["cartPrice"] =
+                value.id === item.id ? item.price * value.value : item.price;
+            }
+
+            return (
+              <Table.Row key={item.id}>
+                <Table.Cell>
+                  <HStack>
+                    <AspectRatio ratio={1 / 1} w="70px">
+                      <Image src={item.thumbnail} alt={item.title}></Image>
+                    </AspectRatio>
+                    <Stack>
+                      <Text>{item.title}</Text>
+                    </Stack>
+                  </HStack>
+                </Table.Cell>
+                <Table.Cell>{item.price}</Table.Cell>
+                <Table.Cell>
+                  <Flex justifyContent={"center"}>
+                    <MobileStepper quantity={setValue} id={item.id} />
+                  </Flex>
+                </Table.Cell>
+                <Table.Cell textAlign="end">
+                  {item.cartPrice.toFixed(2)}
+                </Table.Cell>
+              </Table.Row>
+            );
+          })}
         </Table.Body>
       </Table.Root>
     </Table.ScrollArea>
