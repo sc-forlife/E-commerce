@@ -15,9 +15,9 @@ export default function App() {
       <ViewProduct /> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Cart />} />
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/ViewProduct/:productId" element={<ViewProduct />} /> */}
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
         </Routes>
       </BrowserRouter>
     </>

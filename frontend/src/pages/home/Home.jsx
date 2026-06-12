@@ -9,9 +9,11 @@ import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
 
 export const UserContext = createContext();
+export const CartContext = createContext();
 
 export default function Home() {
   const [searchProduct, setSearchProduct] = useState("");
+  const [cartProducts, setCartProducts] = useState([]);
   const page = useRef("Home");
 
   useEffect(() => {

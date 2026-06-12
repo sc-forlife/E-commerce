@@ -17,9 +17,12 @@ export default function CartTableHeading({ itemNumber = 0 }) {
           justifyContent={"space-between"}
         >
           <Heading>Shopping Cart</Heading>
-          <Heading>{itemNumber} Item</Heading>
+          <Heading>
+            {itemNumber} {itemNumber > 1 ? "Items" : "Item"}
+          </Heading>
         </Flex>
       </Box>
+      <hr></hr>
     </>
   );
 }

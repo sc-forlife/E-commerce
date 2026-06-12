@@ -6,7 +6,10 @@ import {
   HStack,
   Text,
   Flex,
+  Icon,
 } from "@chakra-ui/react";
+import { LuX } from "react-icons/lu";
+import CartTableHeading from "../CartTableHeading/CartTableHeading";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 import { useEffect, useState } from "react";
 import { categories } from "../../data/category_data";
@@ -22,58 +25,81 @@ export default function CartTable() {
     })();
   }, []);
 
+  function deleteItem(id) {
+    setProducts((p) => p.filter((p) => p.id !== id));
+  }
+
   console.log(products);
 
   return (
-    <Table.ScrollArea h={"325px"}>
-      <Table.Root size="md" striped stickyHeader>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeader>Product</Table.ColumnHeader>
-            <Table.ColumnHeader>Price</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign="center">Quantity</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign="end">Total Price</Table.ColumnHeader>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {products.map((item) => {
-            if (item["cartPrice"]) {
-              item["cartPrice"] =
-                value.id === item.id
-                  ? item.price * value.value
-                  : item.cartPrice;
-            } else {
-              item["cartPrice"] =
-                value.id === item.id ? item.price * value.value : item.price;
-            }
+    <>
+      <CartTableHeading itemNumber={products.length} />
+      <Table.ScrollArea h={"325px"} marginBottom={"7px"}>
+        <Table.Root size="md" striped stickyHeader>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader>Product</Table.ColumnHeader>
+              <Table.ColumnHeader>Price</Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="center">
+                Quantity
+              </Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="end">
+                Total Price
+              </Table.ColumnHeader>
+              <Table.ColumnHeader textAlign="end"></Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {products.map((item) => {
+              if (item["cartPrice"]) {
+                item["cartPrice"] =
+                  value.id === item.id
+                    ? item.price * value.value
+                    : item.cartPrice;
+              } else {
+                item["cartPrice"] =
+                  value.id === item.id ? item.price * value.value : item.price;
+              }
 
-            return (
-              <Table.Row key={item.id}>
-                <Table.Cell>
-                  <HStack>
-                    <AspectRatio ratio={1 / 1} w="70px">
-                      <Image src={item.thumbnail} alt={item.title}></Image>
-                    </AspectRatio>
-                    <Stack>
-                      <Text>{item.title}</Text>
-                    </Stack>
-                  </HStack>
-                </Table.Cell>
-                <Table.Cell>{item.price}</Table.Cell>
-                <Table.Cell>
-                  <Flex justifyContent={"center"}>
-                    <MobileStepper quantity={setValue} id={item.id} />
-                  </Flex>
-                </Table.Cell>
-                <Table.Cell textAlign="end">
-                  {item.cartPrice.toFixed(2)}
-                </Table.Cell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-      </Table.Root>
-    </Table.ScrollArea>
+              return (
+                <Table.Row key={item.id}>
+                  <Table.Cell>
+                    <HStack>
+                      <AspectRatio ratio={1 / 1} w="70px">
+                        <Image src={item.thumbnail} alt={item.title}></Image>
+                      </AspectRatio>
+                      <Stack>
+                        <Text>{item.title}</Text>
+                      </Stack>
+                    </HStack>
+                  </Table.Cell>
+                  <Table.Cell>{item.price}</Table.Cell>
+                  <Table.Cell>
+                    <Flex justifyContent={"center"}>
+                      <MobileStepper quantity={setValue} id={item.id} />
+                    </Flex>
+                  </Table.Cell>
+                  <Table.Cell textAlign="end">
+                    {item.cartPrice.toFixed(2)}
+                  </Table.Cell>
+                  <Table.Cell textAlign="end">
+                    <Icon
+                      bg={{
+                        base: "colorPalette.100",
+                        _hover: "colorPalette.200",
+                      }}
+                      onClick={() => deleteItem(item.id)}
+                    >
+                      <LuX />
+                    </Icon>
+                  </Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table.Root>
+      </Table.ScrollArea>
+    </>
   );
 }
 
