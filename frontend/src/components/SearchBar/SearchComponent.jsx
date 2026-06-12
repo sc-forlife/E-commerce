@@ -30,8 +30,6 @@ export default function SearchComponent({}) {
     navigate(`/ViewProduct/${link}`);
   }
 
-  console.log(page.current);
-
   return (
     <>
       {page.current === "Home" ? (

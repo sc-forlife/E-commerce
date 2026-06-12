@@ -11,29 +11,30 @@ import {
 import { LuX } from "react-icons/lu";
 import CartTableHeading from "../CartTableHeading/CartTableHeading";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { categories } from "../../data/category_data";
 import MobileStepper from "../MobileStepper/MobileStepper";
+import { CartContext } from "../../App";
 
 export default function CartTable() {
-  const [products, setProducts] = useState([]);
+  const { cartProducts, setCartProducts } = useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
 
-  useEffect(() => {
-    (async function () {
-      setProducts(await allShopProducts(categories));
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async function () {
+  //     setProducts(await allShopProducts(categories));
+  //   })();
+  // }, []);
 
   function deleteItem(id) {
-    setProducts((p) => p.filter((p) => p.id !== id));
+    setCartProducts((p) => p.filter((p) => p.id !== id));
   }
 
-  console.log(products);
+  console.log(cartProducts);
 
   return (
     <>
-      <CartTableHeading itemNumber={products.length} />
+      <CartTableHeading itemNumber={cartProducts.length} />
       <Table.ScrollArea h={"325px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
@@ -50,7 +51,7 @@ export default function CartTable() {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {products.map((item) => {
+            {cartProducts.map((item) => {
               if (item["cartPrice"]) {
                 item["cartPrice"] =
                   value.id === item.id

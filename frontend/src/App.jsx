@@ -8,18 +8,22 @@ import Cart from "./pages/cart/Cart";
 import ViewProduct from "./pages/ViewProduct/ViewProduct";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+export const CartContext = createContext();
+
 export default function App() {
+  const [cartProducts, setCartProducts] = useState([]);
+  console.log(cartProducts, "Cart");
   return (
     <>
-      {/* <Home />
-      <ViewProduct /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/Cart" element={<Cart />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
-        </Routes>
-      </BrowserRouter>
+      <CartContext.Provider value={{ cartProducts, setCartProducts }}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
+          </Routes>
+        </BrowserRouter>
+      </CartContext.Provider>
     </>
   );
 }

@@ -9,11 +9,10 @@ import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
 
 export const UserContext = createContext();
-export const CartContext = createContext();
 
 export default function Home() {
   const [searchProduct, setSearchProduct] = useState("");
-  const [cartProducts, setCartProducts] = useState([]);
+
   const page = useRef("Home");
 
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function Home() {
       setSearchProduct(await allShopProducts(categories));
     })();
   }, []);
-  console.log(searchProduct);
   return (
     <>
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
@@ -37,10 +35,7 @@ export default function Home() {
           searchProduct.map((product) => {
             return (
               <Display
-                price={product.price}
-                title={product.title}
-                img={product.thumbnail}
-                alt={product.title}
+                item={product}
                 linkTo={`/ViewProduct/${product.title}`}
                 key={product.id}
               />
