@@ -6,22 +6,19 @@ import { CartContext } from "../../App";
 import { useContext, useEffect } from "react";
 
 export default function Display({ item = "", linkTo = "" }) {
-  const { setCartProducts } = useContext(CartContext);
+  const { cartProducts, updateCart, getFreeCartId } = useContext(CartContext);
   const load = !item || !linkTo;
 
   function enterToCart() {
-    sessionStorage.setItem(
-      "Cart",
-      JSON.stringify([
-        ...JSON.parse(sessionStorage.getItem("Cart")),
-        {
-          id: item.id,
-          title: item.title,
-          price: item.price,
-          thumbnail: item.thumbnail,
-        },
-      ]),
-    );
+    updateCart([
+      {
+        cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        thumbnail: item.thumbnail,
+      },
+    ]);
   }
 
   useEffect(() => {

@@ -32,12 +32,12 @@ export default function Home() {
         justifyContent={"center"}
       >
         {searchProduct ? (
-          searchProduct.map((product) => {
+          searchProduct.map((product, index) => {
             return (
               <Display
                 item={product}
                 linkTo={`/ViewProduct/${product.title}`}
-                key={product.id}
+                key={index}
               />
             );
           })

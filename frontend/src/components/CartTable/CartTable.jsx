@@ -17,20 +17,8 @@ import MobileStepper from "../MobileStepper/MobileStepper";
 import { CartContext } from "../../App";
 
 export default function CartTable() {
-  const { cartProducts, setCartProducts } = useContext(CartContext);
+  const { cartProducts, updateCart, deleteCartItem } = useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
-
-  // useEffect(() => {
-  //   (async function () {
-  //     setProducts(await allShopProducts(categories));
-  //   })();
-  // }, []);
-
-  function deleteItem(id) {
-    setCartProducts((p) => p.filter((p) => p.id !== id));
-  }
-
-  console.log(cartProducts);
 
   return (
     <>
@@ -63,7 +51,7 @@ export default function CartTable() {
               }
 
               return (
-                <Table.Row key={item.id}>
+                <Table.Row key={item.cartId}>
                   <Table.Cell>
                     <HStack>
                       <AspectRatio ratio={1 / 1} w="70px">
@@ -89,7 +77,7 @@ export default function CartTable() {
                         base: "colorPalette.100",
                         _hover: "colorPalette.200",
                       }}
-                      onClick={() => deleteItem(item.id)}
+                      onClick={() => deleteCartItem(item.cartId)}
                     >
                       <LuX />
                     </Icon>
