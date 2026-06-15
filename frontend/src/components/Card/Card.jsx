@@ -3,23 +3,32 @@ import { Link } from "react-router-dom";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import css from "./Card.module.css";
 import { CartContext } from "../../App";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function Display({ item = "", linkTo = "" }) {
   const { setCartProducts } = useContext(CartContext);
   const load = !item || !linkTo;
 
   function enterToCart() {
-    setCartProducts((p) => [
-      ...p,
-      {
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        thumbnail: item.thumbnail,
-      },
-    ]);
+    sessionStorage.setItem(
+      "Cart",
+      JSON.stringify([
+        ...JSON.parse(sessionStorage.getItem("Cart")),
+        {
+          id: item.id,
+          title: item.title,
+          price: item.price,
+          thumbnail: item.thumbnail,
+        },
+      ]),
+    );
   }
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("Cart")) {
+      sessionStorage.setItem("Cart", JSON.stringify([]));
+    }
+  }, []);
 
   return (
     <>
