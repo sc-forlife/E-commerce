@@ -23,7 +23,7 @@ export default function CartTable() {
   return (
     <>
       <CartTableHeading itemNumber={cartProducts.length} />
-      <Table.ScrollArea h={"325px"} marginBottom={"7px"}>
+      <Table.ScrollArea h={"315px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
             <Table.Row>

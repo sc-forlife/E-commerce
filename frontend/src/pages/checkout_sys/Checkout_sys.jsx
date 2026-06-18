@@ -1,10 +1,21 @@
-import { Button, ButtonGroup, Steps, Center } from "@chakra-ui/react";
-import Cart from "../../components/CartComponent/CartComponent";
+import {
+  Button,
+  ButtonGroup,
+  Steps,
+  Center,
+  Icon,
+  Flex,
+  Box,
+  Text,
+} from "@chakra-ui/react";
+import CartTable from "../../components/CartTable/CartTable";
+import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
+import Receipt from "../../components/CartReceipt/CartReceipt";
 
 export default function checkout() {
   return (
     <Steps.Root
-      defaultStep={1}
+      defaultStep={0}
       count={steps.length}
       width={"90%"}
       m={"0px auto"}
@@ -23,20 +34,31 @@ export default function checkout() {
       {steps.map((step, index) => (
         <Steps.Content key={index} index={index}>
           <Center w={"89vw"} h={"85vh"} bg={"pink"}>
-            {step.description}
+            <Box bg={"white"} w={"800px"} h={"450px"} borderRadius={"20px"}>
+              {step.description}
+              <Flex justifyContent={"space-around"}>
+                <Steps.PrevTrigger asChild>
+                  <Button variant={"ghost"}>
+                    <Icon>
+                      <LuArrowLeft />
+                    </Icon>
+                    Back to Store
+                  </Button>
+                </Steps.PrevTrigger>
+                <Steps.NextTrigger asChild>
+                  <Button variant={"ghost"}>
+                    Continue{" "}
+                    <Icon>
+                      <LuArrowRight />
+                    </Icon>
+                  </Button>
+                </Steps.NextTrigger>
+              </Flex>
+            </Box>
           </Center>
         </Steps.Content>
       ))}
       <Steps.CompletedContent>All steps are complete!</Steps.CompletedContent>
-
-      <ButtonGroup size="sm" variant="outline">
-        <Steps.PrevTrigger asChild>
-          <Button>Prev</Button>
-        </Steps.PrevTrigger>
-        <Steps.NextTrigger asChild>
-          <Button>Next</Button>
-        </Steps.NextTrigger>
-      </ButtonGroup>
     </Steps.Root>
   );
 }
@@ -44,11 +66,11 @@ export default function checkout() {
 const steps = [
   {
     title: "Cart",
-    description: <Cart />,
+    description: <CartTable />,
   },
   {
     title: "Step 2",
-    description: "Step 2 description",
+    description: <Receipt />,
   },
   {
     title: "Step 3",
