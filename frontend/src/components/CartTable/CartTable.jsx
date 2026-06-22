@@ -17,7 +17,8 @@ import MobileStepper from "../MobileStepper/MobileStepper";
 import { CartContext } from "../../App";
 
 export default function CartTable() {
-  const { cartProducts, updateCart, deleteCartItem } = useContext(CartContext);
+  const { cartProducts, updateCart, deleteCartItem, editCart } =
+    useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
 
   return (
@@ -45,11 +46,14 @@ export default function CartTable() {
                   value.id === item.id
                     ? item.price * value.value
                     : item.cartPrice;
+
+                item["quantity"] =
+                  value.id === item.id ? value.value : item.quantity;
               } else {
                 item["cartPrice"] =
                   value.id === item.id ? item.price * value.value : item.price;
               }
-
+              editCart(item);
               return (
                 <Table.Row key={item.cartId}>
                   <Table.Cell>
@@ -65,7 +69,11 @@ export default function CartTable() {
                   <Table.Cell>{item.price}</Table.Cell>
                   <Table.Cell>
                     <Flex justifyContent={"center"}>
-                      <MobileStepper quantity={setValue} id={item.id} />
+                      <MobileStepper
+                        quantity={setValue}
+                        id={item.id}
+                        defaultQuantity={item.quantity}
+                      />
                     </Flex>
                   </Table.Cell>
                   <Table.Cell textAlign="end">

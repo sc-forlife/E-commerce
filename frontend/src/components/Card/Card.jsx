@@ -12,12 +12,14 @@ export default function Display({ item = "", linkTo = "" }) {
 
   function enterToCart() {
     updateCart([
+      ...cartProducts,
       {
         cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
         id: item.id,
         title: item.title,
         price: item.price,
         thumbnail: item.thumbnail,
+        quantity: 1,
       },
     ]);
   }

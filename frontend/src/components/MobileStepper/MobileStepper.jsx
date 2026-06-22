@@ -2,8 +2,12 @@ import { HStack, IconButton, NumberInput } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { LuMinus, LuPlus } from "react-icons/lu";
 
-export default function MobileStepper({ quantity = function () {}, id = 0 }) {
-  const [value, setValue] = useState(1);
+export default function MobileStepper({
+  quantity = function () {},
+  id = 0,
+  defaultQuantity = 1,
+}) {
+  const [value, setValue] = useState(defaultQuantity);
 
   useEffect(() => {
     quantity({ id: id, value: value });

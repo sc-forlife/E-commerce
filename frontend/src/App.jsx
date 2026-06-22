@@ -22,11 +22,16 @@ export default function App() {
     }
   }, []);
 
+  function editCart(cartItem) {
+    if (inCart(cartItem.id)) {
+      const cartData = JSON.parse(sessionStorage.getItem("Cart"));
+      const newCart = cartData.filter((c) => c.id !== cartItem.id);
+      sessionStorage.setItem("Cart", JSON.stringify([...newCart, cartItem]));
+    }
+  }
+
   function updateCart(newCart) {
-    sessionStorage.setItem(
-      "Cart",
-      JSON.stringify([...cartProducts, ...newCart]),
-    );
+    sessionStorage.setItem("Cart", JSON.stringify(newCart));
     setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
   }
 
@@ -75,6 +80,7 @@ export default function App() {
           deleteCartItem,
           getFreeCartId,
           inCart,
+          editCart,
         }}
       >
         <BrowserRouter>
