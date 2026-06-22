@@ -6,7 +6,8 @@ import { CartContext } from "../../App";
 import { useContext, useEffect } from "react";
 
 export default function Display({ item = "", linkTo = "" }) {
-  const { cartProducts, updateCart, getFreeCartId } = useContext(CartContext);
+  const { cartProducts, updateCart, getFreeCartId, inCart } =
+    useContext(CartContext);
   const load = !item || !linkTo;
 
   function enterToCart() {
@@ -56,9 +57,20 @@ export default function Display({ item = "", linkTo = "" }) {
               </Text>
             </Card.Body>
             <Card.Footer>
-              <Button onClick={enterToCart} w={"100%"}>
-                Add to Cart
-              </Button>
+              {inCart(item.id) ? (
+                <Button
+                  onClick={enterToCart}
+                  w={"100%"}
+                  variant={"outline"}
+                  disabled
+                >
+                  Item Added
+                </Button>
+              ) : (
+                <Button onClick={enterToCart} w={"100%"}>
+                  Add to Cart
+                </Button>
+              )}
             </Card.Footer>
           </Card.Root>
         </>

@@ -56,10 +56,26 @@ export default function App() {
     return freeId;
   }
 
+  function inCart(id) {
+    const cartData = JSON.parse(sessionStorage.getItem("Cart"));
+    for (const item of cartData) {
+      if (item.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <>
       <CartContext.Provider
-        value={{ cartProducts, updateCart, deleteCartItem, getFreeCartId }}
+        value={{
+          cartProducts,
+          updateCart,
+          deleteCartItem,
+          getFreeCartId,
+          inCart,
+        }}
       >
         <BrowserRouter>
           <Routes>

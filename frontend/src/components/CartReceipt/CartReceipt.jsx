@@ -23,7 +23,7 @@ export default function Receipt() {
       >
         <Box
           h={"10px"}
-          bg={"blue"}
+          bg={"black"}
           borderTopRadius={"10px"}
           width={"100%"}
         ></Box>
@@ -32,7 +32,7 @@ export default function Receipt() {
         </Flex>
         <Box
           h={"10px"}
-          bg={"blue"}
+          bg={"black"}
           borderBottomRadius={"10px"}
           width={"100%"}
         ></Box>
