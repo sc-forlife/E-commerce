@@ -12,6 +12,7 @@ import {
 import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
 import { useEffect, useState, createContext, useContext } from "react";
 import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
+import { CartContext } from "../../App";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import Rating from "../Rating/Rating";
 import ProductSize from "../ProductSize/ProductSize";
@@ -20,9 +21,26 @@ export const UserProductSize = createContext();
 
 export default function ProductDescription() {
   //Use create context to provide the details
+  const { cartProducts, updateCart, getFreeCartId, inCart } =
+    useContext(CartContext);
+
   const { product } = useContext(SelectedProduct);
 
   const [size, setSize] = useState("");
+
+  function enterToCart() {
+    updateCart([
+      ...cartProducts,
+      {
+        cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        thumbnail: product.thumbnail,
+        quantity: 1,
+      },
+    ]);
+  }
 
   //Think about Category ,
   //Think about tags
@@ -62,7 +80,17 @@ export default function ProductDescription() {
               <UserProductSize.Provider value={{ size, setSize }}>
                 <ProductSize />
               </UserProductSize.Provider>
-              <Button>Add to Cart</Button>
+              {inCart(product.id) ? (
+                <>
+                  <Button onClick={enterToCart} disabled>
+                    Item Added
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button onClick={enterToCart}>Add to Cart</Button>
+                </>
+              )}
             </Stack>
           </>
         ) : (

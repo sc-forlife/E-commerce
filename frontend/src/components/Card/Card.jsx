@@ -6,23 +6,7 @@ import { CartContext } from "../../App";
 import { useContext, useEffect } from "react";
 
 export default function Display({ item = "", linkTo = "" }) {
-  const { cartProducts, updateCart, getFreeCartId, inCart } =
-    useContext(CartContext);
   const load = !item || !linkTo;
-
-  function enterToCart() {
-    updateCart([
-      ...cartProducts,
-      {
-        cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        thumbnail: item.thumbnail,
-        quantity: 1,
-      },
-    ]);
-  }
 
   useEffect(() => {
     if (!sessionStorage.getItem("Cart")) {
@@ -44,11 +28,10 @@ export default function Display({ item = "", linkTo = "" }) {
               margin={"10px"}
             />
             <Card.Body gap="0" p={"15px"}>
-              <Link to={linkTo} className={css.link}>
-                <Card.Title fontWeight={"light"} data-testid="title">
-                  {item.title}
-                </Card.Title>
-              </Link>
+              <Card.Title fontWeight={"light"} data-testid="title">
+                {item.title}
+              </Card.Title>
+
               <Text
                 textStyle="2x1"
                 fontWeight="medium"
@@ -58,22 +41,11 @@ export default function Display({ item = "", linkTo = "" }) {
                 ${item.price}
               </Text>
             </Card.Body>
-            <Card.Footer>
-              {inCart(item.id) ? (
-                <Button
-                  onClick={enterToCart}
-                  w={"100%"}
-                  variant={"outline"}
-                  disabled
-                >
-                  Item Added
-                </Button>
-              ) : (
-                <Button onClick={enterToCart} w={"100%"}>
-                  Add to Cart
-                </Button>
-              )}
-            </Card.Footer>
+            <Link to={linkTo} className={css.link}>
+              <Card.Footer>
+                <Button w={"100%"}>View Product</Button>
+              </Card.Footer>
+            </Link>
           </Card.Root>
         </>
       )}
