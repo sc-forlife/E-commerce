@@ -11,9 +11,15 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Tab from "@mui/material/Tab";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 
 export default function Receipt() {
+  const [cartData, setCartData] = useState("");
+  useEffect(() => {
+    const data = JSON.parse(sessionStorage.getItem("Cart"));
+    setCartData(data);
+  }, []);
+
   return (
     <>
       <Box
@@ -30,36 +36,56 @@ export default function Receipt() {
           width={"100%"}
         ></Box>
         <Flex
-          justifyContent={"center"}
+          justifyContent={"flex-start"}
           flexDirection={"column"}
-          gap={"50px"}
+          alignItems={"flex-start"}
+          gap={"10px"}
           h={"95%"}
         >
-          <Heading fontSize={"15px"}>Order Summary</Heading>
-          <Table.ScrollArea h={"200px"}>
-            <Table.Root size="sm" stickyHeader stickyFooter>
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeader>Products</Table.ColumnHeader>
-                  <Table.ColumnHeader textAlign="end">Price</Table.ColumnHeader>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {items.map((item) => (
-                  <Table.Row key={item.id}>
-                    <Table.Cell>{item.name}</Table.Cell>
-                    <Table.Cell textAlign="end">{item.price}</Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-              <Table.Footer>
-                <Table.Row>
-                  <Table.Cell>Total</Table.Cell>
-                  <Table.Cell textAlign="end">1000</Table.Cell>
-                </Table.Row>
-              </Table.Footer>
-            </Table.Root>
-          </Table.ScrollArea>
+          <Heading fontSize={"15px"} marginTop={"10px"}>
+            Order Summary
+          </Heading>
+          <Table.Root size="sm" stickyHeader stickyFooter>
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeader>Price Details</Table.ColumnHeader>
+                <Table.ColumnHeader textAlign="end"></Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row key="item-prices">
+                <Table.Cell>
+                  Items{" "}
+                  {`(${
+                    cartData
+                      ? cartData.reduce((acc, currentVal) => {
+                          return currentVal.quantity + acc;
+                        }, 0)
+                      : ""
+                  })`}
+                </Table.Cell>
+                <Table.Cell textAlign="end">1000</Table.Cell>
+              </Table.Row>
+              <Table.Row key="item-discount">
+                <Table.Cell>Discount</Table.Cell>
+                <Table.Cell textAlign="end">1000</Table.Cell>
+              </Table.Row>
+              <Table.Row key="item-discount">
+                <Table.Cell>VAT</Table.Cell>
+                <Table.Cell textAlign="end">1000</Table.Cell>
+              </Table.Row>
+              <Table.Row key="item-shipping">
+                <Table.Cell>Shipping</Table.Cell>
+                <Table.Cell textAlign="end">Free</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+            <Table.Footer>
+              <Table.Row>
+                <Table.Cell>Total</Table.Cell>
+                <Table.Cell textAlign="end">1000</Table.Cell>
+              </Table.Row>
+            </Table.Footer>
+          </Table.Root>
         </Flex>
         <Box
           h={"10px"}

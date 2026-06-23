@@ -15,6 +15,7 @@ import { useEffect, useState, useContext } from "react";
 import { categories } from "../../data/category_data";
 import MobileStepper from "../MobileStepper/MobileStepper";
 import { CartContext } from "../../App";
+import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
   const { cartProducts, updateCart, deleteCartItem, editCart } =

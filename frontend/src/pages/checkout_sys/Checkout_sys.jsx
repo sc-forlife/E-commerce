@@ -7,6 +7,7 @@ import {
   Flex,
   Box,
   Text,
+  HStack,
 } from "@chakra-ui/react";
 import CartTable from "../../components/CartTable/CartTable";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
@@ -33,7 +34,7 @@ export default function checkout() {
 
       {steps.map((step, index) => (
         <Steps.Content key={index} index={index}>
-          <Center w={"89vw"} h={"85vh"} bg={"pink"}>
+          <Center w={"90vw"} h={"85vh"} bg={"pink"}>
             <Box bg={"white"} w={"800px"} h={"450px"} borderRadius={"20px"}>
               {step.description}
               <Flex justifyContent={"space-around"}>
@@ -55,6 +56,7 @@ export default function checkout() {
                 </Steps.NextTrigger>
               </Flex>
             </Box>
+            {step.extra ? step.extra : ""}
           </Center>
         </Steps.Content>
       ))}
