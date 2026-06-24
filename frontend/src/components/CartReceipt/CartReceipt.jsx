@@ -15,10 +15,44 @@ import { useState, useContext, useRef, useEffect } from "react";
 
 export default function Receipt() {
   const [cartData, setCartData] = useState("");
+  const [totalPrices, setTotalPrices] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [tax, setTax] = useState("");
+  const [shipping, setShipping] = useState("");
+  const [total, setTotal] = useState("");
+
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem("Cart"));
     setCartData(data);
+    calDiscount(data);
+    calTotalPrices(data);
+    calTax(data);
+    calShipping(data);
   }, []);
+
+  function totalNumber(data, prop) {
+    const totalNum = data.reduce((acc, currVal) => {
+      return currVal[`${prop}`] + acc;
+    }, 0);
+
+    return totalNum;
+  }
+
+  function calTotalPrices(data) {
+    setTotalPrices(totalNumber(data, "cartPrice"));
+  }
+
+  function calDiscount(data) {
+    setDiscount(((30 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
+  }
+
+  function calTax(data) {
+    setTax(((10 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
+  }
+
+  function calShipping(data) {
+    setShipping(((12 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
+  }
 
   return (
     <>
@@ -55,34 +89,38 @@ export default function Receipt() {
             <Table.Body>
               <Table.Row key="item-prices">
                 <Table.Cell>
-                  Items{" "}
-                  {`(${
-                    cartData
-                      ? cartData.reduce((acc, currentVal) => {
-                          return currentVal.quantity + acc;
-                        }, 0)
-                      : ""
-                  })`}
+                  Items
+                  {`(${cartData ? totalNumber(cartData, "quantity") : ""})`}
                 </Table.Cell>
-                <Table.Cell textAlign="end">1000</Table.Cell>
+                <Table.Cell textAlign="end">{totalPrices} $</Table.Cell>
               </Table.Row>
               <Table.Row key="item-discount">
                 <Table.Cell>Discount</Table.Cell>
-                <Table.Cell textAlign="end">1000</Table.Cell>
+                <Table.Cell textAlign="end">{discount} $</Table.Cell>
               </Table.Row>
               <Table.Row key="item-discount">
                 <Table.Cell>VAT</Table.Cell>
-                <Table.Cell textAlign="end">1000</Table.Cell>
+                <Table.Cell textAlign="end">{tax} $</Table.Cell>
               </Table.Row>
               <Table.Row key="item-shipping">
                 <Table.Cell>Shipping</Table.Cell>
-                <Table.Cell textAlign="end">Free</Table.Cell>
+                <Table.Cell textAlign="end">{shipping} $</Table.Cell>
               </Table.Row>
             </Table.Body>
             <Table.Footer>
               <Table.Row>
                 <Table.Cell>Total</Table.Cell>
-                <Table.Cell textAlign="end">1000</Table.Cell>
+                <Table.Cell textAlign="end">
+                  {shipping
+                    ? (
+                        Number(totalPrices) +
+                        Number(tax) +
+                        Number(shipping) -
+                        Number(discount)
+                      ).toFixed(2)
+                    : ""}{" "}
+                  $
+                </Table.Cell>
               </Table.Row>
             </Table.Footer>
           </Table.Root>
