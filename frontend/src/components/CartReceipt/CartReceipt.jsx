@@ -24,11 +24,17 @@ export default function Receipt() {
   useEffect(() => {
     const data = JSON.parse(sessionStorage.getItem("Cart"));
     setCartData(data);
+    updateData();
+    console.log("Mounted");
+  }, []);
+
+  function updateData() {
+    const data = JSON.parse(sessionStorage.getItem("Cart"));
     calDiscount(data);
     calTotalPrices(data);
     calTax(data);
     calShipping(data);
-  }, []);
+  }
 
   function totalNumber(data, prop) {
     const totalNum = data.reduce((acc, currVal) => {
@@ -62,6 +68,8 @@ export default function Receipt() {
         w={"50%"}
         margin={"20px auto 10px"}
         borderRadius={"10px"}
+        borderWidth={"2px"}
+        borderColor={"black"}
       >
         <Box
           h={"10px"}
@@ -73,13 +81,13 @@ export default function Receipt() {
           justifyContent={"flex-start"}
           flexDirection={"column"}
           alignItems={"flex-start"}
-          gap={"10px"}
+          gap={"25px"}
           h={"95%"}
         >
-          <Heading fontSize={"15px"} marginTop={"10px"}>
-            Order Summary
+          <Heading fontSize={"15px"} marginTop={"25px"} width={"100%"}>
+            <Flex justifyContent={"center"}>Order Summary</Flex>
           </Heading>
-          <Table.Root size="sm" stickyHeader stickyFooter>
+          <Table.Root size="md" stickyHeader striped>
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeader>Price Details</Table.ColumnHeader>

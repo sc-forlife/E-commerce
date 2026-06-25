@@ -71,7 +71,7 @@ const steps = [
     description: <CartTable />,
   },
   {
-    title: "Step 2",
+    title: "Receipt",
     description: <Receipt />,
   },
   {

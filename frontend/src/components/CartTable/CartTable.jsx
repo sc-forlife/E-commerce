@@ -21,7 +21,7 @@ export default function CartTable() {
   const { cartProducts, updateCart, deleteCartItem, editCart } =
     useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
-
+  console.log("render");
   return (
     <>
       <CartTableHeading itemNumber={cartProducts.length} />
