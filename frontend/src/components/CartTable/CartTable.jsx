@@ -18,13 +18,19 @@ import { CartContext } from "../../App";
 import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
-  const { cartProducts, updateCart, deleteCartItem, editCart } =
-    useContext(CartContext);
+  const { updateCart, deleteCartItem, editCart } = useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
+  const [cartProducts, setCartProducts] = useState();
+
+  useEffect(() => {
+    const data = JSON.parse(sessionStorage.getItem("Cart"));
+    setCartProducts(data);
+  }, []);
+
   console.log("render");
   return (
     <>
-      <CartTableHeading itemNumber={cartProducts.length} />
+      <CartTableHeading itemNumber={cartProducts ? cartProducts.length : ""} />
       <Table.ScrollArea h={"315px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
@@ -41,59 +47,67 @@ export default function CartTable() {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {cartProducts.map((item) => {
-              if (item["cartPrice"]) {
-                item["cartPrice"] =
-                  value.id === item.id
-                    ? item.price * value.value
-                    : item.cartPrice;
+            {cartProducts ? (
+              cartProducts.map((item) => {
+                if (item["cartPrice"]) {
+                  item["cartPrice"] =
+                    value.id === item.id
+                      ? item.price * value.value
+                      : item.cartPrice;
 
-                item["quantity"] =
-                  value.id === item.id ? value.value : item.quantity;
-              } else {
-                item["cartPrice"] =
-                  value.id === item.id ? item.price * value.value : item.price;
-              }
-              editCart(item);
-              return (
-                <Table.Row key={item.cartId}>
-                  <Table.Cell>
-                    <HStack>
-                      <AspectRatio ratio={1 / 1} w="70px">
-                        <Image src={item.thumbnail} alt={item.title}></Image>
-                      </AspectRatio>
-                      <Stack>
-                        <Text>{item.title}</Text>
-                      </Stack>
-                    </HStack>
-                  </Table.Cell>
-                  <Table.Cell>{item.price}</Table.Cell>
-                  <Table.Cell>
-                    <Flex justifyContent={"center"}>
-                      <MobileStepper
-                        quantity={setValue}
-                        id={item.id}
-                        defaultQuantity={item.quantity}
-                      />
-                    </Flex>
-                  </Table.Cell>
-                  <Table.Cell textAlign="end">
-                    {item.cartPrice.toFixed(2)}
-                  </Table.Cell>
-                  <Table.Cell textAlign="end">
-                    <Icon
-                      bg={{
-                        base: "colorPalette.100",
-                        _hover: "colorPalette.200",
-                      }}
-                      onClick={() => deleteCartItem(item.cartId)}
-                    >
-                      <LuX />
-                    </Icon>
-                  </Table.Cell>
-                </Table.Row>
-              );
-            })}
+                  item["quantity"] =
+                    value.id === item.id ? value.value : item.quantity;
+                } else {
+                  item["cartPrice"] =
+                    value.id === item.id
+                      ? item.price * value.value
+                      : item.price;
+                }
+                // editCart(item);
+                return (
+                  <Table.Row key={item.cartId}>
+                    <Table.Cell>
+                      <HStack>
+                        <AspectRatio ratio={1 / 1} w="70px">
+                          <Image src={item.thumbnail} alt={item.title}></Image>
+                        </AspectRatio>
+                        <Stack>
+                          <Text>{item.title}</Text>
+                        </Stack>
+                      </HStack>
+                    </Table.Cell>
+                    <Table.Cell>{item.price}</Table.Cell>
+                    <Table.Cell>
+                      <Flex justifyContent={"center"}>
+                        <MobileStepper
+                          quantity={setValue}
+                          id={item.id}
+                          defaultQuantity={item.quantity}
+                        />
+                      </Flex>
+                    </Table.Cell>
+                    <Table.Cell textAlign="end">
+                      {item.cartPrice.toFixed(2)}
+                    </Table.Cell>
+                    <Table.Cell textAlign="end">
+                      <Icon
+                        bg={{
+                          base: "colorPalette.100",
+                          _hover: "colorPalette.200",
+                        }}
+                        onClick={() => deleteCartItem(item.cartId)}
+                      >
+                        <LuX />
+                      </Icon>
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              })
+            ) : (
+              <>
+                <h1>Loading</h1>
+              </>
+            )}
           </Table.Body>
         </Table.Root>
       </Table.ScrollArea>

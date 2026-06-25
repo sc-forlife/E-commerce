@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import Tab from "@mui/material/Tab";
 import { useState, useContext, useRef, useEffect } from "react";
+import { CartContext } from "../../App";
 
 export default function Receipt() {
-  const [cartData, setCartData] = useState("");
+  const { cartProducts } = useContext(CartContext);
+
   const [totalPrices, setTotalPrices] = useState("");
   const [discount, setDiscount] = useState("");
   const [tax, setTax] = useState("");
@@ -22,19 +24,8 @@ export default function Receipt() {
   const [total, setTotal] = useState("");
 
   useEffect(() => {
-    const data = JSON.parse(sessionStorage.getItem("Cart"));
-    setCartData(data);
-    updateData();
-    console.log("Mounted");
+    updateData(cartProducts);
   }, []);
-
-  function updateData() {
-    const data = JSON.parse(sessionStorage.getItem("Cart"));
-    calDiscount(data);
-    calTotalPrices(data);
-    calTax(data);
-    calShipping(data);
-  }
 
   function totalNumber(data, prop) {
     const totalNum = data.reduce((acc, currVal) => {
@@ -44,19 +35,10 @@ export default function Receipt() {
     return totalNum;
   }
 
-  function calTotalPrices(data) {
+  function updateData(data) {
     setTotalPrices(totalNumber(data, "cartPrice"));
-  }
-
-  function calDiscount(data) {
     setDiscount(((30 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
-  }
-
-  function calTax(data) {
     setTax(((10 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
-  }
-
-  function calShipping(data) {
     setShipping(((12 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
   }
 
@@ -98,7 +80,7 @@ export default function Receipt() {
               <Table.Row key="item-prices">
                 <Table.Cell>
                   Items
-                  {`(${cartData ? totalNumber(cartData, "quantity") : ""})`}
+                  {`(${cartProducts ? totalNumber(cartProducts, "quantity") : ""})`}
                 </Table.Cell>
                 <Table.Cell textAlign="end">{totalPrices} $</Table.Cell>
               </Table.Row>

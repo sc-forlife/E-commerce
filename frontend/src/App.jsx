@@ -27,6 +27,7 @@ export default function App() {
       const cartData = JSON.parse(sessionStorage.getItem("Cart"));
       const newCart = cartData.filter((c) => c.id !== cartItem.id);
       sessionStorage.setItem("Cart", JSON.stringify([...newCart, cartItem]));
+      // setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
     }
   }
 
