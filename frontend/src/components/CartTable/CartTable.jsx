@@ -15,9 +15,11 @@ import { useEffect, useState, useContext } from "react";
 import { categories } from "../../data/category_data";
 import MobileStepper from "../MobileStepper/MobileStepper";
 import { CartContext } from "../../App";
+import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
+  const { setReceiptData } = useContext(ReceiptContext);
   const { updateCart, deleteCartItem, editCart } = useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
   const [cartProducts, setCartProducts] = useState();
@@ -26,6 +28,22 @@ export default function CartTable() {
     const data = JSON.parse(sessionStorage.getItem("Cart"));
     setCartProducts(data);
   }, []);
+
+  function updateReceipt() {
+    let quantity = 0;
+    let cartPrice = 0;
+    const data = JSON.parse(sessionStorage.getItem("Cart"));
+    for (const item of data) {
+      if (item.cartPrice) {
+        cartPrice += item.cartPrice;
+      }
+      if (item.quantity) {
+        quantity += item.quantity;
+      }
+    }
+
+    // setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
+  }
 
   console.log("render");
   return (
@@ -63,7 +81,7 @@ export default function CartTable() {
                       ? item.price * value.value
                       : item.price;
                 }
-                // editCart(item);
+                editCart(item);
                 return (
                   <Table.Row key={item.cartId}>
                     <Table.Cell>

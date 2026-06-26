@@ -13,9 +13,11 @@ import {
 import Tab from "@mui/material/Tab";
 import { useState, useContext, useRef, useEffect } from "react";
 import { CartContext } from "../../App";
+import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 
 export default function Receipt() {
   const { cartProducts } = useContext(CartContext);
+  const { receiptData, setReceiptData } = useContext(ReceiptContext);
 
   const [totalPrices, setTotalPrices] = useState("");
   const [discount, setDiscount] = useState("");
@@ -24,7 +26,9 @@ export default function Receipt() {
   const [total, setTotal] = useState("");
 
   useEffect(() => {
-    updateData(cartProducts);
+    if (receiptData) {
+      updateData(receiptData);
+    }
   }, []);
 
   function totalNumber(data, prop) {
@@ -36,10 +40,10 @@ export default function Receipt() {
   }
 
   function updateData(data) {
-    setTotalPrices(totalNumber(data, "cartPrice"));
-    setDiscount(((30 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
-    setTax(((10 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
-    setShipping(((12 / 100) * totalNumber(data, "cartPrice")).toFixed(2));
+    setTotalPrices(data.cartPrice);
+    setDiscount(((30 / 100) * data.cartPrice).toFixed(2));
+    setTax(((10 / 100) * data.cartPrice).toFixed(2));
+    setShipping(((12 / 100) * data.cartPrice).toFixed(2));
   }
 
   return (
