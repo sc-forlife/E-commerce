@@ -46,18 +46,13 @@ export default function checkout() {
                 <Flex justifyContent={"space-around"}>
                   <Steps.PrevTrigger asChild>
                     <Button variant={"ghost"}>
-                      <Icon>
-                        <LuArrowLeft />
-                      </Icon>
+                      <Icon as={LuArrowLeft}></Icon>
                       Back to Store
                     </Button>
                   </Steps.PrevTrigger>
                   <Steps.NextTrigger asChild>
                     <Button variant={"ghost"}>
-                      Continue{" "}
-                      <Icon>
-                        <LuArrowRight />
-                      </Icon>
+                      Continue <Icon as={LuArrowRight}></Icon>
                     </Button>
                   </Steps.NextTrigger>
                 </Flex>

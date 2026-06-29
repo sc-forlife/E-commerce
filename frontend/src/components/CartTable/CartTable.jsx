@@ -29,6 +29,12 @@ export default function CartTable() {
     setCartProducts(data);
   }, []);
 
+  useEffect(() => {
+    if (cartProducts) {
+      updateReceipt();
+    }
+  }, [value, cartProducts]);
+
   function updateReceipt() {
     let quantity = 0;
     let cartPrice = 0;
@@ -42,10 +48,8 @@ export default function CartTable() {
       }
     }
 
-    // setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
+    setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
   }
-
-  console.log("render");
   return (
     <>
       <CartTableHeading itemNumber={cartProducts ? cartProducts.length : ""} />
@@ -67,6 +71,7 @@ export default function CartTable() {
           <Table.Body>
             {cartProducts ? (
               cartProducts.map((item) => {
+                // ******** Figure out a way to update state rather than direct mutation *********
                 if (item["cartPrice"]) {
                   item["cartPrice"] =
                     value.id === item.id
@@ -82,6 +87,7 @@ export default function CartTable() {
                       : item.price;
                 }
                 editCart(item);
+                // ******************************************************************************
                 return (
                   <Table.Row key={item.cartId}>
                     <Table.Cell>
@@ -109,21 +115,24 @@ export default function CartTable() {
                     </Table.Cell>
                     <Table.Cell textAlign="end">
                       <Icon
+                        as={LuX}
                         bg={{
                           base: "colorPalette.100",
                           _hover: "colorPalette.200",
                         }}
                         onClick={() => deleteCartItem(item.cartId)}
-                      >
-                        <LuX />
-                      </Icon>
+                      ></Icon>
                     </Table.Cell>
                   </Table.Row>
                 );
               })
             ) : (
               <>
-                <h1>Loading</h1>
+                <Table.Row>
+                  <Table.Cell colSpan={5} textAlign="center">
+                    Loading
+                  </Table.Cell>
+                </Table.Row>
               </>
             )}
           </Table.Body>

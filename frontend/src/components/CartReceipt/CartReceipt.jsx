@@ -29,7 +29,7 @@ export default function Receipt() {
     if (receiptData) {
       updateData(receiptData);
     }
-  }, []);
+  }, [receiptData]);
 
   function totalNumber(data, prop) {
     const totalNum = data.reduce((acc, currVal) => {
@@ -84,7 +84,7 @@ export default function Receipt() {
               <Table.Row key="item-prices">
                 <Table.Cell>
                   Items
-                  {`(${cartProducts ? totalNumber(cartProducts, "quantity") : ""})`}
+                  {`(${receiptData ? receiptData.quantity : ""})`}
                 </Table.Cell>
                 <Table.Cell textAlign="end">{totalPrices} $</Table.Cell>
               </Table.Row>
@@ -92,7 +92,7 @@ export default function Receipt() {
                 <Table.Cell>Discount</Table.Cell>
                 <Table.Cell textAlign="end">{discount} $</Table.Cell>
               </Table.Row>
-              <Table.Row key="item-discount">
+              <Table.Row key="item-tax">
                 <Table.Cell>VAT</Table.Cell>
                 <Table.Cell textAlign="end">{tax} $</Table.Cell>
               </Table.Row>
