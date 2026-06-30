@@ -13,6 +13,7 @@ import { createContext, useState, useEffect } from "react";
 import CartTable from "../../components/CartTable/CartTable";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import Receipt from "../../components/CartReceipt/CartReceipt";
+import CartPayment from "../../components/CartPayment/CartPayment";
 
 export const ReceiptContext = createContext();
 
@@ -41,7 +42,13 @@ export default function checkout() {
         {steps.map((step, index) => (
           <Steps.Content key={index} index={index}>
             <Center w={"90vw"} h={"85vh"} bg={"pink"}>
-              <Box bg={"white"} w={"800px"} h={"450px"} borderRadius={"20px"}>
+              <Box
+                bg={"white"}
+                w={"800px"}
+                h={"450px"}
+                borderRadius={"20px"}
+                overflowY={step.title === "Payment" ? "scroll" : "none"}
+              >
                 {step.description}
                 <Flex justifyContent={"space-around"}>
                   <Steps.PrevTrigger asChild>
@@ -77,7 +84,7 @@ const steps = [
     description: <Receipt />,
   },
   {
-    title: "Step 3",
-    description: "Step 3 description",
+    title: "Payment",
+    description: <CartPayment />,
   },
 ];

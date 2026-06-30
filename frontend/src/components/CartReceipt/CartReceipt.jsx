@@ -16,7 +16,6 @@ import { CartContext } from "../../App";
 import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 
 export default function Receipt() {
-  const { cartProducts } = useContext(CartContext);
   const { receiptData, setReceiptData } = useContext(ReceiptContext);
 
   const [totalPrices, setTotalPrices] = useState("");
