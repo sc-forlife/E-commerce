@@ -8,6 +8,7 @@ import {
   Stack,
   HStack,
   RadioGroup,
+  Flex,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import OnlinePayment from "../OnlinePayment/OnlinePayment";
@@ -16,55 +17,67 @@ export default function CartPayment() {
   const [displayBankCard, setDisplayBankCard] = useState(false);
 
   return (
-    <Fieldset.Root size="lg" maxW="md" margin={"30px 30px"}>
-      <Stack>
-        <Fieldset.Legend>Contact details</Fieldset.Legend>
-        <Fieldset.HelperText>
-          Please provide your contact details below.
-        </Fieldset.HelperText>
-      </Stack>
+    <>
+      <Flex>
+        <Fieldset.Root size="lg" w="400px" margin={"30px 30px"}>
+          <Stack>
+            <Fieldset.Legend>Contact details</Fieldset.Legend>
+            <Fieldset.HelperText>
+              Please provide your contact details below.
+            </Fieldset.HelperText>
+          </Stack>
 
-      <Fieldset.Content>
-        <Field.Root>
-          <Field.Label>Name</Field.Label>
-          <Input name="name" />
-        </Field.Root>
+          <Fieldset.Content>
+            <Field.Root>
+              <Field.Label>Name</Field.Label>
+              <Input name="name" />
+            </Field.Root>
 
-        <Field.Root>
-          <Field.Label>Email address</Field.Label>
-          <Input name="email" type="email" />
-        </Field.Root>
+            <Field.Root>
+              <Field.Label>Email address</Field.Label>
+              <Input name="email" type="email" />
+            </Field.Root>
 
-        <Field.Root>
-          <Field.Label>Contact</Field.Label>
-          <Input name="contact" type="text" />
-        </Field.Root>
+            <Field.Root>
+              <Field.Label>Contact</Field.Label>
+              <Input name="contact" type="text" />
+            </Field.Root>
 
-        <Field.Root>
-          <Field.Label>Address</Field.Label>
-          <Input name="address" type="text" />
-        </Field.Root>
-      </Fieldset.Content>
+            <Field.Root>
+              <Field.Label>Address</Field.Label>
+              <Input name="address" type="text" />
+            </Field.Root>
+          </Fieldset.Content>
 
-      <Stack>
-        <Fieldset.Legend>Payment Method</Fieldset.Legend>
-        <RadioGroup.Root
-          defaultValue="1"
-          onValueChange={() => setDisplayBankCard((t) => (t = !t))}
-        >
-          <HStack gap="6">
-            {items.map((item) => (
-              <RadioGroup.Item key={item.value} value={item.value}>
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
-                <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
-              </RadioGroup.Item>
-            ))}
-          </HStack>
-        </RadioGroup.Root>
-      </Stack>
-      {displayBankCard ? <OnlinePayment /> : ""}
-    </Fieldset.Root>
+          <Stack>
+            <Fieldset.Legend>Payment Method</Fieldset.Legend>
+            <RadioGroup.Root
+              defaultValue="1"
+              onValueChange={() => setDisplayBankCard((t) => (t = !t))}
+            >
+              <HStack gap="6">
+                {items.map((item) => (
+                  <RadioGroup.Item key={item.value} value={item.value}>
+                    <RadioGroup.ItemHiddenInput />
+                    <RadioGroup.ItemIndicator />
+                    <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+                  </RadioGroup.Item>
+                ))}
+              </HStack>
+            </RadioGroup.Root>
+          </Stack>
+        </Fieldset.Root>
+        {displayBankCard ? (
+          <OnlinePayment />
+        ) : // <Fieldset.Root margin={"30px 30px"}>
+        //   <Fieldset.Legend>Online Payment Section</Fieldset.Legend>
+        //   <Fieldset.HelperText>
+        //     Please provide your contact details below.
+        //   </Fieldset.HelperText>
+        // </Fieldset.Root>
+        null}
+      </Flex>
+    </>
   );
 }
 

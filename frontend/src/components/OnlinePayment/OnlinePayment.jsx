@@ -13,7 +13,7 @@ import {
 export default function OnlinePayment() {
   return (
     <>
-      <Fieldset.Root size="lg" maxW="md">
+      <Fieldset.Root size="lg" w="400px" margin={"30px 30px"}>
         <Stack>
           <Fieldset.Legend>Card details</Fieldset.Legend>
           <Fieldset.HelperText>

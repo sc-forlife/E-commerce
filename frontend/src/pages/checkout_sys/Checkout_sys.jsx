@@ -44,7 +44,8 @@ export default function checkout() {
             <Center w={"90vw"} h={"85vh"} bg={"pink"}>
               <Box
                 bg={"white"}
-                w={"800px"}
+                minW={"800px"}
+                maxW={"1000px"}
                 h={"450px"}
                 borderRadius={"20px"}
                 overflowY={step.title === "Payment" ? "scroll" : null}
@@ -54,7 +55,7 @@ export default function checkout() {
                   <Steps.PrevTrigger asChild>
                     <Button variant={"ghost"}>
                       <Icon as={LuArrowLeft}></Icon>
-                      Back to Store
+                      Back
                     </Button>
                   </Steps.PrevTrigger>
                   <Steps.NextTrigger asChild>
