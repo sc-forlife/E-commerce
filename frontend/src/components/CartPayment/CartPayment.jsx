@@ -10,6 +10,7 @@ import {
   RadioGroup,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import OnlinePayment from "../OnlinePayment/OnlinePayment";
 
 export default function CartPayment() {
   const [displayBankCard, setDisplayBankCard] = useState(false);
@@ -59,46 +60,10 @@ export default function CartPayment() {
                 <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
               </RadioGroup.Item>
             ))}
-            {console.log()}
           </HStack>
         </RadioGroup.Root>
       </Stack>
-
-      {displayBankCard ? (
-        <>
-          <Fieldset.Root size="lg" maxW="md">
-            <Stack>
-              <Fieldset.Legend>Card details</Fieldset.Legend>
-              <Fieldset.HelperText>
-                Please provide your card details below.
-              </Fieldset.HelperText>
-            </Stack>
-
-            <Fieldset.Content>
-              <Field.Root>
-                <Field.Label>Card Holder's Name</Field.Label>
-                <Input name="name" />
-              </Field.Root>
-
-              <Field.Root>
-                <Field.Label>Card Number</Field.Label>
-                <Input name="email" type="email" />
-              </Field.Root>
-
-              <Field.Root>
-                <Field.Label>EXP</Field.Label>
-                <Input name="email" type="email" />
-              </Field.Root>
-            </Fieldset.Content>
-          </Fieldset.Root>
-        </>
-      ) : (
-        ""
-      )}
-
-      <Button type="submit" alignSelf="flex-start">
-        Submit
-      </Button>
+      {displayBankCard ? <OnlinePayment /> : ""}
     </Fieldset.Root>
   );
 }

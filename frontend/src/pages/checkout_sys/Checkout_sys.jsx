@@ -47,7 +47,7 @@ export default function checkout() {
                 w={"800px"}
                 h={"450px"}
                 borderRadius={"20px"}
-                overflowY={step.title === "Payment" ? "scroll" : "none"}
+                overflowY={step.title === "Payment" ? "scroll" : null}
               >
                 {step.description}
                 <Flex justifyContent={"space-around"}>
