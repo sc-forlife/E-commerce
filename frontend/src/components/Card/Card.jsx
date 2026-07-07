@@ -8,11 +8,11 @@ import { useContext, useEffect } from "react";
 export default function Display({ item = "", linkTo = "" }) {
   const load = !item || !linkTo;
 
-  useEffect(() => {
-    if (!sessionStorage.getItem("Cart")) {
-      sessionStorage.setItem("Cart", JSON.stringify([]));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!sessionStorage.getItem("Cart")) {
+  //     sessionStorage.setItem("Cart", JSON.stringify([]));
+  //   }
+  // }, []);
 
   return (
     <>

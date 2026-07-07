@@ -11,52 +11,65 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 export const CartContext = createContext();
 
 export default function App() {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); //This is the main storage
 
   useEffect(() => {
     const cartData = JSON.parse(sessionStorage.getItem("Cart"));
-    if (cartData) {
-      setCartProducts(cartData);
+    if (cartProducts.length >= 1) {
+      sessionStorage.setItem("Cart", JSON.stringify(cartProducts));
+    } else if (cartData) {
+      cartData.length >= 1 && cartProducts.length < 1
+        ? setCartProducts(cartData)
+        : null;
     } else {
       sessionStorage.setItem("Cart", JSON.stringify([]));
     }
-  }, []);
+    console.log(cartProducts.length, "CartProducts");
+    console.log(cartData.length, "CartData");
+  }, [cartProducts]);
 
+  //passing item , find index of passed item and replace it in the cart
   function editCart(cartItem) {
     if (inCart(cartItem.id)) {
-      const cartData = JSON.parse(sessionStorage.getItem("Cart"));
-      const newCart = cartData.filter((c) => c.id !== cartItem.id);
-      sessionStorage.setItem("Cart", JSON.stringify([...newCart, cartItem]));
-      // setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
+      // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
+      const newCart = cartProducts.filter((c) => c.id !== cartItem.id);
+
+      // This is causing infinity loop
+      // setCartProducts([...newCart, cartItem]);
     }
   }
 
-  function updateCart(newCart) {
-    sessionStorage.setItem("Cart", JSON.stringify(newCart));
-    setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
+  //replace entire cart , with a new one updated one ,, This should be deleted
+  // function updateCart(newCart) {
+  //   sessionStorage.setItem("Cart", JSON.stringify(newCart));
+  //   setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
+  // }
+
+  function addCart(item) {
+    setCartProducts((i) => [item, ...i]);
   }
 
+  //filter item out from the cart
   function deleteCartItem(id) {
-    const cartData = JSON.parse(sessionStorage.getItem("Cart"));
-    sessionStorage.setItem(
-      "Cart",
-      JSON.stringify(cartData.filter((c) => c.cartId !== id)),
-    );
-    setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
+    // const cartData = JSON.parse(sessionStorage.getItem("Cart"));   MAKE CHANGES USE STATE
+    const newCart = cartProducts.filter((c) => c.cartId !== id);
+    setCartProducts(newCart);
   }
 
   function clearCart() {
-    sessionStorage.setItem("Cart", JSON.stringify([]));
     setCartProducts([]);
   }
 
   function getFreeCartId() {
-    const cartData = JSON.parse(sessionStorage.getItem("Cart"));
+    // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
+
+    //What happens when cart is empty
     const takenId = [];
     let freeId = "";
-    for (const item of cartData) {
+    for (const item of cartProducts) {
       takenId.push(item.cartId);
     }
+    //Loop through all cart IDs to find non-allocated one
     for (let i = 0; i < 500; i++) {
       if (!takenId.includes(i)) {
         freeId = i;
@@ -82,7 +95,7 @@ export default function App() {
       <CartContext.Provider
         value={{
           cartProducts,
-          updateCart,
+          addCart,
           deleteCartItem,
           getFreeCartId,
           inCart,

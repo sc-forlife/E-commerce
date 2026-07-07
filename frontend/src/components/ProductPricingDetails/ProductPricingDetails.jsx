@@ -21,7 +21,7 @@ export const UserProductSize = createContext();
 
 export default function ProductDescription() {
   //Use create context to provide the details
-  const { cartProducts, updateCart, getFreeCartId, inCart } =
+  const { cartProducts, addCart, getFreeCartId, inCart } =
     useContext(CartContext);
 
   const { product } = useContext(SelectedProduct);
@@ -29,17 +29,14 @@ export default function ProductDescription() {
   const [size, setSize] = useState("");
 
   function enterToCart() {
-    updateCart([
-      ...cartProducts,
-      {
-        cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        thumbnail: product.thumbnail,
-        quantity: 1,
-      },
-    ]);
+    addCart({
+      cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      thumbnail: product.thumbnail,
+      quantity: 1,
+    });
   }
 
   //Think about Category ,

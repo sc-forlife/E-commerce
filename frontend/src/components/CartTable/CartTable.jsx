@@ -19,14 +19,15 @@ import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
-  const { setReceiptData } = useContext(ReceiptContext);
-  const { updateCart, deleteCartItem, editCart } = useContext(CartContext);
+  const { receiptData, setReceiptData } = useContext(ReceiptContext);
+  const { cartProducts, updateCart, deleteCartItem, editCart } =
+    useContext(CartContext);
   const [value, setValue] = useState({ id: 0, value: 1 });
-  const [cartProducts, setCartProducts] = useState();
+  // const [cartProducts, setCartProducts] = useState();
 
   useEffect(() => {
-    const data = JSON.parse(sessionStorage.getItem("Cart"));
-    setCartProducts(data);
+    // const data = JSON.parse(sessionStorage.getItem("Cart"));
+    // setCartProducts(data);
   }, []);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function CartTable() {
   }
   return (
     <>
-      <CartTableHeading itemNumber={cartProducts ? cartProducts.length : ""} />
+      <CartTableHeading itemNumber={receiptData ? receiptData.quantity : ""} />
       <Table.ScrollArea h={"315px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
