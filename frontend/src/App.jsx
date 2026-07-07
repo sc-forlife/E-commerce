@@ -45,6 +45,11 @@ export default function App() {
     setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
   }
 
+  function clearCart() {
+    sessionStorage.setItem("Cart", JSON.stringify([]));
+    setCartProducts([]);
+  }
+
   function getFreeCartId() {
     const cartData = JSON.parse(sessionStorage.getItem("Cart"));
     const takenId = [];
@@ -82,6 +87,7 @@ export default function App() {
           getFreeCartId,
           inCart,
           editCart,
+          clearCart,
         }}
       >
         <BrowserRouter>

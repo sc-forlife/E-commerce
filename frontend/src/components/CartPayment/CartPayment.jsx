@@ -27,27 +27,29 @@ export default function CartPayment() {
             </Fieldset.HelperText>
           </Stack>
 
-          <Fieldset.Content>
-            <Field.Root>
-              <Field.Label>Name</Field.Label>
-              <Input name="name" />
-            </Field.Root>
+          <form>
+            <Fieldset.Content>
+              <Field.Root>
+                <Field.Label>Name</Field.Label>
+                <Input name="name" required />
+              </Field.Root>
 
-            <Field.Root>
-              <Field.Label>Email address</Field.Label>
-              <Input name="email" type="email" />
-            </Field.Root>
+              <Field.Root>
+                <Field.Label>Email address</Field.Label>
+                <Input name="email" type="email" />
+              </Field.Root>
 
-            <Field.Root>
-              <Field.Label>Contact</Field.Label>
-              <Input name="contact" type="text" />
-            </Field.Root>
+              <Field.Root>
+                <Field.Label>Contact</Field.Label>
+                <Input name="contact" type="text" />
+              </Field.Root>
 
-            <Field.Root>
-              <Field.Label>Address</Field.Label>
-              <Input name="address" type="text" />
-            </Field.Root>
-          </Fieldset.Content>
+              <Field.Root>
+                <Field.Label>Address</Field.Label>
+                <Input name="address" type="text" />
+              </Field.Root>
+            </Fieldset.Content>
+          </form>
 
           <Stack>
             <Fieldset.Legend>Payment Method</Fieldset.Legend>

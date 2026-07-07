@@ -9,11 +9,12 @@ import {
   Text,
   HStack,
 } from "@chakra-ui/react";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import CartTable from "../../components/CartTable/CartTable";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 import Receipt from "../../components/CartReceipt/CartReceipt";
 import CartPayment from "../../components/CartPayment/CartPayment";
+import CompleteCart from "../../components/CompleteCart/CompleteCart";
 
 export const ReceiptContext = createContext();
 
@@ -70,7 +71,9 @@ export default function checkout() {
           </Steps.Content>
         ))}
       </ReceiptContext.Provider>
-      <Steps.CompletedContent>All steps are complete!</Steps.CompletedContent>
+      <Steps.CompletedContent>
+        <CompleteCart />
+      </Steps.CompletedContent>
     </Steps.Root>
   );
 }
