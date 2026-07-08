@@ -36,6 +36,7 @@ export default function ProductDescription() {
       price: product.price,
       thumbnail: product.thumbnail,
       quantity: 1,
+      cartPrice: product.price,
     });
   }
 

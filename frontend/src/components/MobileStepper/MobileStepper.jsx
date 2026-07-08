@@ -1,16 +1,17 @@
 import { HStack, IconButton, NumberInput } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { LuMinus, LuPlus } from "react-icons/lu";
+import { CartContext } from "../../App";
 
-export default function MobileStepper({
-  quantity = function () {},
-  id = 0,
-  defaultQuantity = 1,
-}) {
-  const [value, setValue] = useState(defaultQuantity);
+export default function MobileStepper({ item = {} }) {
+  const [value, setValue] = useState(1);
+  const { editCart } = useContext(CartContext);
 
   useEffect(() => {
-    quantity({ id: id, value: value });
+    item["cartPrice"] = item.price * value;
+    item["quantity"] = value;
+
+    editCart(item);
   }, [value]);
 
   return (

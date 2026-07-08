@@ -20,9 +20,7 @@ import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
   const { receiptData, setReceiptData } = useContext(ReceiptContext);
-  const { cartProducts, updateCart, deleteCartItem, editCart } =
-    useContext(CartContext);
-  const [value, setValue] = useState({ id: 0, value: 1 });
+  const { cartProducts, deleteCartItem } = useContext(CartContext);
   // const [cartProducts, setCartProducts] = useState();
 
   useEffect(() => {
@@ -32,25 +30,25 @@ export default function CartTable() {
 
   useEffect(() => {
     if (cartProducts) {
-      updateReceipt();
+      // updateReceipt();
     }
-  }, [value, cartProducts]);
+  }, [cartProducts]);
 
-  function updateReceipt() {
-    let quantity = 0;
-    let cartPrice = 0;
-    const data = JSON.parse(sessionStorage.getItem("Cart"));
-    for (const item of data) {
-      if (item.cartPrice) {
-        cartPrice += item.cartPrice;
-      }
-      if (item.quantity) {
-        quantity += item.quantity;
-      }
-    }
+  // function updateReceipt() {
+  //   let quantity = 0;
+  //   let cartPrice = 0;
+  //   const data = JSON.parse(sessionStorage.getItem("Cart"));
+  //   for (const item of data) {
+  //     if (item.cartPrice) {
+  //       cartPrice += item.cartPrice;
+  //     }
+  //     if (item.quantity) {
+  //       quantity += item.quantity;
+  //     }
+  //   }
 
-    setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
-  }
+  //   setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
+  // }
   return (
     <>
       <CartTableHeading itemNumber={receiptData ? receiptData.quantity : ""} />
@@ -72,23 +70,6 @@ export default function CartTable() {
           <Table.Body>
             {cartProducts ? (
               cartProducts.map((item) => {
-                // ******** Figure out a way to update state rather than direct mutation *********
-                if (item["cartPrice"]) {
-                  item["cartPrice"] =
-                    value.id === item.id
-                      ? item.price * value.value
-                      : item.cartPrice;
-
-                  item["quantity"] =
-                    value.id === item.id ? value.value : item.quantity;
-                } else {
-                  item["cartPrice"] =
-                    value.id === item.id
-                      ? item.price * value.value
-                      : item.price;
-                }
-                editCart(item);
-                // ******************************************************************************
                 return (
                   <Table.Row key={item.cartId}>
                     <Table.Cell>
@@ -104,11 +85,7 @@ export default function CartTable() {
                     <Table.Cell>{item.price}</Table.Cell>
                     <Table.Cell>
                       <Flex justifyContent={"center"}>
-                        <MobileStepper
-                          quantity={setValue}
-                          id={item.id}
-                          defaultQuantity={item.quantity}
-                        />
+                        <MobileStepper item={item} />
                       </Flex>
                     </Table.Cell>
                     <Table.Cell textAlign="end">

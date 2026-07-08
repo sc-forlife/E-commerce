@@ -16,16 +16,12 @@ export default function App() {
   useEffect(() => {
     const cartData = JSON.parse(sessionStorage.getItem("Cart"));
     if (cartProducts.length >= 1) {
-      sessionStorage.setItem("Cart", JSON.stringify(cartProducts));
+      sessionStorage.setItem("Cart", JSON.stringify(cartProducts)); //update DB
     } else if (cartData) {
-      cartData.length >= 1 && cartProducts.length < 1
-        ? setCartProducts(cartData)
-        : null;
+      cartData.length ? setCartProducts(cartData) : null; //update main storage
     } else {
-      sessionStorage.setItem("Cart", JSON.stringify([]));
+      sessionStorage.setItem("Cart", JSON.stringify([])); //Set up DB
     }
-    console.log(cartProducts.length, "CartProducts");
-    console.log(cartData.length, "CartData");
   }, [cartProducts]);
 
   //passing item , find index of passed item and replace it in the cart
@@ -33,17 +29,9 @@ export default function App() {
     if (inCart(cartItem.id)) {
       // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
       const newCart = cartProducts.filter((c) => c.id !== cartItem.id);
-
-      // This is causing infinity loop
-      // setCartProducts([...newCart, cartItem]);
+      setCartProducts([...newCart, cartItem]);
     }
   }
-
-  //replace entire cart , with a new one updated one ,, This should be deleted
-  // function updateCart(newCart) {
-  //   sessionStorage.setItem("Cart", JSON.stringify(newCart));
-  //   setCartProducts(JSON.parse(sessionStorage.getItem("Cart")));
-  // }
 
   function addCart(item) {
     setCartProducts((i) => [item, ...i]);
