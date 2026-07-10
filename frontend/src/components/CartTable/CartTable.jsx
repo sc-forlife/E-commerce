@@ -28,11 +28,7 @@ export default function CartTable() {
     // setCartProducts(data);
   }, []);
 
-  useEffect(() => {
-    if (cartProducts) {
-      // updateReceipt();
-    }
-  }, [cartProducts]);
+  useEffect(() => {}, []);
 
   // function updateReceipt() {
   //   let quantity = 0;

@@ -23,16 +23,23 @@ export default function App() {
     }
   }, []);
 
-  function updateDB() {
-    sessionStorage.setItem("Cart", JSON.stringify(cartProducts)); //update DB
-  }
+  useEffect(() => {
+    sessionStorage.setItem("Cart", JSON.stringify(cartProducts));
+    console.log("I saved");
+  }, [cartProducts]);
 
   //passing item , find index of passed item and replace it in the cart
   function editCart(cartItem) {
     if (inCart(cartItem.id)) {
       // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
-      const newCart = cartProducts.filter((c) => c.id !== cartItem.id);
-      setCartProducts([...newCart, cartItem]);
+      const newCart = cartProducts.map((c) => {
+        if (c.id === cartItem.id) {
+          c = { ...cartItem };
+        }
+        return c;
+      });
+      console.log(newCart);
+      setCartProducts([...newCart]);
     }
   }
 
@@ -45,7 +52,6 @@ export default function App() {
     // const cartData = JSON.parse(sessionStorage.getItem("Cart"));   MAKE CHANGES USE STATE
     const newCart = cartProducts.filter((c) => c.cartId !== id);
     setCartProducts(newCart);
-    updateDB();
   }
 
   function clearCart() {
