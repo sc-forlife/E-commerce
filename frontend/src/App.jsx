@@ -15,14 +15,17 @@ export default function App() {
 
   useEffect(() => {
     const cartData = JSON.parse(sessionStorage.getItem("Cart"));
-    if (cartProducts.length >= 1) {
-      sessionStorage.setItem("Cart", JSON.stringify(cartProducts)); //update DB
-    } else if (cartData) {
-      cartData.length ? setCartProducts(cartData) : null; //update main storage
+    if (cartData) {
+      //This causes the cartPorducts to never be empty , or last be deleted
+      cartData.length ? setCartProducts(cartData) : null; //update main storage on render only
     } else {
       sessionStorage.setItem("Cart", JSON.stringify([])); //Set up DB
     }
-  }, [cartProducts]);
+  }, []);
+
+  function updateDB() {
+    sessionStorage.setItem("Cart", JSON.stringify(cartProducts)); //update DB
+  }
 
   //passing item , find index of passed item and replace it in the cart
   function editCart(cartItem) {
@@ -42,6 +45,7 @@ export default function App() {
     // const cartData = JSON.parse(sessionStorage.getItem("Cart"));   MAKE CHANGES USE STATE
     const newCart = cartProducts.filter((c) => c.cartId !== id);
     setCartProducts(newCart);
+    updateDB();
   }
 
   function clearCart() {
