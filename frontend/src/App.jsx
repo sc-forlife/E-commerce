@@ -16,7 +16,6 @@ export default function App() {
   useEffect(() => {
     const cartData = JSON.parse(sessionStorage.getItem("Cart"));
     if (cartData) {
-      //This causes the cartPorducts to never be empty , or last be deleted
       cartData.length ? setCartProducts(cartData) : null; //update main storage on render only
     } else {
       sessionStorage.setItem("Cart", JSON.stringify([])); //Set up DB
@@ -25,13 +24,11 @@ export default function App() {
 
   useEffect(() => {
     sessionStorage.setItem("Cart", JSON.stringify(cartProducts));
-    console.log("I saved");
   }, [cartProducts]);
 
   //passing item , find index of passed item and replace it in the cart
   function editCart(cartItem) {
     if (inCart(cartItem.id)) {
-      // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
       const newCart = cartProducts.map((c) => {
         if (c.id === cartItem.id) {
           c = { ...cartItem };
@@ -49,7 +46,6 @@ export default function App() {
 
   //filter item out from the cart
   function deleteCartItem(id) {
-    // const cartData = JSON.parse(sessionStorage.getItem("Cart"));   MAKE CHANGES USE STATE
     const newCart = cartProducts.filter((c) => c.cartId !== id);
     setCartProducts(newCart);
   }
@@ -59,8 +55,6 @@ export default function App() {
   }
 
   function getFreeCartId() {
-    // const cartData = JSON.parse(sessionStorage.getItem("Cart")); MAKE CHANGES USE STATE
-
     //What happens when cart is empty
     const takenId = [];
     let freeId = "";

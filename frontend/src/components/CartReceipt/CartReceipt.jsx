@@ -16,33 +16,33 @@ import { CartContext } from "../../App";
 import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 
 export default function Receipt() {
-  const { receiptData, setReceiptData } = useContext(ReceiptContext);
+  const { cartProducts } = useContext(CartContext);
 
   const [totalPrices, setTotalPrices] = useState("");
   const [discount, setDiscount] = useState("");
   const [tax, setTax] = useState("");
   const [shipping, setShipping] = useState("");
   const [total, setTotal] = useState("");
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (receiptData) {
-      updateData(receiptData);
+    if (cartProducts) {
+      let totalPrice = 0;
+      let quantity = 0;
+      cartProducts.forEach((item) => {
+        totalPrice += item.cartPrice;
+        quantity += item.quantity;
+      });
+      updateData(totalPrice);
+      setQuantity(quantity);
     }
-  }, [receiptData]);
+  }, []);
 
-  function totalNumber(data, prop) {
-    const totalNum = data.reduce((acc, currVal) => {
-      return currVal[`${prop}`] + acc;
-    }, 0);
-
-    return totalNum;
-  }
-
-  function updateData(data) {
-    setTotalPrices(data.cartPrice);
-    setDiscount(((30 / 100) * data.cartPrice).toFixed(2));
-    setTax(((10 / 100) * data.cartPrice).toFixed(2));
-    setShipping(((12 / 100) * data.cartPrice).toFixed(2));
+  function updateData(cartPrice) {
+    setTotalPrices(cartPrice);
+    setDiscount(((10 / 100) * cartPrice).toFixed(2));
+    setTax(((12 / 100) * cartPrice).toFixed(2));
+    setShipping(((15 / 100) * cartPrice).toFixed(2));
   }
 
   return (
@@ -83,7 +83,7 @@ export default function Receipt() {
               <Table.Row key="item-prices">
                 <Table.Cell>
                   Items
-                  {`(${receiptData ? receiptData.quantity : ""})`}
+                  {`(${quantity ? quantity : ""})`}
                 </Table.Cell>
                 <Table.Cell textAlign="end">{totalPrices} $</Table.Cell>
               </Table.Row>
