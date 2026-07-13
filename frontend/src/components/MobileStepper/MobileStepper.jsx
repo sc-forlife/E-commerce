@@ -4,7 +4,7 @@ import { LuMinus, LuPlus } from "react-icons/lu";
 import { CartContext } from "../../App";
 
 export default function MobileStepper({ item = {} }) {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(item.quantity ? item.quantity : value);
   const { editCart } = useContext(CartContext);
 
   function addCartProperties(val) {

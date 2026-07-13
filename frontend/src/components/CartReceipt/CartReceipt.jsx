@@ -36,10 +36,10 @@ export default function Receipt() {
       updateData(totalPrice);
       setQuantity(quantity);
     }
-  }, []);
+  }, [cartProducts]);
 
   function updateData(cartPrice) {
-    setTotalPrices(cartPrice);
+    setTotalPrices(cartPrice.toFixed(2));
     setDiscount(((10 / 100) * cartPrice).toFixed(2));
     setTax(((12 / 100) * cartPrice).toFixed(2));
     setShipping(((15 / 100) * cartPrice).toFixed(2));

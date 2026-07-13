@@ -11,12 +11,14 @@ import Spinner from "../../components/Spinner/SpinnerComponent";
 export const UserContext = createContext();
 
 export default function Home() {
+  // variable catalog with the list of item/s being displayed
   const [searchProduct, setSearchProduct] = useState("");
 
   const page = useRef("Home");
 
   useEffect(() => {
     (async () => {
+      //get all store items on initial render and populate catalog
       setSearchProduct(await allShopProducts(categories));
     })();
   }, []);

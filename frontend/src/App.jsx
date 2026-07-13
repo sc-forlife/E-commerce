@@ -73,8 +73,7 @@ export default function App() {
   }
 
   function inCart(id) {
-    const cartData = JSON.parse(sessionStorage.getItem("Cart"));
-    for (const item of cartData) {
+    for (const item of cartProducts) {
       if (item.id === id) {
         return true;
       }
