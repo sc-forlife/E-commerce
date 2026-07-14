@@ -24,13 +24,13 @@ export default function SearchComponent({}) {
     })();
   }, []);
 
+  //populate the catalog , with a single searched item
   async function sendSearchProduct(product) {
-    //populate the catalog , with a single searched item
     setSearchProduct(await searchQuery(product));
   }
 
+  //change viewed product in the same page
   function changeProduct(link) {
-    //change viewed product in the same page
     navigate(`/ViewProduct/${link}`);
   }
 

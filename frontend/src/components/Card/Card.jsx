@@ -6,13 +6,8 @@ import { CartContext } from "../../App";
 import { useContext, useEffect } from "react";
 
 export default function Display({ item = "", linkTo = "" }) {
+  //check if any of the variables is falsy
   const load = !item || !linkTo;
-
-  // useEffect(() => {
-  //   if (!sessionStorage.getItem("Cart")) {
-  //     sessionStorage.setItem("Cart", JSON.stringify([]));
-  //   }
-  // }, []);
 
   return (
     <>

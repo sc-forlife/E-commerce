@@ -11,17 +11,14 @@ import { useParams, useNavigate } from "react-router-dom";
 
 export const SelectedProduct = createContext();
 
-export const NewSelectedProduct = createContext();
-
 export default function ViewProduct() {
-  const navigate = useNavigate();
   const [product, setProduct] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
-  const [changeProduct, setChangeProduct] = useState("");
   const { productId } = useParams();
   const page = useRef("View Page");
 
   useEffect(() => {
+    //retrieve the selected product from params
     (async () => {
       try {
         const [response] = await searchQuery(productId);
@@ -30,6 +27,7 @@ export default function ViewProduct() {
         console.error("Something went wrong", err);
       }
     })();
+    //dependecy catches change in params and changes product change in NAVBAR
   }, [productId]);
 
   return (

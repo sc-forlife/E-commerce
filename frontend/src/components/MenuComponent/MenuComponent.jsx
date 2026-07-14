@@ -11,8 +11,10 @@ export default function MenuComponent() {
 
   async function getProducts(product) {
     if (product === "Show All") {
+      //return all products
       setSearchProduct(await allShopProducts(categories));
     } else {
+      //return selected category
       setSearchProduct(await getCategory(product));
     }
   }
