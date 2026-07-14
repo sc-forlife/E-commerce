@@ -10,44 +10,16 @@ import {
 } from "@chakra-ui/react";
 import { LuX } from "react-icons/lu";
 import CartTableHeading from "../CartTableHeading/CartTableHeading";
-import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
-import { useEffect, useState, useContext } from "react";
-import { categories } from "../../data/category_data";
+import { useContext } from "react";
 import MobileStepper from "../MobileStepper/MobileStepper";
 import { CartContext } from "../../App";
-import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
-import Receipt from "../CartReceipt/CartReceipt";
 
 export default function CartTable() {
-  const { receiptData, setReceiptData } = useContext(ReceiptContext);
   const { cartProducts, deleteCartItem } = useContext(CartContext);
-  // const [cartProducts, setCartProducts] = useState();
 
-  useEffect(() => {
-    // const data = JSON.parse(sessionStorage.getItem("Cart"));
-    // setCartProducts(data);
-  }, []);
-
-  useEffect(() => {}, []);
-
-  // function updateReceipt() {
-  //   let quantity = 0;
-  //   let cartPrice = 0;
-  //   const data = JSON.parse(sessionStorage.getItem("Cart"));
-  //   for (const item of data) {
-  //     if (item.cartPrice) {
-  //       cartPrice += item.cartPrice;
-  //     }
-  //     if (item.quantity) {
-  //       quantity += item.quantity;
-  //     }
-  //   }
-
-  //   setReceiptData({ quantity: quantity, cartPrice: cartPrice.toFixed(2) });
-  // }
   return (
     <>
-      <CartTableHeading itemNumber={receiptData ? receiptData.quantity : ""} />
+      <CartTableHeading />
       <Table.ScrollArea h={"315px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
@@ -115,16 +87,3 @@ export default function CartTable() {
     </>
   );
 }
-
-const items = [
-  { id: 1, name: "Laptop", category: "Electronics", price: 999.99 },
-  { id: 2, name: "Coffee Maker", category: "Home Appliances", price: 49.99 },
-  { id: 3, name: "Desk Chair", category: "Furniture", price: 150.0 },
-  { id: 4, name: "Smartphone", category: "Electronics", price: 799.99 },
-  { id: 5, name: "Headphones", category: "Accessories", price: 199.99 },
-  { id: 1, name: "Laptop", category: "Electronics", price: 999.99 },
-  { id: 2, name: "Coffee Maker", category: "Home Appliances", price: 49.99 },
-  { id: 3, name: "Desk Chair", category: "Furniture", price: 150.0 },
-  { id: 4, name: "Smartphone", category: "Electronics", price: 799.99 },
-  { id: 5, name: "Headphones", category: "Accessories", price: 199.99 },
-];

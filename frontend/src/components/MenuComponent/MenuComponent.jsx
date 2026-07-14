@@ -23,7 +23,7 @@ export default function MenuComponent() {
     <>
       <Menu.Root>
         <Menu.Trigger asChild>
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" disabled>
             Categories
           </Button>
         </Menu.Trigger>

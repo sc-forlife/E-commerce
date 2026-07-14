@@ -9,7 +9,6 @@ import {
   Image,
   RatingGroup,
 } from "@chakra-ui/react";
-import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
 import { useEffect, useState, createContext, useContext } from "react";
 import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 import { CartContext } from "../../App";
@@ -23,11 +22,11 @@ export default function ProductDescription() {
   //Use create context to provide the details
   const { cartProducts, addCart, getFreeCartId, inCart } =
     useContext(CartContext);
-
   const { product } = useContext(SelectedProduct);
 
   const [size, setSize] = useState("");
 
+  // enter items into main storage
   function enterToCart() {
     addCart({
       cartId: cartProducts.length <= 0 ? 0 : getFreeCartId(),
@@ -39,9 +38,6 @@ export default function ProductDescription() {
       cartPrice: product.price,
     });
   }
-
-  //Think about Category ,
-  //Think about tags
 
   return (
     <>

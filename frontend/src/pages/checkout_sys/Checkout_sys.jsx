@@ -19,8 +19,6 @@ import CompleteCart from "../../components/CompleteCart/CompleteCart";
 export const ReceiptContext = createContext();
 
 export default function checkout() {
-  const [receiptData, setReceiptData] = useState({ quantity: 0, cartPrice: 0 });
-
   return (
     <Steps.Root
       defaultStep={0}
@@ -39,38 +37,37 @@ export default function checkout() {
         ))}
       </Steps.List>
 
-      <ReceiptContext.Provider value={{ receiptData, setReceiptData }}>
-        {steps.map((step, index) => (
-          <Steps.Content key={index} index={index}>
-            <Center w={"90vw"} h={"85vh"} bg={"pink"}>
-              <Box
-                bg={"white"}
-                minW={"800px"}
-                maxW={"1000px"}
-                h={"450px"}
-                borderRadius={"20px"}
-                overflowY={step.title === "Payment" ? "scroll" : null}
-              >
-                {step.description}
-                <Flex justifyContent={"space-around"}>
-                  <Steps.PrevTrigger asChild>
-                    <Button variant={"ghost"}>
-                      <Icon as={LuArrowLeft}></Icon>
-                      Back
-                    </Button>
-                  </Steps.PrevTrigger>
-                  <Steps.NextTrigger asChild>
-                    <Button variant={"ghost"}>
-                      Continue <Icon as={LuArrowRight}></Icon>
-                    </Button>
-                  </Steps.NextTrigger>
-                </Flex>
-              </Box>
-              {step.extra ? step.extra : ""}
-            </Center>
-          </Steps.Content>
-        ))}
-      </ReceiptContext.Provider>
+      {steps.map((step, index) => (
+        <Steps.Content key={index} index={index}>
+          <Center w={"90vw"} h={"85vh"} bg={"pink"}>
+            <Box
+              bg={"white"}
+              minW={"800px"}
+              maxW={"1000px"}
+              h={"450px"}
+              borderRadius={"20px"}
+              overflowY={step.title === "Payment" ? "scroll" : null}
+            >
+              {step.description}
+              <Flex justifyContent={"space-around"}>
+                <Steps.PrevTrigger asChild>
+                  <Button variant={"ghost"}>
+                    <Icon as={LuArrowLeft}></Icon>
+                    Back
+                  </Button>
+                </Steps.PrevTrigger>
+                <Steps.NextTrigger asChild>
+                  <Button variant={"ghost"}>
+                    Continue <Icon as={LuArrowRight}></Icon>
+                  </Button>
+                </Steps.NextTrigger>
+              </Flex>
+            </Box>
+            {step.extra ? step.extra : ""}
+          </Center>
+        </Steps.Content>
+      ))}
+
       <Steps.CompletedContent>
         <CompleteCart />
       </Steps.CompletedContent>
@@ -78,6 +75,7 @@ export default function checkout() {
   );
 }
 
+// Checkout system sections
 const steps = [
   {
     title: "Cart",

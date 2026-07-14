@@ -10,10 +10,8 @@ import {
   Table,
   Heading,
 } from "@chakra-ui/react";
-import Tab from "@mui/material/Tab";
 import { useState, useContext, useRef, useEffect } from "react";
 import { CartContext } from "../../App";
-import { ReceiptContext } from "../../pages/checkout_sys/Checkout_sys";
 
 export default function Receipt() {
   const { cartProducts } = useContext(CartContext);
@@ -22,10 +20,10 @@ export default function Receipt() {
   const [discount, setDiscount] = useState("");
   const [tax, setTax] = useState("");
   const [shipping, setShipping] = useState("");
-  const [total, setTotal] = useState("");
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
+    //get total number of quantity and prices
     if (cartProducts) {
       let totalPrice = 0;
       let quantity = 0;
@@ -38,6 +36,7 @@ export default function Receipt() {
     }
   }, [cartProducts]);
 
+  //processing data into receipt prices
   function updateData(cartPrice) {
     setTotalPrices(cartPrice.toFixed(2));
     setDiscount(((10 / 100) * cartPrice).toFixed(2));
@@ -128,11 +127,3 @@ export default function Receipt() {
     </>
   );
 }
-
-const items = [
-  { id: 1, name: "Laptop", category: "Electronics", price: 999.99 },
-  { id: 2, name: "Coffee Maker", category: "Home Appliances", price: 49.99 },
-  { id: 3, name: "Desk Chair", category: "Furniture", price: 150.0 },
-  { id: 4, name: "Smartphone", category: "Electronics", price: 799.99 },
-  { id: 5, name: "Headphones", category: "Accessories", price: 199.99 },
-];

@@ -7,7 +7,7 @@ import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
 import { Flex, HStack, Box } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const SelectedProduct = createContext();
 
@@ -32,6 +32,7 @@ export default function ViewProduct() {
 
   return (
     <>
+      {/* The context provides placeholder due to navbar expecting one , but it has not general use */}
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>

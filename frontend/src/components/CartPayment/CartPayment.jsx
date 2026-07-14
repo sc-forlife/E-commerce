@@ -69,15 +69,7 @@ export default function CartPayment() {
             </RadioGroup.Root>
           </Stack>
         </Fieldset.Root>
-        {displayBankCard ? (
-          <OnlinePayment />
-        ) : // <Fieldset.Root margin={"30px 30px"}>
-        //   <Fieldset.Legend>Online Payment Section</Fieldset.Legend>
-        //   <Fieldset.HelperText>
-        //     Please provide your contact details below.
-        //   </Fieldset.HelperText>
-        // </Fieldset.Root>
-        null}
+        {displayBankCard ? <OnlinePayment /> : null}
       </Flex>
     </>
   );

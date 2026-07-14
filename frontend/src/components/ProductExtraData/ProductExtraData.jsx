@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { searchQuery } from "../../APIs/getSearch/getSearchQuery";
 import { Box, For, SimpleGrid, Tabs, Text } from "@chakra-ui/react";
 import { LuFolder, LuSquareCheck, LuUser } from "react-icons/lu";
 import Comments from "../Comments/Comments";
@@ -7,7 +6,6 @@ import ProductDetailsComponent from "../ProductDetailsComponent/ProductDetailsCo
 import { SelectedProduct } from "../../pages/ViewProduct/ViewProduct";
 
 export default function ProductDetails() {
-  //Create a Context which provides product object
   const { product } = useContext(SelectedProduct);
 
   return (

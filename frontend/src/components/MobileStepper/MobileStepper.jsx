@@ -7,6 +7,7 @@ export default function MobileStepper({ item = {} }) {
   const [value, setValue] = useState(item.quantity ? item.quantity : value);
   const { editCart } = useContext(CartContext);
 
+  //Add selected cart price and qunatity to cart item
   function addCartProperties(val) {
     item["cartPrice"] = item.price * val;
     item["quantity"] = val;

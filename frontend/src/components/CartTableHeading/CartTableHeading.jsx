@@ -1,6 +1,21 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../App";
 
-export default function CartTableHeading({ itemNumber = 0 }) {
+export default function CartTableHeading() {
+  const { cartProducts } = useContext(CartContext);
+  const [itemNumber, setItemNumber] = useState(0);
+
+  useEffect(() => {
+    let totalItems = 0;
+    if (cartProducts) {
+      cartProducts.forEach((item) => {
+        totalItems += item.quantity;
+      });
+      setItemNumber(totalItems);
+    }
+  }, [cartProducts]);
+
   return (
     <>
       <Box
