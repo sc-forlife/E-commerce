@@ -7,21 +7,18 @@ import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
 import { Flex, HStack, Box } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const SelectedProduct = createContext();
 
-export const NewSelectedProduct = createContext();
-
 export default function ViewProduct() {
-  const navigate = useNavigate();
   const [product, setProduct] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
-  const [changeProduct, setChangeProduct] = useState("");
   const { productId } = useParams();
   const page = useRef("View Page");
 
   useEffect(() => {
+    //retrieve the selected product from params
     (async () => {
       try {
         const [response] = await searchQuery(productId);
@@ -30,10 +27,12 @@ export default function ViewProduct() {
         console.error("Something went wrong", err);
       }
     })();
+    //dependecy catches change in params and changes product change in NAVBAR
   }, [productId]);
 
   return (
     <>
+      {/* The context provides placeholder due to navbar expecting one , but it has not general use */}
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>

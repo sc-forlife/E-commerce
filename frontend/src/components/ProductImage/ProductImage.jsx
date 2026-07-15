@@ -12,7 +12,6 @@ import HorizontalScrolling from "../HorizontalScrolling/HorinzontalScrolling";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 
 export default function ProductImage({ productTitle = "" }) {
-  //Create a Context which provides product object
   const { product } = useContext(SelectedProduct);
   const [selectedImage, setSelectedImage] = useState();
 

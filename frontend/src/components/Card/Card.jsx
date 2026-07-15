@@ -2,15 +2,12 @@ import { Button, Card, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import SpinnerComponent from "../Spinner/SpinnerComponent";
 import css from "./Card.module.css";
+import { CartContext } from "../../App";
+import { useContext, useEffect } from "react";
 
-export default function Display({
-  title = "",
-  price = "",
-  img = "",
-  alt = "",
-  linkTo = "",
-}) {
-  const load = !title || !price || !img || !alt || !linkTo;
+export default function Display({ item = "", linkTo = "" }) {
+  //check if any of the variables is falsy
+  const load = !item || !linkTo;
 
   return (
     <>
@@ -19,25 +16,31 @@ export default function Display({
       ) : (
         <>
           <Card.Root w="250px" maxH="400px" overflow="hidden">
-            <Image src={img} alt={alt} maxH={"200px"} margin={"10px"} />
+            <Image
+              src={item.thumbnail}
+              alt={item.title}
+              maxH={"200px"}
+              margin={"10px"}
+            />
             <Card.Body gap="0" p={"15px"}>
-              <Link to={linkTo} className={css.link}>
-                <Card.Title fontWeight={"light"} data-testid="title">
-                  {title}
-                </Card.Title>
-              </Link>
+              <Card.Title fontWeight={"light"} data-testid="title">
+                {item.title}
+              </Card.Title>
+
               <Text
                 textStyle="2x1"
                 fontWeight="medium"
                 letterSpacing="tight"
                 mt="2"
               >
-                ${price}
+                ${item.price}
               </Text>
             </Card.Body>
-            <Card.Footer>
-              <Button w={"100%"}>Add to Cart</Button>
-            </Card.Footer>
+            <Link to={linkTo} className={css.link}>
+              <Card.Footer>
+                <Button w={"100%"}>View Product</Button>
+              </Card.Footer>
+            </Link>
           </Card.Root>
         </>
       )}

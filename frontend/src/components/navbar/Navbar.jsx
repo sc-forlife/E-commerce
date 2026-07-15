@@ -24,7 +24,9 @@ export default function Navbar() {
           <SearchComponent />
         </Flex>
         <Flex align={"center"} justify={"space-around"} w={"30%"}>
-          <CartComponent />
+          <Link to={"/Checkout"}>
+            <CartComponent />
+          </Link>
           <Button variant={"ghost"}>Login / Sign Up</Button>
         </Flex>
       </Box>

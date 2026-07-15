@@ -5,19 +5,103 @@ import ProductImage from "./components/ProductImage/ProductImage"; // Testing Co
 import ProductDescription from "./components/ProductPricingDetails/ProductPricingDetails"; //Testing Component
 import ProductDetails from "./components/ProductExtraData/ProductExtraData";
 import ViewProduct from "./pages/ViewProduct/ViewProduct";
+import Checkout from "./pages/checkout_sys/Checkout_sys";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+export const CartContext = createContext();
+
 export default function App() {
+  const [cartProducts, setCartProducts] = useState([]); //This is the main storage
+
+  useEffect(() => {
+    const cartData = JSON.parse(sessionStorage.getItem("Cart"));
+    if (cartData) {
+      cartData.length ? setCartProducts(cartData) : null; //update main storage on render only
+    } else {
+      sessionStorage.setItem("Cart", JSON.stringify([])); //Set up DB
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("Cart", JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
+  //passing item , find index of passed item and replace it in the cart
+  function editCart(cartItem) {
+    if (inCart(cartItem.id)) {
+      const newCart = cartProducts.map((c) => {
+        if (c.id === cartItem.id) {
+          c = { ...cartItem };
+        }
+        return c;
+      });
+      console.log(newCart);
+      setCartProducts([...newCart]);
+    }
+  }
+
+  function addCart(item) {
+    setCartProducts((i) => [item, ...i]);
+  }
+
+  //filter item out from the cart
+  function deleteCartItem(id) {
+    const newCart = cartProducts.filter((c) => c.cartId !== id);
+    setCartProducts(newCart);
+  }
+
+  function clearCart() {
+    setCartProducts([]);
+  }
+
+  function getFreeCartId() {
+    //What happens when cart is empty
+    const takenId = [];
+    let freeId = "";
+    for (const item of cartProducts) {
+      takenId.push(item.cartId);
+    }
+    //Loop through all cart IDs to find non-allocated one
+    for (let i = 0; i < 500; i++) {
+      if (!takenId.includes(i)) {
+        freeId = i;
+        break;
+      }
+    }
+
+    return freeId;
+  }
+
+  function inCart(id) {
+    for (const item of cartProducts) {
+      if (item.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   return (
     <>
-      {/* <Home />
-      <ViewProduct /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
-        </Routes>
-      </BrowserRouter>
+      <CartContext.Provider
+        value={{
+          cartProducts,
+          addCart,
+          deleteCartItem,
+          getFreeCartId,
+          inCart,
+          editCart,
+          clearCart,
+        }}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
+          </Routes>
+        </BrowserRouter>
+      </CartContext.Provider>
     </>
   );
 }

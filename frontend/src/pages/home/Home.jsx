@@ -11,15 +11,17 @@ import Spinner from "../../components/Spinner/SpinnerComponent";
 export const UserContext = createContext();
 
 export default function Home() {
+  // variable catalog with the list of item/s being displayed
   const [searchProduct, setSearchProduct] = useState("");
+
   const page = useRef("Home");
 
   useEffect(() => {
     (async () => {
+      //get all store items on initial render and populate catalog
       setSearchProduct(await allShopProducts(categories));
     })();
   }, []);
-  console.log(searchProduct);
   return (
     <>
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
@@ -32,15 +34,12 @@ export default function Home() {
         justifyContent={"center"}
       >
         {searchProduct ? (
-          searchProduct.map((product) => {
+          searchProduct.map((product, index) => {
             return (
               <Display
-                price={product.price}
-                title={product.title}
-                img={product.thumbnail}
-                alt={product.title}
+                item={product}
                 linkTo={`/ViewProduct/${product.title}`}
-                key={product.id}
+                key={index}
               />
             );
           })

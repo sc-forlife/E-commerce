@@ -12,28 +12,33 @@ export default function SearchComponent({}) {
 
   const { setSearchProduct, page } = useContext(UserContext);
 
+  //search list
   const [storeProductsAPI, setStoreProductsAPI] = useState([
     { title: "Loading" },
   ]);
 
   useEffect(() => {
     (async () => {
+      //Populate the search list with all products
       setStoreProductsAPI(await allShopProducts(categories));
     })();
   }, []);
 
+  //populate the catalog , with a single searched item
   async function sendSearchProduct(product) {
     setSearchProduct(await searchQuery(product));
   }
 
+  //change viewed product in the same page
   function changeProduct(link) {
     navigate(`/ViewProduct/${link}`);
   }
 
-  console.log(page.current);
-
   return (
     <>
+      {/* Different NAV BAR systems for different pages */}
+      {/* Home is search with free typing */}
+      {/* ViewProduct is only select on available options , no free typing */}
       {page.current === "Home" ? (
         <>
           <Autocomplete

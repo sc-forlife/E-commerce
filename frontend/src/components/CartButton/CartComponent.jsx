@@ -1,7 +1,11 @@
 import { Float, Circle, Box, Icon } from "@chakra-ui/react";
 import { FaCartPlus } from "react-icons/fa";
+import { CartContext } from "../../App";
+import { useContext, useState } from "react";
 
 export default function CartComponent() {
+  const { cartProducts } = useContext(CartContext);
+
   return (
     <>
       <Box position={"relative"}>
@@ -10,7 +14,7 @@ export default function CartComponent() {
         </Icon>
         <Float>
           <Circle size="5" bg="red" color="white">
-            0
+            {cartProducts.length}
           </Circle>
         </Float>
       </Box>
