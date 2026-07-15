@@ -17,7 +17,7 @@ export default function OnlinePayment() {
 
   useEffect(() => {
     //Create list collection for month and year values and labels
-
+    //dynamic list for month and year values and labels
     let monthList = [];
     for (let i = 1; i < 13; i++) {
       monthList.push({ label: `${i}`, value: i });

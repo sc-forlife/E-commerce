@@ -8,7 +8,7 @@ import {
   Flex,
   Icon,
 } from "@chakra-ui/react";
-import { LuX } from "react-icons/lu";
+import { LuX, LuDelete, LuTrash } from "react-icons/lu";
 import CartTableHeading from "../CartTableHeading/CartTableHeading";
 import { useContext } from "react";
 import MobileStepper from "../MobileStepper/MobileStepper";
@@ -50,18 +50,19 @@ export default function CartTable() {
                         </Stack>
                       </HStack>
                     </Table.Cell>
-                    <Table.Cell>{item.price}</Table.Cell>
+                    <Table.Cell>${item.price}</Table.Cell>
                     <Table.Cell>
                       <Flex justifyContent={"center"}>
                         <MobileStepper item={item} />
                       </Flex>
                     </Table.Cell>
                     <Table.Cell textAlign="end">
-                      {item.cartPrice.toFixed(2)}
+                      ${item.cartPrice.toFixed(2)}
                     </Table.Cell>
                     <Table.Cell textAlign="end">
                       <Icon
-                        as={LuX}
+                        as={LuTrash}
+                        size={"md"}
                         bg={{
                           base: "colorPalette.100",
                           _hover: "colorPalette.200",

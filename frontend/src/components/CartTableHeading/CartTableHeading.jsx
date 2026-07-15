@@ -8,6 +8,7 @@ export default function CartTableHeading() {
 
   useEffect(() => {
     let totalItems = 0;
+    // get total number of items in quantities
     if (cartProducts) {
       cartProducts.forEach((item) => {
         totalItems += item.quantity;
