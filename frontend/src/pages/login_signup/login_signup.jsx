@@ -1,33 +1,25 @@
-import { Button, Field, Input, Stack } from "@chakra-ui/react";
-import { PasswordInput } from "../../src/components/ui/password-input";
-import { useForm } from "react-hook-form";
+import {
+  Button,
+  Field,
+  Input,
+  Stack,
+  Center,
+  AspectRatio,
+  Image,
+  HStack,
+} from "@chakra-ui/react";
+import SignUp from "../../components/SignUp/SignUp";
+import Logo from "../../assets/Logo.png";
 
 export default function loginSignUp() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = handleSubmit((data) => console.log(data));
-
   return (
-    <form onSubmit={onSubmit}>
-      <Stack gap="4" align="flex-start" maxW="sm">
-        <Field.Root invalid={!!errors.username}>
-          <Field.Label>Username</Field.Label>
-          <Input {...register("username")} />
-          <Field.ErrorText>{errors.username?.message}</Field.ErrorText>
-        </Field.Root>
-
-        <Field.Root invalid={!!errors.password}>
-          <Field.Label>Password</Field.Label>
-          <PasswordInput {...register("password")} />
-          <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
-        </Field.Root>
-
-        <Button type="submit">Submit</Button>
-      </Stack>
-    </form>
+    <>
+      <HStack h={"100vh"} bg={"bg.muted"}>
+        <SignUp />
+        <AspectRatio borderRadius={"10px"} bg="red" maxW="450px" ratio={1 / 1}>
+          <Image src={Logo} objectFit={"cover"} />
+        </AspectRatio>
+      </HStack>
+    </>
   );
 }
