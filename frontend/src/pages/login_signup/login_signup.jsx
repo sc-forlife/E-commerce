@@ -1,5 +1,6 @@
 import {
   Button,
+  Box,
   Field,
   Input,
   Stack,
@@ -7,19 +8,34 @@ import {
   AspectRatio,
   Image,
   HStack,
+  Flex,
 } from "@chakra-ui/react";
+import { useState, createContext } from "react";
 import SignUp from "../../components/SignUp/SignUp";
 import Logo from "../../assets/Logo.png";
+import Login from "../../components/Login/Login";
+
+export const AuthContext = createContext();
 
 export default function loginSignUp() {
+  const [isUser, setIsUser] = useState(true);
+
   return (
     <>
-      <HStack h={"100vh"} bg={"bg.muted"}>
-        <SignUp />
-        <AspectRatio borderRadius={"10px"} bg="red" maxW="450px" ratio={1 / 1}>
-          <Image src={Logo} objectFit={"cover"} />
-        </AspectRatio>
-      </HStack>
+      <Flex
+        h={"100vh"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        paddingLeft={"30px"}
+      >
+        <AuthContext.Provider value={{ isUser, setIsUser }}>
+          {isUser ? <Login /> : <SignUp />}
+        </AuthContext.Provider>
+
+        <Center width={"55%"} height={"100%"} bg={"black"}>
+          <Image src={Logo} bg={"black"} width={"400px"} />
+        </Center>
+      </Flex>
     </>
   );
 }

@@ -13,15 +13,7 @@ export default function SignUp() {
 
   return (
     <form onSubmit={onSubmit}>
-      <Stack
-        gap="4"
-        align="flex-start"
-        w={"500px"}
-        rounded="md"
-        borderColor="blackAlpha.700"
-        borderWidth={"1px"}
-        p={"20px 50px"}
-      >
+      <Stack gap="4" align="flex-start" w={"500px"} p={"20px 50px"}>
         <Field.Root invalid={!!errors.username}>
           <Field.Label>Full Name</Field.Label>
           <Input {...register("fullName")} />
