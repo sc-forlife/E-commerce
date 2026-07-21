@@ -97,9 +97,9 @@ export default function App() {
       >
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginSignUp />} />
+            <Route path="/login_signup" element={<LoginSignUp />} />
             <Route path="/Checkout" element={<Checkout />} />
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Home />} />
             <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
           </Routes>
         </BrowserRouter>
