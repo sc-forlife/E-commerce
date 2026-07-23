@@ -6,6 +6,7 @@ import ProductDescription from "./components/ProductPricingDetails/ProductPricin
 import ProductDetails from "./components/ProductExtraData/ProductExtraData";
 import ViewProduct from "./pages/ViewProduct/ViewProduct";
 import Checkout from "./pages/checkout_sys/Checkout_sys";
+import LoginSignUp from "./pages/login_signup/login_signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const CartContext = createContext();
@@ -96,6 +97,7 @@ export default function App() {
       >
         <BrowserRouter>
           <Routes>
+            <Route path="/login_signup" element={<LoginSignUp />} />
             <Route path="/Checkout" element={<Checkout />} />
             <Route path="/" element={<Home />} />
             <Route path="/ViewProduct/:productId" element={<ViewProduct />} />

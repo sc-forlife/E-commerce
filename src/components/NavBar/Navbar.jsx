@@ -1,11 +1,12 @@
 import css from "./Navbar.module.css";
 import { useState, useEffect, useEffectEvent, useContext } from "react";
-import { Flex, Box, Button, Image } from "@chakra-ui/react";
+import { Flex, Box, Button, Image, Icon, Avatar } from "@chakra-ui/react";
 import Logo from "../../assets/Logo.png";
 import MenuComponent from "../MenuComponent/MenuComponent.jsx";
 import SearchComponent from "../SearchBar/SearchComponent.jsx";
 import CartComponent from "../CartButton/CartComponent.jsx";
 import { Link } from "react-router-dom";
+import { LuUser } from "react-icons/lu";
 
 export default function Navbar() {
   return (
@@ -27,7 +28,12 @@ export default function Navbar() {
           <Link to={"/Checkout"}>
             <CartComponent />
           </Link>
-          <Button variant={"ghost"}>Login / Sign Up</Button>
+          <Link to="/login_signup">
+            <Button variant={"ghost"}>Login / Sign Up</Button>
+            <Avatar.Root variant={"solid"}>
+              <Avatar.Fallback name="Guest Account" />
+            </Avatar.Root>
+          </Link>
         </Flex>
       </Box>
     </>
