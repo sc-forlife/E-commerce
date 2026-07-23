@@ -1,16 +1,89 @@
-# React + Vite
+![Homepage](src/assets/Logo.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# PORTFOLIO PROJECT - E-COMMERCE WEB APPLICATION
+A modern e-commerce web application built to streamline online shopping by providing users with an intuitive interface to browse, search, and view products.
 
-Currently, two official plugins are available:
+![Homepage](src/assets/Homepage)
+![ViewProduct](src/assets/Homepage)
+![Checkout system](src/assets/Homepage)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## About
 
-## React Compiler
+This project is a modern e-commerce web application built to showcase my React.js development skills through a real-world application. It integrates a public REST API to simulate a complete online shopping experience, allowing users to browse products, view product details, and manage a shopping cart.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The project demonstrates modern frontend development practices, including component-based architecture, client-side routing, state management, session storage for cart persistence, and unit testing with Vitest. It was developed with a strong focus on writing clean, reusable, and maintainable code.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ Product Catalog
+- ✅ Product Search
+- ✅ Category Filtering
+- ✅ Product Details
+- ✅ Shopping Cart
+- ✅ Quantity Management
+- ✅ Checkout Process
+- ✅ Checkout Progress
+- ✅ Payment Selection
+- ✅ Order Receipt
+- ✅ Product Ratings
+- ✅ Customer Reviews
+- ✅ Stock Availability
+- ✅ Responsive Design
+- ✅ Loading States
+- ✅ Error Handling
+
+## Built With
+
+### Frontend
+
+- React
+- React Router
+- JavaScript
+- HTML5
+- CSS3
+- Material UI
+- Chakra UI
+- Vitest
+
+### APIs
+
+- DummyJSON API
+
+### Tools
+
+- Git
+- GitHub
+- Vite
+- VS Code
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sc-forlife/E-commerce.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd E-commerce
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and visit:
+
+```
+http://localhost:5173
+```
