@@ -118,3 +118,31 @@ http://localhost:5173
 ### Sign Up
 
 <img src="src/assets/Signup.png" width="70%">
+
+## Challenges
+
+- Building custom search and filtering logic for a selected subset of products, as the API's built-in search only supported the entire product collection.
+- Writing and testing asynchronous API fetch functions with Vitest.
+- Managing product quantity and price updates independently without affecting other products or components.
+- Keeping the receipt synchronized with cart updates while managing shared state across sibling components.
+- Designing a centralized state management solution using React Context to share data across the application.
+- Keeping session storage synchronized with React state to ensure cart persistence across page refreshes.
+
+## Future Improvements
+
+- 🔐 User authentication with JWT
+- 🔍 Advanced search and filtering (price, brand, ratings, category, etc.)
+- 📱 Full responsive support for mobile devices
+- 👤 User profile customization
+- ❤️ Wishlist functionality
+- 💬 User advised feedback
+
+## Author
+
+Salem Chirau
+
+GitHub:
+
+```
+https://github.com/sc-forlife
+```
