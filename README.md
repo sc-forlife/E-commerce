@@ -1,11 +1,12 @@
-<img src="src/assets/SC Logo 1360x760.png" width="80%"> 
+<img src="src/assets/SC Logo 1360x760.png" width="80%">
 
 # PORTFOLIO PROJECT - E-COMMERCE WEB APPLICATION
+
 A modern e-commerce web application built to streamline online shopping by providing users with an intuitive interface to browse, search, and view products.
 
 ## Preview
 
-<img src="src/assets/e-commerce.gif" width="70%"> 
+<img src="src/assets/e-commerce.gif" width="70%">
 
 ## About
 
@@ -87,3 +88,33 @@ Open your browser and visit:
 ```
 http://localhost:5173
 ```
+
+## Screenshots
+
+### Homepage
+
+<img src="src/assets/Homepage.png" width="70%">
+
+### View Product
+
+<img src="src/assets/ViewProductPage.png" width="70%">
+
+### Cart
+
+<img src="src/assets/Cart.png" width="70%">
+
+### Receipt
+
+<img src="src/assets/Receipt.png" width="70%">
+
+### Checkout
+
+<img src="src/assets/Checkout.png" width="70%">
+
+### Login
+
+<img src="src/assets/Login.png" width="70%">
+
+### Sign Up
+
+<img src="src/assets/Signup.png" width="70%">
