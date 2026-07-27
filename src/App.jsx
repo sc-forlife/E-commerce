@@ -95,14 +95,12 @@ export default function App() {
           clearCart,
         }}
       >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login_signup" element={<LoginSignUp />} />
-            <Route path="/Checkout" element={<Checkout />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/login_signup" element={<LoginSignUp />} />
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/ViewProduct/:productId" element={<ViewProduct />} />
+        </Routes>
       </CartContext.Provider>
     </>
   );
