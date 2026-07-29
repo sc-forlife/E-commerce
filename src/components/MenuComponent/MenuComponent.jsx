@@ -1,4 +1,5 @@
-import { Button, Menu, Portal } from "@chakra-ui/react";
+import { Button, Menu, Portal, Icon } from "@chakra-ui/react";
+import { LuSearch, LuMenu } from "react-icons/lu";
 import { categories } from "../../data/category_data";
 import { UserContext } from "../../pages/home/Home";
 import { useContext } from "react";
@@ -24,7 +25,7 @@ export default function MenuComponent() {
       <Menu.Root>
         <Menu.Trigger asChild>
           <Button size="sm" variant="outline">
-            Categories
+            <Icon as={LuMenu}></Icon>
           </Button>
         </Menu.Trigger>
         <Portal>
