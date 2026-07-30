@@ -1,3 +1,9 @@
+import {
+  Combobox,
+  Portal,
+  useFilter,
+  useListCollection,
+} from "@chakra-ui/react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useEffect, useState, useRef, useContext } from "react";
@@ -20,7 +26,9 @@ export default function SearchComponent({}) {
   useEffect(() => {
     (async () => {
       //Populate the search list with all products
-      setStoreProductsAPI(await allShopProducts(categories));
+      const products = await allShopProducts(categories);
+      setStoreProductsAPI(products);
+      set(products);
     })();
   }, []);
 
@@ -34,6 +42,15 @@ export default function SearchComponent({}) {
     navigate(`/ViewProduct/${link}`);
   }
 
+  const { contains } = useFilter({ sensitivity: "base" });
+
+  const { collection, filter, set } = useListCollection({
+    initialItems: storeProductsAPI,
+    filter: contains,
+    itemToString: (item) => item.title,
+    itemToValue: (item) => item.title,
+  });
+
   return (
     <>
       {/* Different NAV BAR systems for different pages */}
@@ -41,7 +58,37 @@ export default function SearchComponent({}) {
       {/* ViewProduct is only select on available options , no free typing */}
       {page.current === "Home" ? (
         <>
-          <Autocomplete
+          <Combobox.Root
+            collection={collection}
+            onInputValueChange={(e) => {
+              filter(e.inputValue);
+            }}
+            onValueChange={(e) => setSearchProduct(e.value[0])}
+            width="320px"
+          >
+            <Combobox.Label>Select framework</Combobox.Label>
+            <Combobox.Control>
+              <Combobox.Input placeholder="Type to search" />
+              <Combobox.IndicatorGroup>
+                <Combobox.ClearTrigger />
+                <Combobox.Trigger />
+              </Combobox.IndicatorGroup>
+            </Combobox.Control>
+            <Portal>
+              <Combobox.Positioner>
+                <Combobox.Content>
+                  <Combobox.Empty>No items found</Combobox.Empty>
+                  {collection.items.map((item) => (
+                    <Combobox.Item item={item} key={item.id}>
+                      {item.title}
+                      <Combobox.ItemIndicator />
+                    </Combobox.Item>
+                  ))}
+                </Combobox.Content>
+              </Combobox.Positioner>
+            </Portal>
+          </Combobox.Root>
+          {/* <Autocomplete
             id="free-solo-demo"
             sx={{
               "& .MuiInputBase-root": { height: "40px", width: "450px" },
@@ -54,7 +101,7 @@ export default function SearchComponent({}) {
             renderInput={(params) => (
               <TextField {...params} placeholder="Search" />
             )}
-          />
+          /> */}
         </>
       ) : (
         <>

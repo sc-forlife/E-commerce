@@ -9,6 +9,9 @@ import {
   Avatar,
   HStack,
   Stack,
+  Dialog,
+  Portal,
+  createOverlay,
 } from "@chakra-ui/react";
 import Logo from "../../assets/Logo.png";
 import LogoMd from "../../assets/Cropped.png";
@@ -17,8 +20,32 @@ import SearchComponent from "../SearchBar/SearchComponent.jsx";
 import CartComponent from "../CartButton/CartComponent.jsx";
 import { Link } from "react-router-dom";
 import { LuSearch, LuUser } from "react-icons/lu";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function Navbar() {
+  const dialog = createOverlay((props) => {
+    const { title, description, content, ...rest } = props;
+    return (
+      <Dialog.Root {...rest}>
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content>
+              {title && (
+                <Dialog.Header>
+                  <Dialog.Title>{title}</Dialog.Title>
+                </Dialog.Header>
+              )}
+              <SearchComponent />
+              <Dialog.Body spaceY="4"></Dialog.Body>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
+    );
+  });
+
   return (
     <>
       <Box w={"100%"} h={"60px"} m={"5px"} display="flex" hideBelow="md">
@@ -46,6 +73,7 @@ export default function Navbar() {
           </Link>
         </Flex>
       </Box>
+      {/* Base Model Design */}
       <Box h={"60px"} m={"5px"} showFrom="md">
         <Stack>
           <HStack
@@ -66,9 +94,17 @@ export default function Navbar() {
                 <Link to={"/Checkout"}>
                   <CartComponent />
                 </Link>
-                <Button onClick={<SearchComponent />}>
+                <Button
+                  onClick={() => {
+                    dialog.open("a", {
+                      title: "Dialog Title",
+                      description: "Dialog Description",
+                    });
+                  }}
+                >
                   <Icon as={LuSearch}></Icon>
                 </Button>
+                <dialog.Viewport />
                 <Link to="/login_signup">
                   <Avatar.Root variant={"solid"}>
                     <Avatar.Fallback name="Guest Account" />
