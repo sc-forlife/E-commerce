@@ -31,12 +31,7 @@ export default function Navbar() {
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content>
-              {title && (
-                <Dialog.Header>
-                  <Dialog.Title>{title}</Dialog.Title>
-                </Dialog.Header>
-              )}
+            <Dialog.Content h={"400px"} minW={"300px"}>
               <SearchComponent />
               <Dialog.Body spaceY="4"></Dialog.Body>
             </Dialog.Content>
@@ -74,7 +69,7 @@ export default function Navbar() {
         </Flex>
       </Box>
       {/* Base Model Design */}
-      <Box h={"60px"} m={"5px"} showFrom="md">
+      <Box h={"60px"} m={"5px"} showFrom="md" hideAfter="md">
         <Stack>
           <HStack
             minW={"280px"}

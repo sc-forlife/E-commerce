@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchComponent({}) {
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
 
   const { setSearchProduct, page } = useContext(UserContext);
 
@@ -62,13 +63,24 @@ export default function SearchComponent({}) {
             collection={collection}
             onInputValueChange={(e) => {
               filter(e.inputValue);
+              setInputValue(e.inputValue);
             }}
-            onValueChange={(e) => setSearchProduct(e.value[0])}
-            width="320px"
+            onValueChange={(e) => sendSearchProduct(e.value[0])}
+            width="90%"
+            m={"auto"}
+            open={open}
           >
-            <Combobox.Label>Select framework</Combobox.Label>
+            <Combobox.Label></Combobox.Label>
             <Combobox.Control>
-              <Combobox.Input placeholder="Type to search" />
+              <Combobox.Input
+                placeholder="Type to search"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    sendSearchProduct(inputValue);
+                  }
+                }}
+              />
               <Combobox.IndicatorGroup>
                 <Combobox.ClearTrigger />
                 <Combobox.Trigger />

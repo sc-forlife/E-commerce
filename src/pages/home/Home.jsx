@@ -33,6 +33,7 @@ export default function Home() {
         wrap={"wrap"}
         justifyContent={"center"}
       >
+        {console.log(searchProduct)}
         {searchProduct ? (
           searchProduct.map((product, index) => {
             return (
