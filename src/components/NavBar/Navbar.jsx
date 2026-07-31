@@ -12,6 +12,8 @@ import {
   Dialog,
   Portal,
   createOverlay,
+  useBreakpoint,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import Logo from "../../assets/Logo.png";
 import LogoMd from "../../assets/Cropped.png";
@@ -49,6 +51,7 @@ export default function Navbar() {
           justify={"space-between"}
           w={"70%"}
           paddingRight={"10px"}
+          gap={"20px"}
         >
           <Link to={"/"}>
             <Image h={"60px"} src={Logo} justify={"flex-start"} m={"5px"} />
@@ -69,7 +72,7 @@ export default function Navbar() {
         </Flex>
       </Box>
       {/* Base Model Design */}
-      <Box h={"60px"} m={"5px"} showFrom="md" hideAfter="md">
+      <Box h={"60px"} m={"5px"} showFrom="md" hideFrom="md">
         <Stack>
           <HStack
             minW={"280px"}

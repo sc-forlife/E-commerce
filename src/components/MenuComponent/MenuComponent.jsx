@@ -1,4 +1,10 @@
-import { Button, Menu, Portal, Icon } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  Portal,
+  Icon,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { LuSearch, LuMenu } from "react-icons/lu";
 import { categories } from "../../data/category_data";
 import { UserContext } from "../../pages/home/Home";
@@ -9,6 +15,7 @@ import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 export default function MenuComponent() {
   const { setSearchProduct } = useContext(UserContext);
   const renderCategories = ["Show All", ...categories];
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   async function getProducts(product) {
     if (product === "Show All") {
@@ -25,7 +32,7 @@ export default function MenuComponent() {
       <Menu.Root>
         <Menu.Trigger asChild>
           <Button size="sm" variant="outline">
-            <Icon as={LuMenu}></Icon>
+            {isMobile ? <Icon as={LuMenu}></Icon> : "Category"}
           </Button>
         </Menu.Trigger>
         <Portal>
