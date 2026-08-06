@@ -28,7 +28,7 @@ export default function Home() {
         <NavBar />
       </UserContext.Provider>
       <Flex
-        gap={{ base: "1px", md: "5px" }}
+        gap={{ base: "10px", md: "20px" }}
         marginTop={"50px"}
         wrap={"wrap"}
         justifyContent={"center"}
