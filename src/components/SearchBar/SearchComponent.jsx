@@ -90,19 +90,19 @@ export default function SearchComponent({ model = "" }) {
               <Combobox.Trigger />
             </Combobox.IndicatorGroup>
           </Combobox.Control>
-          <Portal>
-            <Combobox.Positioner>
-              <Combobox.Content>
-                <Combobox.Empty>No items found</Combobox.Empty>
-                {collection.items.map((item) => (
-                  <Combobox.Item item={item} key={item.id}>
-                    {item.title}
-                    <Combobox.ItemIndicator />
-                  </Combobox.Item>
-                ))}
-              </Combobox.Content>
-            </Combobox.Positioner>
-          </Portal>
+          {/* <Portal> */}
+          <Combobox.Positioner>
+            <Combobox.Content>
+              <Combobox.Empty>No items found</Combobox.Empty>
+              {collection.items.map((item) => (
+                <Combobox.Item item={item} key={item.id}>
+                  {item.title}
+                  <Combobox.ItemIndicator />
+                </Combobox.Item>
+              ))}
+            </Combobox.Content>
+          </Combobox.Positioner>
+          {/* </Portal> */}
         </Combobox.Root>
         {/* <Autocomplete
             id="free-solo-demo"

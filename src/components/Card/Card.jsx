@@ -15,15 +15,26 @@ export default function Display({ item = "", linkTo = "" }) {
         <SpinnerComponent />
       ) : (
         <>
-          <Card.Root w="250px" maxH="400px" overflow="hidden">
+          <Card.Root
+            w={{ base: "150px", md: "250px" }}
+            h={{ base: "auto", md: "380px" }}
+            overflow="hidden"
+          >
             <Image
               src={item.thumbnail}
               alt={item.title}
-              maxH={"200px"}
+              maxW={{ base: "150px", md: "200px" }}
               margin={"10px"}
             />
-            <Card.Body gap="0" p={"15px"}>
-              <Card.Title fontWeight={"light"} data-testid="title">
+            <Card.Body gap="0" p={{ md: "15px", base: "10px" }}>
+              <Card.Title
+                fontSize={{
+                  base: "12px",
+                  md: "17px",
+                }}
+                fontWeight={"light"}
+                data-testid="title"
+              >
                 {item.title}
               </Card.Title>
 
@@ -37,8 +48,10 @@ export default function Display({ item = "", linkTo = "" }) {
               </Text>
             </Card.Body>
             <Link to={linkTo} className={css.link}>
-              <Card.Footer>
-                <Button w={"100%"}>View Product</Button>
+              <Card.Footer p={{ md: "25px", base: "5px" }}>
+                <Button w={"100%"} h={{ base: "30px", md: "35px" }}>
+                  View Product
+                </Button>
               </Card.Footer>
             </Link>
           </Card.Root>
