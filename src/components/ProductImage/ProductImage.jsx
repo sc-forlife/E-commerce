@@ -17,13 +17,13 @@ export default function ProductImage({ productTitle = "" }) {
 
   return (
     <>
-      <Box w={"450px"}>
+      <Box w={"350px"}>
         {product ? (
           <>
             <AspectRatio
               borderRadius={"10px"}
               bg="bg.muted"
-              maxW="450px"
+              w={{ base: "350px", md: "450px" }}
               ratio={1 / 1}
             >
               <Image

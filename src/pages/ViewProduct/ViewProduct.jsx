@@ -5,7 +5,7 @@ import ProductDetails from "../../components/ProductExtraData/ProductExtraData";
 import ProductImage from "../../components/ProductImage/ProductImage";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
-import { Flex, HStack, Box } from "@chakra-ui/react";
+import { Flex, HStack, Box, useBreakpointValue, Stack } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
 import { useParams } from "react-router-dom";
 
@@ -16,6 +16,7 @@ export default function ViewProduct() {
   const [searchProduct, setSearchProduct] = useState("");
   const { productId } = useParams();
   const page = useRef("View Page");
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
     //retrieve the selected product from params
@@ -40,10 +41,17 @@ export default function ViewProduct() {
         <>
           <SelectedProduct.Provider value={{ product: product }}>
             <Flex justifyContent="center" align={"center"}>
-              <HStack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
-                <ProductImage />
-                <ProductDescription />
-              </HStack>
+              {isMobile ? (
+                <Stack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
+                  <ProductImage />
+                  <ProductDescription />
+                </Stack>
+              ) : (
+                <HStack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
+                  <ProductImage />
+                  <ProductDescription />
+                </HStack>
+              )}
             </Flex>
             <Box paddingLeft={"30px"} marginBottom={"40px"}>
               <ProductDetails />
