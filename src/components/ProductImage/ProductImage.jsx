@@ -36,7 +36,7 @@ export default function ProductImage({ productTitle = "" }) {
                 return (
                   <AspectRatio
                     ratio={1 / 1}
-                    width={"100%"}
+                    width={"25%"}
                     h={"100px"}
                     bg={imageURL === selectedImage ? "bg.muted" : "none"}
                   >

@@ -45,7 +45,7 @@ export default function ViewProduct() {
                 <Stack
                   gap={{ base: "50px", md: "150px" }}
                   marginTop={"50px"}
-                  marginBottom={"100px"}
+                  marginBottom={{ base: "50px", md: "100px" }}
                 >
                   <ProductImage />
                   <ProductDescription />
@@ -57,7 +57,10 @@ export default function ViewProduct() {
                 </HStack>
               )}
             </Flex>
-            <Box paddingLeft={"30px"} marginBottom={"40px"}>
+            <Box
+              paddingLeft={{ base: "10px", md: "30px" }}
+              marginBottom={"40px"}
+            >
               <ProductDetails />
             </Box>
           </SelectedProduct.Provider>
