@@ -17,13 +17,13 @@ export default function ProductImage({ productTitle = "" }) {
 
   return (
     <>
-      <Box w={"350px"}>
+      <Box w={{ base: "100%", md: "450px" }} m="auto">
         {product ? (
           <>
             <AspectRatio
               borderRadius={"10px"}
               bg="bg.muted"
-              w={{ base: "350px", md: "450px" }}
+              w={{ base: "100%", md: "450px" }}
               ratio={1 / 1}
             >
               <Image
@@ -36,7 +36,7 @@ export default function ProductImage({ productTitle = "" }) {
                 return (
                   <AspectRatio
                     ratio={1 / 1}
-                    width={"100px"}
+                    width={"100%"}
                     h={"100px"}
                     bg={imageURL === selectedImage ? "bg.muted" : "none"}
                   >

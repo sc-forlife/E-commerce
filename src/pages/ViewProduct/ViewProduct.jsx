@@ -42,7 +42,11 @@ export default function ViewProduct() {
           <SelectedProduct.Provider value={{ product: product }}>
             <Flex justifyContent="center" align={"center"}>
               {isMobile ? (
-                <Stack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
+                <Stack
+                  gap={{ base: "50px", md: "150px" }}
+                  marginTop={"50px"}
+                  marginBottom={"100px"}
+                >
                   <ProductImage />
                   <ProductDescription />
                 </Stack>
