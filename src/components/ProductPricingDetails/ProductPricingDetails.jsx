@@ -43,7 +43,7 @@ export default function ProductDescription() {
     <>
       <Box
         bg={""}
-        maxW={"450px"}
+        w={"50%"}
         h={{ base: "auto", md: "540px" }}
         p={"20px"}
         rounded={"md"}

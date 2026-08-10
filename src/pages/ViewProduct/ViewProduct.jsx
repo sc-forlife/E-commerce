@@ -40,22 +40,18 @@ export default function ViewProduct() {
       {product ? (
         <>
           <SelectedProduct.Provider value={{ product: product }}>
-            <Flex justifyContent="center" align={"center"}>
-              {isMobile ? (
-                <Stack
-                  gap={{ base: "50px", md: "150px" }}
-                  marginTop={"50px"}
-                  marginBottom={{ base: "50px", md: "100px" }}
-                >
-                  <ProductImage />
-                  <ProductDescription />
-                </Stack>
-              ) : (
-                <HStack gap={"150px"} marginTop={"40px"} marginBottom={"100px"}>
-                  <ProductImage />
-                  <ProductDescription />
-                </HStack>
-              )}
+            <Flex
+              marginBottom={{ base: "50px", md: "100px" }}
+              marginTop={{ base: "50px", md: "40px" }}
+              // gap={{ base: "50px", md: "150px" }}
+              direction={{ base: "column", md: "row" }}
+              justifyContent="space-around"
+              align={"center"}
+              w={"100%"}
+              p={"10px"}
+            >
+              <ProductImage />
+              <ProductDescription />
             </Flex>
             <Box
               paddingLeft={{ base: "10px", md: "30px" }}

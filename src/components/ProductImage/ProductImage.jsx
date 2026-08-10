@@ -23,7 +23,7 @@ export default function ProductImage({ productTitle = "" }) {
             <AspectRatio
               borderRadius={"10px"}
               bg="bg.muted"
-              w={{ base: "100%", md: "450px" }}
+              w={{ base: "100%", md: "100%" }}
               ratio={1 / 1}
             >
               <Image

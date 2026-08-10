@@ -65,7 +65,12 @@ export default function SearchComponent({ model = "" }) {
             filter(e.inputValue);
             setInputValue(e.inputValue);
           }}
-          onValueChange={(e) => sendSearchProduct(e.value[0])}
+          onValueChange={(e) =>
+            //Call function depending on user location
+            page.current === "Home"
+              ? sendSearchProduct(e.value[0])
+              : changeProduct(e.value[0])
+          }
           width={{ base: "90%", md: "50%", lg: "60%" }}
           m={"auto"}
           open={isMobile ? open : null}
@@ -74,16 +79,15 @@ export default function SearchComponent({ model = "" }) {
           <Combobox.Control>
             <Combobox.Input
               placeholder="Type to search"
-              onKeyDown={
-                page.current === "Home"
-                  ? (e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        sendSearchProduct(inputValue);
-                      }
-                    }
-                  : null
-              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  //Call function depending on user location
+                  page.current === "Home"
+                    ? sendSearchProduct(inputValue)
+                    : changeProduct(inputValue);
+                }
+              }}
             />
             <Combobox.IndicatorGroup>
               <Combobox.ClearTrigger />
