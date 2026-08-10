@@ -43,16 +43,19 @@ export default function ProductDescription() {
     <>
       <Box
         bg={""}
-        w={"50%"}
-        h={{ base: "auto", md: "540px" }}
+        w={{ base: "100%", md: "50%" }}
+        maxW={{ base: "480px" }}
+        h={{ base: "auto" }}
         p={"20px"}
         rounded={"md"}
+        marginTop={{ base: "25px", md: "0px" }}
+        marginBottom={{ base: "40px", md: "0px" }}
         borderColor={"ThreeDFace"}
         borderWidth={"4px"}
       >
         {product ? (
           <>
-            <Stack gap={{ base: "30px", md: "35px" }}>
+            <Stack gap={{ base: "20px", md: "25px" }}>
               <Flex justifyContent={"space-between"}>
                 <Heading fontSize={{ base: "19px", md: "22px" }}>
                   {product.title}

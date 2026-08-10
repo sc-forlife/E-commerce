@@ -43,11 +43,13 @@ export default function ViewProduct() {
             <Flex
               marginBottom={{ base: "50px", md: "100px" }}
               marginTop={{ base: "50px", md: "40px" }}
+              m="auto"
               // gap={{ base: "50px", md: "150px" }}
               direction={{ base: "column", md: "row" }}
               justifyContent="space-around"
               align={"center"}
               w={"100%"}
+              maxW="1200px"
               p={"10px"}
             >
               <ProductImage />
