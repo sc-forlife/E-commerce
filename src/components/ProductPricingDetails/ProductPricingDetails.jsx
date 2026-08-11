@@ -42,10 +42,9 @@ export default function ProductDescription() {
   return (
     <>
       <Box
-        bg={""}
         w={{ base: "100%", md: "50%" }}
         maxW={{ base: "480px" }}
-        h={{ base: "auto" }}
+        // h={{ base: "auto" }}
         p={"20px"}
         rounded={"md"}
         marginTop={{ base: "25px", md: "0px" }}

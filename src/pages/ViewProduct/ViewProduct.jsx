@@ -41,10 +41,9 @@ export default function ViewProduct() {
         <>
           <SelectedProduct.Provider value={{ product: product }}>
             <Flex
-              marginBottom={{ base: "50px", md: "100px" }}
-              marginTop={{ base: "50px", md: "40px" }}
+              marginBottom={{ base: "0px", md: "100px" }}
+              marginTop={{ base: "0px", md: "40px" }}
               m="auto"
-              // gap={{ base: "50px", md: "150px" }}
               direction={{ base: "column", md: "row" }}
               justifyContent="space-around"
               align={"center"}

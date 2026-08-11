@@ -7,7 +7,7 @@ export default function HorizontalScrolling({ render = "" }) {
         <ScrollArea.Root position={"absolute"}>
           <ScrollArea.Viewport>
             <ScrollArea.Content>
-              <Flex gap="4" flexWrap={"nowrap"}>
+              <Flex gap="10%" flexWrap={"nowrap"} justifyContent="center">
                 {render}
               </Flex>
             </ScrollArea.Content>

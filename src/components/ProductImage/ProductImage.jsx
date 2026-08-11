@@ -24,7 +24,7 @@ export default function ProductImage({ productTitle = "" }) {
               borderRadius={"10px"}
               bg="bg.muted"
               maxW={{ base: "100%", md: "350px" }}
-              h={{ md: "100%" }}
+              // h={{ md: "100%" }}
               ratio={1 / 1}
             >
               <Image
