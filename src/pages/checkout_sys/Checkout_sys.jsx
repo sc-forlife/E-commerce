@@ -42,8 +42,9 @@ export default function checkout() {
           <Center w={"90vw"} h={"85vh"}>
             <Box
               bg={"white"}
-              minW={"800px"}
-              maxW={"1000px"}
+              // minW={"800px"}
+              width={"70%"}
+              maxW={"800px"}
               h={"450px"}
               borderRadius={"20px"}
               border={"grey solid 2px"}
