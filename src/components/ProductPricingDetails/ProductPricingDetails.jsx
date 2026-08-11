@@ -42,19 +42,23 @@ export default function ProductDescription() {
   return (
     <>
       <Box
-        bg={""}
-        maxW={"450px"}
-        h={"540px"}
+        w={{ base: "100%", md: "50%" }}
+        maxW={{ base: "480px" }}
+        // h={{ base: "auto" }}
         p={"20px"}
         rounded={"md"}
+        marginTop={{ base: "25px", md: "0px" }}
+        marginBottom={{ base: "40px", md: "0px" }}
         borderColor={"ThreeDFace"}
         borderWidth={"4px"}
       >
         {product ? (
           <>
-            <Stack gap={"35px"}>
+            <Stack gap={{ base: "20px", md: "25px" }}>
               <Flex justifyContent={"space-between"}>
-                <Heading>{product.title}</Heading>
+                <Heading fontSize={{ base: "19px", md: "22px" }}>
+                  {product.title}
+                </Heading>
                 <Badge
                   colorPalette={
                     product.availabilityStatus === "In Stock" ? "green" : "red"
@@ -63,9 +67,13 @@ export default function ProductDescription() {
                   {product.availabilityStatus}
                 </Badge>
               </Flex>
-              <Text>{product.description}</Text>
+              <Text fontSize={{ base: "13px", md: "15px" }}>
+                {product.description}
+              </Text>
               {/* Pricing */}
-              <Heading size={"3xl"}>${product.price}</Heading>
+              <Heading fontSize={{ base: "2xl", md: "3xl" }}>
+                ${product.price}
+              </Heading>
               {/* Rating */}
               <Flex gap={"10px"}>
                 <Rating value={Math.round(product.rating)} />

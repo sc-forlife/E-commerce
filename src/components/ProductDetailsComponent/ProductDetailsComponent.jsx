@@ -7,6 +7,7 @@ import CollapsibleComponent from "../CollapsibleComponent/CollapsibleComponent";
 
 export default function ProductDetailsComponent() {
   const { product } = useContext(SelectedProduct);
+  const sizing = { base: "13px", md: "15px" };
 
   return (
     <>
@@ -17,9 +18,15 @@ export default function ProductDetailsComponent() {
             content={
               <>
                 <Stack>
-                  <Text>Width: {product.dimensions.width}</Text>
-                  <Text>Depth: {product.dimensions.depth}</Text>
-                  <Text>Height: {product.dimensions.height}</Text>
+                  <Text fontSize={sizing}>
+                    Width: {product.dimensions.width}
+                  </Text>
+                  <Text fontSize={sizing}>
+                    Depth: {product.dimensions.depth}
+                  </Text>
+                  <Text fontSize={sizing}>
+                    Height: {product.dimensions.height}
+                  </Text>
                 </Stack>
               </>
             }
@@ -29,7 +36,7 @@ export default function ProductDetailsComponent() {
             content={
               <>
                 <Stack>
-                  <Text>{product.returnPolicy}</Text>
+                  <Text fontSize={sizing}>{product.returnPolicy}</Text>
                 </Stack>
               </>
             }
@@ -39,7 +46,7 @@ export default function ProductDetailsComponent() {
             content={
               <>
                 <Stack>
-                  <Text>Stock: {product.stock}</Text>
+                  <Text fontSize={sizing}>Stock: {product.stock}</Text>
                 </Stack>
               </>
             }
@@ -49,7 +56,7 @@ export default function ProductDetailsComponent() {
             content={
               <>
                 <Stack>
-                  <Text>Weight: {product.weight}</Text>
+                  <Text fontSize={sizing}>Weight: {product.weight}</Text>
                 </Stack>
               </>
             }
@@ -59,7 +66,7 @@ export default function ProductDetailsComponent() {
             content={
               <>
                 <Stack>
-                  <Text>{product.warrantyInformation}</Text>
+                  <Text fontSize={sizing}>{product.warrantyInformation}</Text>
                 </Stack>
               </>
             }

@@ -17,7 +17,7 @@ export default function Comments() {
                 <Box
                   bg={"bg.muted"}
                   p={"10px"}
-                  w={"50%"}
+                  w={{ base: "90%", md: "50%" }}
                   borderRadius={"2xl"}
                   key={index}
                 >
@@ -31,7 +31,12 @@ export default function Comments() {
                         <Rating size={"xs"} value={comment.rating} />
                       </Stack>
                     </HStack>
-                    <Text marginLeft={"15px"}>{comment.comment}</Text>
+                    <Text
+                      marginLeft={"15px"}
+                      fontSize={{ base: "13px", md: "15px" }}
+                    >
+                      {comment.comment}
+                    </Text>
                   </Stack>
                 </Box>
               );

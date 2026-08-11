@@ -13,7 +13,7 @@ import { getCategory } from "../../APIs/getCategory/getCategory";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 
 export default function MenuComponent() {
-  const { setSearchProduct } = useContext(UserContext);
+  const { setSearchProduct, page } = useContext(UserContext);
   const renderCategories = ["Show All", ...categories];
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -29,31 +29,35 @@ export default function MenuComponent() {
 
   return (
     <>
-      <Menu.Root>
-        <Menu.Trigger asChild>
-          <Button size="sm" variant="outline">
-            {isMobile ? <Icon as={LuMenu}></Icon> : "Category"}
-          </Button>
-        </Menu.Trigger>
-        <Portal>
-          <Menu.Positioner>
-            <Menu.Content>
-              {renderCategories.map((category, index) => (
-                <Menu.Item
-                  key={index}
-                  asChild
-                  value={category}
-                  onClick={(e) => getProducts(e.target.innerText)}
-                >
-                  <p>
-                    {category.slice(0, 1).toUpperCase() + category.slice(1)}
-                  </p>
-                </Menu.Item>
-              ))}
-            </Menu.Content>
-          </Menu.Positioner>
-        </Portal>
-      </Menu.Root>
+      {page.current === "Home" ? (
+        <Menu.Root>
+          <Menu.Trigger asChild>
+            <Button size="sm" variant="outline">
+              {isMobile ? <Icon as={LuMenu}></Icon> : "Category"}
+            </Button>
+          </Menu.Trigger>
+          <Portal>
+            <Menu.Positioner>
+              <Menu.Content>
+                {renderCategories.map((category, index) => (
+                  <Menu.Item
+                    key={index}
+                    asChild
+                    value={category}
+                    onClick={(e) => getProducts(e.target.innerText)}
+                  >
+                    <p>
+                      {category.slice(0, 1).toUpperCase() + category.slice(1)}
+                    </p>
+                  </Menu.Item>
+                ))}
+              </Menu.Content>
+            </Menu.Positioner>
+          </Portal>
+        </Menu.Root>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

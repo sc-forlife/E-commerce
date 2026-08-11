@@ -10,7 +10,7 @@ export default function ProductDetails() {
 
   return (
     <>
-      <SimpleGrid columns={1} gap="14" width="full">
+      <SimpleGrid columns={1} gap="14" width="100%">
         <Tabs.Root
           key={"outline"}
           defaultValue="comments"
@@ -20,11 +20,13 @@ export default function ProductDetails() {
           <Tabs.List>
             <Tabs.Trigger value="comments">
               <LuUser size={"30"} />
-              <Text fontSize={"20px"}>Comments</Text>
+              <Text fontSize={{ base: "13px", md: "20px" }}>Comments</Text>
             </Tabs.Trigger>
             <Tabs.Trigger value="details">
               <LuFolder size={"30"} />
-              <Text fontSize={"20px"}>Product Details </Text>
+              <Text fontSize={{ base: "13px", md: "20px" }}>
+                Product Details{" "}
+              </Text>
             </Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="comments">

@@ -20,7 +20,7 @@ export default function CollapsibleComponent({
           >
             <LuChevronRight />
           </Collapsible.Indicator>
-          <Heading>{title}</Heading>
+          <Heading fontSize={{ base: "15px", md: "18px" }}>{title}</Heading>
         </Collapsible.Trigger>
         <Collapsible.Content>
           <Stack padding="4" borderWidth="1px">
