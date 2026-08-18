@@ -47,6 +47,7 @@ export default function checkout() {
           flexDirection={"column"}
           justifyContent={"space-between"}
           h={"100%"}
+          overflowY={"scroll"}
         >
           {/* <Box
           // bg={"white"}
@@ -57,7 +58,7 @@ export default function checkout() {
           // overflowY={step.title === "Payment" ? "scroll" : null}
           > */}
           {step.description}
-          <Flex justifyContent={"space-around"}>
+          <Flex justifyContent={"space-around"} marginTop={"15px"}>
             {step.title === "Cart" ? (
               <Link to={"/"}>
                 <Button variant={"ghost"}>
