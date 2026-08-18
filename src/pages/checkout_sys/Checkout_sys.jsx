@@ -28,7 +28,7 @@ export default function checkout() {
       h={"100vh"}
       m={"0px auto"}
       paddingTop={"15px"}
-      justifyContent={"flex-start"}
+      justifyContent={"space-between"}
     >
       <Steps.List paddingRight={"20px"} paddingLeft={"20px"}>
         {steps.map((step, index) => (
@@ -40,7 +40,14 @@ export default function checkout() {
         ))}
       </Steps.List>
       {steps.map((step, index) => (
-        <Steps.Content key={index} index={index}>
+        <Steps.Content
+          key={index}
+          index={index}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"space-between"}
+          h={"100%"}
+        >
           {/* <Box
           // bg={"white"}
           // // minW={"800px"}

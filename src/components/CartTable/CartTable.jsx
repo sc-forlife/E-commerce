@@ -1,5 +1,10 @@
 import {
   Table,
+  Box,
+  Heading,
+  Card,
+  Badge,
+  Button,
   Image,
   AspectRatio,
   Stack,
@@ -19,7 +24,57 @@ export default function CartTable() {
 
   return (
     <>
-      <CartTableHeading />
+      <Flex
+        flexDirection={"column"}
+        gap="15px"
+        marginLeft={{ base: "5px", md: "20px" }}
+      >
+        <Heading>Order Summary</Heading>
+        {cartProducts ? (
+          cartProducts.map((item) => {
+            return (
+              <Card.Root
+                flexDirection="row"
+                overflow="hidden"
+                maxW="xl"
+                h={"auto"}
+              >
+                <Image
+                  objectFit="fit"
+                  maxW="150px"
+                  w={"130px"}
+                  h={"130px"}
+                  src={item.thumbnail}
+                  alt={item.title}
+                />
+                <Box>
+                  <Card.Body>
+                    <HStack gap={"20px"}>
+                      <Card.Title mb="2">{item.title}</Card.Title>
+                      <Icon
+                        as={LuTrash}
+                        size={"md"}
+                        bg={{
+                          base: "colorPalette.100",
+                          _hover: "colorPalette.200",
+                        }}
+                        onClick={() => deleteCartItem(item.cartId)}
+                      ></Icon>
+                    </HStack>
+                    <Card.Description>${item.cartPrice}</Card.Description>
+                    <HStack mt="4">
+                      <MobileStepper item={item} />
+                    </HStack>
+                  </Card.Body>
+                </Box>
+              </Card.Root>
+            );
+          })
+        ) : (
+          <p>Loading</p>
+        )}
+      </Flex>
+      {/* <CartTableHeading />
       <Table.ScrollArea h={"315px"} marginBottom={"7px"}>
         <Table.Root size="md" striped stickyHeader>
           <Table.Header>
@@ -84,7 +139,7 @@ export default function CartTable() {
             )}
           </Table.Body>
         </Table.Root>
-      </Table.ScrollArea>
+      </Table.ScrollArea> */}
     </>
   );
 }

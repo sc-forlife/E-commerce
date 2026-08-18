@@ -18,7 +18,7 @@ export default function CartPayment() {
 
   return (
     <>
-      <Flex>
+      <Flex flexDirection={{ base: "column", md: "row" }}>
         <Fieldset.Root size="lg" w="400px" margin={"30px 30px"}>
           <Stack>
             <Fieldset.Legend>Contact details</Fieldset.Legend>
