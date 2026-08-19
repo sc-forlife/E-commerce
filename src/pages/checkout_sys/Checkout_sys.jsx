@@ -8,6 +8,7 @@ import {
   Box,
   Text,
   HStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { createContext, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
@@ -20,6 +21,8 @@ import CompleteCart from "../../components/CompleteCart/CompleteCart";
 export const ReceiptContext = createContext();
 
 export default function checkout() {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <Steps.Root
       defaultStep={0}
@@ -34,7 +37,7 @@ export default function checkout() {
         {steps.map((step, index) => (
           <Steps.Item key={index} index={index} title={step.title}>
             <Steps.Indicator />
-            <Steps.Title>{step.title}</Steps.Title>
+            {isMobile ? <></> : <Steps.Title>{step.title}</Steps.Title>}
             <Steps.Separator />
           </Steps.Item>
         ))}
@@ -46,8 +49,8 @@ export default function checkout() {
           display={"flex"}
           flexDirection={"column"}
           justifyContent={"space-between"}
-          h={"100%"}
-          overflowY={"scroll"}
+          h={"100vh"}
+          overflowY={step.title !== "Payment" ? "scroll" : ""}
         >
           {/* <Box
           // bg={"white"}
@@ -58,7 +61,19 @@ export default function checkout() {
           // overflowY={step.title === "Payment" ? "scroll" : null}
           > */}
           {step.description}
-          <Flex justifyContent={"space-around"} marginTop={"15px"}>
+          <Flex
+            justifyContent={"space-around"}
+            marginTop={"15px"}
+            position="fixed"
+            bottom="0"
+            left="0"
+            bg={"white"}
+            w={"100%"}
+            bg={{
+              base: "rgba(255, 255, 255)",
+              md: "rgba(255, 255, 255, 0.6)",
+            }}
+          >
             {step.title === "Cart" ? (
               <Link to={"/"}>
                 <Button variant={"ghost"}>

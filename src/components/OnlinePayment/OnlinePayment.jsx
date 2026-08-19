@@ -8,10 +8,12 @@ import {
   Text,
   HStack,
   createListCollection,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 export default function OnlinePayment() {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
 
@@ -34,7 +36,13 @@ export default function OnlinePayment() {
 
   return (
     <>
-      <Fieldset.Root size="lg" w="400px" margin={"30px 30px"}>
+      <Fieldset.Root
+        size="lg"
+        w="50%"
+        minW="270px"
+        maxW="400px"
+        margin={{ base: "10px 10px 50px", md: "30px 30px" }}
+      >
         <Stack>
           <Fieldset.Legend>Card details</Fieldset.Legend>
           <Fieldset.HelperText>
@@ -55,6 +63,7 @@ export default function OnlinePayment() {
 
           <HStack>
             <Text>Card's Exp</Text>
+            {isMobile ? <br></br> : ""}
             <Select.Root collection={month} size="sm" width="100px">
               <Select.HiddenSelect />
               <Select.Control>
@@ -106,6 +115,8 @@ export default function OnlinePayment() {
                 </Select.Positioner>
               </Portal>
             </Select.Root>
+          </HStack>
+          <HStack>
             <Text>CVV</Text>
             <Input
               type="text"

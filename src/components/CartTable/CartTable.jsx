@@ -28,6 +28,7 @@ export default function CartTable() {
         flexDirection={"column"}
         gap="15px"
         marginLeft={{ base: "5px", md: "20px" }}
+        marginBottom={{ base: "50px" }}
       >
         <Heading>Order Summary</Heading>
         {cartProducts ? (
@@ -42,15 +43,20 @@ export default function CartTable() {
                 <Image
                   objectFit="fit"
                   maxW="150px"
-                  w={"130px"}
-                  h={"130px"}
+                  w={{ base: "100px", md: "130px" }}
+                  h={{ base: "100px", md: "130px" }}
                   src={item.thumbnail}
                   alt={item.title}
                 />
                 <Box>
                   <Card.Body>
                     <HStack gap={"20px"}>
-                      <Card.Title mb="2">{item.title}</Card.Title>
+                      <Card.Title
+                        mb="2"
+                        fontSize={{ base: "14px", md: "17px" }}
+                      >
+                        {item.title}
+                      </Card.Title>
                       <Icon
                         as={LuTrash}
                         size={"md"}

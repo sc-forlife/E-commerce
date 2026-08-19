@@ -18,8 +18,14 @@ export default function CartPayment() {
 
   return (
     <>
-      <Flex flexDirection={{ base: "column", md: "row" }}>
-        <Fieldset.Root size="lg" w="400px" margin={"30px 30px"}>
+      <Flex flexDirection={{ base: "column", md: "row" }} marginBottom={"50px"}>
+        <Fieldset.Root
+          size="lg"
+          w="50%"
+          minW="270px"
+          maxW="400px"
+          margin={{ base: "10px 10px", md: "30px 30px" }}
+        >
           <Stack>
             <Fieldset.Legend>Contact details</Fieldset.Legend>
             <Fieldset.HelperText>

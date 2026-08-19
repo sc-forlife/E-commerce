@@ -1,4 +1,4 @@
-import { Text, Center, Button, Stack } from "@chakra-ui/react";
+import { Text, Center, Button, Stack, Box } from "@chakra-ui/react";
 import { CartContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -14,9 +14,9 @@ export default function CompleteCart() {
 
   return (
     <>
-      <Center w={"90vw"} h={"50vh"}>
+      <Box w={"90vw"} h={"470px"} margin={"auto"}>
         <Stack gap={"20px"}>
-          <Text>
+          <Text textAlign={"center"}>
             Payment has been completed , Click the button below to be redirected
             to the home page
           </Text>
@@ -24,7 +24,7 @@ export default function CompleteCart() {
             Finish
           </Button>
         </Stack>
-      </Center>
+      </Box>
     </>
   );
 }

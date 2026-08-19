@@ -48,8 +48,8 @@ export default function Receipt() {
     <>
       <Box
         bg={"bg.muted"}
-        h={"370px"}
         w={"50%"}
+        minW={"280px"}
         margin={"20px auto 10px"}
         borderRadius={"10px"}
         borderWidth={"2px"}
@@ -69,7 +69,7 @@ export default function Receipt() {
           h={"95%"}
         >
           <Heading fontSize={"15px"} marginTop={"25px"} width={"100%"}>
-            <Flex justifyContent={"center"}>Order Summary</Flex>
+            <Flex justifyContent={"center"}>Receipt</Flex>
           </Heading>
           <Table.Root size="md" stickyHeader striped>
             <Table.Header>
