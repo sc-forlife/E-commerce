@@ -12,8 +12,6 @@ import {
   Dialog,
   Portal,
   createOverlay,
-  useBreakpoint,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import Logo from "../../assets/Logo.png";
 import LogoMd from "../../assets/Cropped.png";
@@ -21,9 +19,7 @@ import MenuComponent from "../MenuComponent/MenuComponent.jsx";
 import SearchComponent from "../SearchBar/SearchComponent.jsx";
 import CartComponent from "../CartButton/CartComponent.jsx";
 import { Link } from "react-router-dom";
-import { LuSearch, LuUser } from "react-icons/lu";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { LuSearch } from "react-icons/lu";
 
 export default function Navbar() {
   const dialog = createOverlay((props) => {
@@ -45,7 +41,7 @@ export default function Navbar() {
 
   return (
     <>
-      <Box w={"100%"} h={"60px"} m={"5px"} display="flex" hideBelow="md">
+      <Box w={"100%"} h={"60px"} p={"5px"} display="flex" hideBelow="md">
         <Flex
           align={"center"}
           justify={"space-between"}

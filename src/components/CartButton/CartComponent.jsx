@@ -9,9 +9,7 @@ export default function CartComponent() {
   return (
     <>
       <Box position={"relative"}>
-        <Icon>
-          <FaCartPlus style={{ width: "40px" }} />
-        </Icon>
+        <FaCartPlus style={{ width: "40px" }} />
         <Float>
           <Circle size="5" bg="red" color="white">
             {cartProducts.length}

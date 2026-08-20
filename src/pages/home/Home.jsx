@@ -1,12 +1,12 @@
 import { useEffect, useState, createContext, useRef } from "react";
 import NavBar from "../../components/NavBar/Navbar";
-import Card from "../../components/Card/Card";
 import { allShopProducts } from "../../APIs/getAllProducts/getAllProducts";
 import { categories } from "../../data/category_data";
 import { Flex } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
+import FooterComponent from "../../components/FooterComponent/FooterComponent";
 
 export const UserContext = createContext();
 
@@ -33,7 +33,6 @@ export default function Home() {
         wrap={"wrap"}
         justifyContent={"center"}
       >
-        {console.log(searchProduct)}
         {searchProduct ? (
           searchProduct.map((product, index) => {
             return (
@@ -48,6 +47,7 @@ export default function Home() {
           <Spinner />
         )}
       </Flex>
+      <FooterComponent />
     </>
   );
 }

@@ -1,13 +1,8 @@
 import {
   Button,
-  ButtonGroup,
   Steps,
-  Center,
   Icon,
   Flex,
-  Box,
-  Text,
-  HStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { createContext, useState, useEffect, useContext } from "react";
@@ -52,14 +47,6 @@ export default function checkout() {
           h={"100vh"}
           overflowY={step.title !== "Payment" ? "scroll" : ""}
         >
-          {/* <Box
-          // bg={"white"}
-          // // minW={"800px"}
-          // width={"100%"}
-          // borderRadius={"20px"}
-          // // border={"grey solid 2px"}
-          // overflowY={step.title === "Payment" ? "scroll" : null}
-          > */}
           {step.description}
           <Flex
             justifyContent={"space-around"}
@@ -67,7 +54,6 @@ export default function checkout() {
             position="fixed"
             bottom="0"
             left="0"
-            bg={"white"}
             w={"100%"}
             bg={{
               base: "rgba(255, 255, 255)",

@@ -1,17 +1,5 @@
-import {
-  Button,
-  Box,
-  Field,
-  Input,
-  Stack,
-  Center,
-  AspectRatio,
-  Image,
-  HStack,
-  Flex,
-  Icon,
-} from "@chakra-ui/react";
-import { useState, createContext } from "react";
+import { Button, Center, Image, Flex, Icon } from "@chakra-ui/react";
+import { useState } from "react";
 import SignUp from "../../components/SignUp/SignUp";
 import Logo from "../../assets/Logo.png";
 import Login from "../../components/Login/Login";

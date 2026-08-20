@@ -5,9 +5,10 @@ import ProductDetails from "../../components/ProductExtraData/ProductExtraData";
 import ProductImage from "../../components/ProductImage/ProductImage";
 import SpinnerComponent from "../../components/Spinner/SpinnerComponent";
 import NavBar from "../../components/NavBar/Navbar";
-import { Flex, HStack, Box, useBreakpointValue, Stack } from "@chakra-ui/react";
+import { Flex, Box, useBreakpointValue } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
 import { useParams } from "react-router-dom";
+import FooterComponent from "../../components/FooterComponent/FooterComponent";
 
 export const SelectedProduct = createContext();
 
@@ -67,6 +68,7 @@ export default function ViewProduct() {
           <SpinnerComponent />
         </>
       )}
+      <FooterComponent />
     </>
   );
 }

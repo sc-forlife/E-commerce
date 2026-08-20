@@ -94,34 +94,18 @@ export default function SearchComponent({ model = "" }) {
               <Combobox.Trigger />
             </Combobox.IndicatorGroup>
           </Combobox.Control>
-          {/* <Portal> */}
           <Combobox.Positioner>
             <Combobox.Content>
               <Combobox.Empty>No items found</Combobox.Empty>
-              {collection.items.map((item) => (
-                <Combobox.Item item={item} key={item.id}>
+              {collection.items.map((item, index) => (
+                <Combobox.Item item={item} key={index}>
                   {item.title}
                   <Combobox.ItemIndicator />
                 </Combobox.Item>
               ))}
             </Combobox.Content>
           </Combobox.Positioner>
-          {/* </Portal> */}
         </Combobox.Root>
-        {/* <Autocomplete
-            id="free-solo-demo"
-            sx={{
-              "& .MuiInputBase-root": { height: "40px", width: "450px" },
-            }}
-            freeSolo
-            onInputChange={(event, newInputValue) =>
-              sendSearchProduct(newInputValue)
-            }
-            options={storeProductsAPI.map((option) => option.title)}
-            renderInput={(params) => (
-              <TextField {...params} placeholder="Search" />
-            )}
-          /> */}
       </>
     </>
   );
