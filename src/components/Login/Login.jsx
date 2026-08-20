@@ -22,8 +22,8 @@ export default function Login({ user = () => {} }) {
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <form onSubmit={onSubmit}>
-      <Stack gap="4" align="flex-start" w={"500px"} p={"20px 50px"}>
+    <form onSubmit={onSubmit} style={{ width: "100%" }}>
+      <Stack gap="4" w={{ base: "80%", md: "80%px" }} m={"auto"}>
         <Field.Root invalid={!!errors.email}>
           <Field.Label>Email</Field.Label>
           <Input borderColor={"black"} {...register("email")} />

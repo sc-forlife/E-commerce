@@ -23,7 +23,12 @@ export default function loginSignUp() {
 
   return (
     <>
-      <Flex h={"100vh"} justifyContent={"space-between"} alignItems={"center"}>
+      <Flex
+        h={"100vh"}
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        flexDirection={{ base: "column", md: "row" }}
+      >
         <Link
           to={"/"}
           style={{
@@ -37,11 +42,28 @@ export default function loginSignUp() {
             Home
           </Button>
         </Link>
-        <Center w={"50%"}>
+        <Center
+          w={"100%"}
+          minW="300px"
+          marginTop={"50px"}
+          marginBottom={"20px"}
+          maxW={"500px"}
+        >
           {isUser ? <Login user={setIsUser} /> : <SignUp user={setIsUser} />}
         </Center>
-        <Center width={"55%"} height={"100%"} bg={"black"}>
-          <Image src={Logo} bg={"black"} width={"400px"} />
+        <Center
+          width={{ base: "100%", md: "55%" }}
+          height={{ base: "40%", md: "100%" }}
+          minH={"200px"}
+          bg={"black"}
+        >
+          <Image
+            src={Logo}
+            bg={"black"}
+            width={{ base: "50%", md: "90%" }}
+            maxW={{ base: "220px", md: "300px" }}
+            minW={"150px"}
+          />
         </Center>
       </Flex>
     </>
