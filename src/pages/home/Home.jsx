@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import Alert from "../../components/Alert/Alert";
 
 export const UserContext = createContext();
 
@@ -19,7 +20,10 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       //get all store items on initial render and populate catalog
-      setSearchProduct(await allShopProducts(categories));
+      const products = await allShopProducts(categories);
+      if (!products) {
+      }
+      setSearchProduct(products);
     })();
   }, []);
   return (
@@ -27,6 +31,7 @@ export default function Home() {
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
+      <Alert />
       <Flex
         gap={{ base: "10px", md: "20px" }}
         marginTop={"50px"}
