@@ -7,23 +7,28 @@ import { Link } from "react-router-dom";
 import Display from "../../components/Card/Card";
 import Spinner from "../../components/Spinner/SpinnerComponent";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
-import Alert from "../../components/Alert/Alert";
+import AlertPopUp from "../../components/AlertPopUp/AlertPopUp";
+import ErrorIcon from "../../components/ErrorIcon/ErrorIcon";
 
 export const UserContext = createContext();
 
 export default function Home() {
   // variable catalog with the list of item/s being displayed
   const [searchProduct, setSearchProduct] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const page = useRef("Home");
 
   useEffect(() => {
     (async () => {
       //get all store items on initial render and populate catalog
-      const products = await allShopProducts(categories);
-      if (!products) {
+      try {
+        const products = await allShopProducts(categories);
+        setSearchProduct(products);
+      } catch (error) {
+        setIsError(true);
+        console.log(error);
       }
-      setSearchProduct(products);
     })();
   }, []);
   return (
@@ -31,7 +36,11 @@ export default function Home() {
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
-      <Alert />
+      {/* Error handling */}
+      {isError ? (
+        <AlertPopUp alertTitle="Something went wrong with the server , Please try again later" />
+      ) : null}
+
       <Flex
         gap={{ base: "10px", md: "20px" }}
         marginTop={"50px"}
@@ -48,6 +57,8 @@ export default function Home() {
               />
             );
           })
+        ) : isError ? (
+          <ErrorIcon />
         ) : (
           <Spinner />
         )}

@@ -1,8 +1,8 @@
 import { Alert, Stack, Dialog, Portal, createOverlay } from "@chakra-ui/react";
 
 export default function AlertPopUp({
-  status = "error",
-  title = "Error ! , PLease try again later",
+  alertStatus = "error",
+  alertTitle = "Error ! , Please try again later",
 }) {
   const dialog = createOverlay((props) => {
     const { title, description, content, ...rest } = props;
@@ -11,12 +11,11 @@ export default function AlertPopUp({
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content h={"400px"} minW={"300px"}>
-              <Alert.Root status={status}>
+            <Dialog.Content h={"auto"} minW={"300px"}>
+              <Alert.Root status={alertStatus} h="100%">
                 <Alert.Indicator />
-                <Alert.Title>{title}</Alert.Title>
+                <Alert.Title>{alertTitle}</Alert.Title>
               </Alert.Root>
-              <Dialog.Body spaceY="4"></Dialog.Body>
             </Dialog.Content>
           </Dialog.Positioner>
         </Portal>
@@ -24,5 +23,17 @@ export default function AlertPopUp({
     );
   });
 
-  return <dialog.Viewport />;
+  const dialogOpen = () => {
+    dialog.open("a", {
+      title: "Dialog Title",
+      description: "Dialog Description",
+    });
+  };
+
+  return (
+    <>
+      {dialogOpen()}
+      <dialog.Viewport />
+    </>
+  );
 }
