@@ -4,9 +4,12 @@ import Logo from "../../assets/Logo.png";
 export default function FooterComponent() {
   return (
     <Center
-      marginTop={{ base: "40px", md: "60px" }}
+      marginTop={{ base: "40px", md: "100px" }}
       width={{ base: "100%", md: "100%" }}
-      height={{ base: "40%", md: "100%" }}
+      height={{ base: "200px", md: "200px" }}
+      position="relative"
+      bottom="0"
+      left="0"
       minH={"200px"}
       bg={"black"}
     >

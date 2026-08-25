@@ -16,8 +16,9 @@ export default function Display({ item = "", linkTo = "" }) {
       ) : (
         <>
           <Card.Root
-            w={{ base: "150px", md: "250px" }}
+            minW={{ base: "150px", md: "250px" }}
             h={{ base: "auto", md: "380px" }}
+            maxW={{ base: "150px", md: "300px" }}
             overflow="hidden"
           >
             <Image
@@ -30,7 +31,7 @@ export default function Display({ item = "", linkTo = "" }) {
               <Card.Title
                 fontSize={{
                   base: "12px",
-                  md: "17px",
+                  md: "16px",
                 }}
                 fontWeight={"light"}
                 data-testid="title"

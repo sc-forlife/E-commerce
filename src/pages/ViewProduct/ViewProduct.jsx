@@ -9,6 +9,8 @@ import { Flex, Box, useBreakpointValue } from "@chakra-ui/react";
 import { UserContext } from "../home/Home";
 import { useParams } from "react-router-dom";
 import FooterComponent from "../../components/FooterComponent/FooterComponent";
+import AlertPopUp from "../../components/AlertPopUp/AlertPopUp";
+import ErrorIcon from "../../components/ErrorIcon/ErrorIcon";
 
 export const SelectedProduct = createContext();
 
@@ -17,6 +19,7 @@ export default function ViewProduct() {
   const [searchProduct, setSearchProduct] = useState("");
   const { productId } = useParams();
   const page = useRef("View Page");
+  const [isError, setIsError] = useState(false);
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
@@ -26,6 +29,7 @@ export default function ViewProduct() {
         const [response] = await searchQuery(productId);
         setProduct(response);
       } catch (err) {
+        setIsError(true);
         console.error("Something went wrong", err);
       }
     })();
@@ -38,6 +42,11 @@ export default function ViewProduct() {
       <UserContext.Provider value={{ searchProduct, setSearchProduct, page }}>
         <NavBar />
       </UserContext.Provider>
+
+      {isError ? (
+        <AlertPopUp alertTitle="Something went wrong with the server , Please try again later" />
+      ) : null}
+
       {product ? (
         <>
           <SelectedProduct.Provider value={{ product: product }}>
@@ -63,10 +72,10 @@ export default function ViewProduct() {
             </Box>
           </SelectedProduct.Provider>
         </>
+      ) : isError ? (
+        <ErrorIcon />
       ) : (
-        <>
-          <SpinnerComponent />
-        </>
+        <SpinnerComponent />
       )}
       <FooterComponent />
     </>
@@ -75,5 +84,3 @@ export default function ViewProduct() {
 
 // You need to add:
 // Color Selection
-// Size Selection
-// Quantity Selection

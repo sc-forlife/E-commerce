@@ -36,7 +36,14 @@ export default function SearchComponent({ model = "" }) {
 
   //populate the catalog , with a single searched item
   async function sendSearchProduct(product) {
-    setSearchProduct(await searchQuery(product));
+    try {
+      const searchedProducts = await searchQuery(product);
+      if (searchedProducts.length) {
+        setSearchProduct(searchedProducts);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   //change viewed product in the same page
