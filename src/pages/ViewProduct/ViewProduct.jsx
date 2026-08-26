@@ -19,7 +19,7 @@ export default function ViewProduct() {
   const [searchProduct, setSearchProduct] = useState("");
   const { productId } = useParams();
   const page = useRef("View Page");
-  const [isError, setIsError] = useState(false);
+  const [alert, setAlert] = useState({ bool: false, type: "" });
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
@@ -27,9 +27,12 @@ export default function ViewProduct() {
     (async () => {
       try {
         const [response] = await searchQuery(productId);
+        if (!response) {
+          setAlert({ bool: true, type: "noItem" });
+        }
         setProduct(response);
       } catch (err) {
-        setIsError(true);
+        setAlert({ bool: true, type: "serverFail" });
         console.error("Something went wrong", err);
       }
     })();
@@ -43,9 +46,7 @@ export default function ViewProduct() {
         <NavBar />
       </UserContext.Provider>
 
-      {isError ? (
-        <AlertPopUp alertTitle="Something went wrong with the server , Please try again later" />
-      ) : null}
+      {alert.bool ? <AlertPopUp type={alert.type} /> : null}
 
       {product ? (
         <>
@@ -72,8 +73,8 @@ export default function ViewProduct() {
             </Box>
           </SelectedProduct.Provider>
         </>
-      ) : isError ? (
-        <ErrorIcon />
+      ) : alert.bool ? (
+        <ErrorIcon type={alert.type} />
       ) : (
         <SpinnerComponent />
       )}

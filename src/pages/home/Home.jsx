@@ -15,7 +15,7 @@ export const UserContext = createContext();
 export default function Home() {
   // variable catalog with the list of item/s being displayed
   const [searchProduct, setSearchProduct] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [alert, setAlert] = useState({ bool: false, type: "" });
 
   const page = useRef("Home");
 
@@ -26,7 +26,7 @@ export default function Home() {
         const products = await allShopProducts(categories);
         setSearchProduct(products);
       } catch (error) {
-        setIsError(true);
+        setAlert({ bool: true, type: "serverFail" });
         console.log(error);
       }
     })();
@@ -37,9 +37,7 @@ export default function Home() {
         <NavBar />
       </UserContext.Provider>
       {/* Error handling */}
-      {isError ? (
-        <AlertPopUp alertTitle="Something went wrong with the server , Please try again later" />
-      ) : null}
+      {alert.bool ? <AlertPopUp type={alert.type} /> : null}
 
       <Flex
         gap={{ base: "10px", md: "20px" }}
@@ -57,8 +55,8 @@ export default function Home() {
               />
             );
           })
-        ) : isError ? (
-          <ErrorIcon />
+        ) : alert.bool ? (
+          <ErrorIcon type={alert.type} />
         ) : (
           <Spinner />
         )}
