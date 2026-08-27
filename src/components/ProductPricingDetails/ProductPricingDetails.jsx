@@ -36,6 +36,7 @@ export default function ProductDescription() {
       thumbnail: product.thumbnail,
       quantity: 1,
       cartPrice: product.price,
+      stock: product.stock,
     });
   }
 

@@ -63,7 +63,9 @@ export default function CartTable() {
                         ></Icon>
                       </Flex>
                     </HStack>
-                    <Card.Description>${item.cartPrice}</Card.Description>
+                    <Card.Description>
+                      ${item.cartPrice.toFixed(2)}
+                    </Card.Description>
                     <HStack mt="4">
                       <MobileStepper item={item} />
                     </HStack>
